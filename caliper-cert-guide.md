@@ -155,35 +155,27 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
  ### <a name="basicProfile"></a>3.1 Basic Profile
  
  #### Minimum Conformance
- Create and send a generic Caliper [Event](#event) to a target [Endpoint](#endpoint).  At least one Caliper [action](#actions) MUST be implemented.
+ Create and send a *generic* Caliper [Event](#event) to a target [Endpoint](#endpoint).  At least one Caliper [action](#actions) MUST be implemented.
  
  #### Requirements
- * Certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
- * The `action` vocabulary is limited to the supported actions described in this specification and no other.
+ * Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Only generic events are allowed to be described using the [Event](#event) supertype.
  
  ### <a name="annotationProfile"></a>3.2 Annotation Profile
  
  #### Minimum Conformance
   Create and send an [AnnotationEvent](#annotationEvent) to a target [Endpoint](#endpoint).  The [Bookmarked](#bookmarked) action is required and MUST be implemented.  All other supported actions are considered optional.
  
- #### Requirements
- * Certain [AnnotationEvent](#annotationEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [AnnotationEvent](#annotationEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [AnnotationEvent](#annotationEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements  
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * The `generated` [Annotation](#annotation) SHOULD be specified.  If expressed as an object both the `annotator` and `annotated` [DigitalResource](#digitalResource) SHOULD be referenced.
  
  ### <a name="assessmentProfile"></a>3.3 Assessment Profile
  
  #### Minimum Conformance
-  Create and send an [AssessmentEvent](#assessmentEvent) to a target [Endpoint](#endpoint).  The [Started](#started) and [Submitted](#submitted) actions are required and MUST be implemented.  All other supported events and actions are considered optional.
+ Create and send an [AssessmentEvent](#assessmentEvent) to a target [Endpoint](#endpoint).  The [Started](#started) and [Submitted](#submitted) actions are required and MUST be implemented.  All other supported events and actions are considered optional.
  
- #### Requirements
- * Certain [AssessmentEvent](#assessmentEvent), [AssessmentItemEvent](#assessmentItemEvent), [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [AssessmentEvent](#assessmentEvent), [AssessmentItemEvent](#assessmentItemEvent), [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [AssessmentEvent](#assessmentEvent), [AssessmentItemEvent](#assessmentItemEvent), [NavigationEvent](#navigationEvent) or [ViewEvent](#viewEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * The [Attempt](#attempt) SHOULD reference both the `assignee` and the assigned [Assessment](#assessment) or [AssessmentItem](#assessmentItem).
  * For a [Started](#started) action, the learner's `generated` [Attempt](#attempt) SHOULD be specified.  If the [Attempt](#attempt) is included, it  MUST be specified with the `count` value set to 1 for a first attempt and incremented by 1 for each subsequent attempt.
  * For a [Paused](#paused), [Resumed](#resumed) and [Reset](#reset) actions, if the [Attempt](#attempt) is specified, the current `count` value MUST NOT be changed.
@@ -195,13 +187,10 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
  ### <a name="assignableProfile"></a>3.4 Assignable Profile
  
  #### Minimum Conformance
-  Create and send an [AssignableEvent](#assignableEvent) to a target [Endpoint](#endpoint). The [Started](#started) and [Submitted](#submitted) actions are required and MUST be implemented.  The [Completed](#completed) action SHOULD be implemented.  All other supported events and actions are considered optional.
+ Create and send an [AssignableEvent](#assignableEvent) to a target [Endpoint](#endpoint). The [Started](#started) and [Submitted](#submitted) actions are required and MUST be implemented.  The [Completed](#completed) action SHOULD be implemented.  All other supported events and actions are considered optional.
  
- #### Requirements
- * Certain [AssignableEvent](#assignableEvent), [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [AssignableEvent](#assignableEvent), [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [AssignableEvent](#assignableEvent), [NavigationEvent](#navigationEvent) or [ViewEvent](#viewEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements  
  * For the [AssignableEvent](#assignableEvent), a [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction; For the [NavigationEvent](#navigationEvent) and [ViewEvent](#navigationEvent), a [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * The [Attempt](#attempt) SHOULD reference both the `assignee` and the assigned  [AssignableDigitalResource](#assignableDigitalResource).
  * For a [Started](#started) action, the learner's `generated` [Attempt](#attempt) SHOULD be specified.  If the [Attempt](#attempt) is included, it  MUST be specified with the `count` value set to 1 for a first attempt and incremented by 1 for each subsequent attempt.
  * For a [Paused](#paused), [Resumed](#resumed) and [Reset](#reset) actions, if the [Attempt](#attempt) is specified, the current `count` value MUST NOT be changed.
@@ -215,13 +204,10 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
  ### <a name="forumProfile"></a>3.5 Forum Profile
  
  #### Minimum Conformance
-  Create and send a [MessageEvent](#messageEvent) to a target [Endpoint](#endpoint). The [Posted](#posted) action is required and MUST be implemented.  All other supported events and actions are considered optional. 
+ Create and send a [MessageEvent](#messageEvent) to a target [Endpoint](#endpoint). The [Posted](#posted) action is required and MUST be implemented.  All other supported events and actions are considered optional. 
  
- #### Requirements
- * Certain [ForumEvent](#forumEvent), [MessageEvent](#messageEvent), [NavigationEvent](#navigationEvent), [ThreadEvent](#threadEvent) and [ViewEvent](#viewEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [ForumEvent](#forumEvent), [MessageEvent](#messageEvent), [NavigationEvent](#navigationEvent), [ThreadEvent](#threadEvent) and [ViewEvent](#viewEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [ForumEvent](#forumEvent), [MessageEvent](#messageEvent), [NavigationEvent](#navigationEvent), [ThreadEvent](#threadEvent) or [ViewEvent](#viewEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements  
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * When the [Message](#message) is in the form of a reply, the prior [Message](#message) that prompted the reply SHOULD be referenced via the [Message](#message) `replyTo` property.
  * Parent-child relationships that exist between a [Message](#message), [Thread](#thread) and a [Forum](#forum) MAY be represented by use of the `isPartOf` property.
  * When navigating to a [Forum](#forum), [Thread](#thread) or [Message](#message) the [DigitalResource](#digitalResource) or [SoftwareApplication](#softwareApplication) that constitutes the referring context MAY be specified as the `referrer`.
@@ -229,25 +215,19 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
  ### <a name="gradingProfile"></a>3.6 Grading Profile
  
  #### Minimum Conformance
-  Create and send a Caliper [GradeEvent](#gradeEvent) to a target [Endpoint](#endpoint).  The [Graded](#graded) action is required and MUST be implemented.
+ Create and send a Caliper [GradeEvent](#gradeEvent) to a target [Endpoint](#endpoint).  The [Graded](#graded) action is required and MUST be implemented.
  
- #### Requirements
- * Certain [GradeEvent](#gradeEvent) and [ViewEvent](#viewEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [GradeEvent](#gradeEvent) and [ViewEvent](#viewEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [GradeEvent](#gradeEvent) or [ViewEvent](#viewEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements
  * For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * For a [Graded](#graded) action, the `generated` [Score](#score) SHOULD be specified.
  
  ### <a name="mediaProfile"></a>3.7 Media Profile
  
  #### Minimum Conformance
-  Create and send a [MediaEvent](#mediaEvent) to a target endpoint. The [Started](#started) and [Ended](#ended) actions are required and MUST be implemented.  The [Paused](#paused), [Resumed](#resumed) and [Restarted](#restarted) actions SHOULD be implemented.  All other supported events and actions are considered optional.
+ Create and send a [MediaEvent](#mediaEvent) to a target endpoint. The [Started](#started) and [Ended](#ended) actions are required and MUST be implemented.  The [Paused](#paused), [Resumed](#resumed) and [Restarted](#restarted) actions SHOULD be implemented.  All other supported events and actions are considered optional.
  
- #### Requirements
- * Certain [MediaEvent](#mediaEvent), [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [MediaEvent](#mediaEvent), [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [MediaEvent](#mediaEvent), [NavigationEvent](#navigationEvent) or [ViewEvent](#viewEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements  
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
  * A [MediaLocation](#mediaLocation) MAY be specified as the `target` in order to indicate the current location in an audio or video stream.
  * For a [Started](#started) or [Restarted](#restarted) action, the [MediaLocation](#mediaLocation) `currentTime` value MUST be set to the beginning or initial starting location in the audio or video stream.
@@ -260,13 +240,10 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
  ### <a name="readingProfile"></a>3.8 Reading Profile
  
  #### Minimum Conformance
-  Create and send a [NavigationEvent](#navigationEvent) and a [ViewEvent](#viewEvent) to a target [Endpoint](#endpoint).  The [NavigatedTo](#navigatedTo) and [Viewed](#viewed) actions are required and MUST be implemented.
+ Create and send a [NavigationEvent](#navigationEvent) and a [ViewEvent](#viewEvent) to a target [Endpoint](#endpoint).  The [NavigatedTo](#navigatedTo) and [Viewed](#viewed) actions are required and MUST be implemented.
  
- #### Requirements
- * Certain [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [NavigationEvent](#navigationEvent) and [ViewEvent](#viewEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [NavigationEvent](#navigationEvent) or [ViewEvent](#viewEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements  
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  * A [Frame](#frame) MAY be specified as the `target` in order to indicate an indexed segment or location.
  * When navigating to digital content the [DigitalResource](#digitalResource) or [SoftwareApplication](#softwareApplication) that constitutes the referring context MAY be specified as the `referrer`.
@@ -274,25 +251,19 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
  ### <a name="sessionProfile"></a>3.9 Session Profile
  
  #### Minimum Conformance
-  Create and send a [SessionEvent](#sessionEvent) to a target [Endpoint](#endpoint). The [LoggedIn](#loggedIn) action is required and MUST be implemented.
+ Create and send a [SessionEvent](#sessionEvent) to a target [Endpoint](#endpoint). The [LoggedIn](#loggedIn) action is required and MUST be implemented.
  
- #### Requirements
- * Certain [SessionEvent](#sessionEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [SessionEvent](#sessionEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
- * Each [Entity](#entity) participating in the [SessionEvent](#sessionEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
- * The `action` vocabulary is limited to the supported actions described in the profile.
+ #### Requirements  
  * Although optional, the relevant user `session` SHOULD be specified.
  * For a [LoggedIn](#loggedIn) action, if the `actor` is attempting to access a particular [DigitalResource](#digitalResource) the resource MAY be designated as the `target` of the interaction.
  
  ### <a name="toolUseProfile"></a>3.10 Tool Use Profile
  
  #### Minimum Conformance
-  Create and send a Caliper [ToolUseEvent](#toolUseEvent) to a target [Endpoint](#endpoint).  The [Used](#used) action is required and MUST be implemented.
+ Create and send a Caliper [ToolUseEvent](#toolUseEvent) to a target [Endpoint](#endpoint).  The [Used](#used) action is required and MUST be implemented.
  
- #### Requirements
- * Certain [ToolUseEvent](#toolUseEvent) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [ToolUseEvent](#toolUseEvent) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.
- * Each [Entity](#entity) participating in the [ToolUseEvent](#toolUseEvent) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
+ #### Additional Requirements
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `action` vocabulary is limited to the supported actions described in the profile.
  * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
 
 ## <a name="sensor"></a>4.0 Service Provider Sensor Conformance
