@@ -282,7 +282,7 @@ Irrespective of the chosen transport protocol, each message sent by a [Sensor](#
 
 #### 5.1 HTTP Transport Requirements
 
-A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) MUST demonstrate that is capable of communicating with the Caliper certification suite over HTTP with the connection encrypted by TLS.  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
+A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) MUST demonstrate that is capable of communicating with the Caliper certification suite over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
 
 ##### 5.1.1 General Message Requirements
 * Each message MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).
