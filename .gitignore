@@ -1,0 +1,13 @@
+dist/*
+node_modules
+doc/*
+test/resources
+*.log
+
+# Intellij
+.idea/
+*.iml
+*.ipr
+*.iws
+*.uml
+out/
