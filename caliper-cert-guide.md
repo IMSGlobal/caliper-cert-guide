@@ -274,7 +274,7 @@ A Caliper service provider MUST be capable of serializing and sending a Caliper 
 * A JSON array consisting of one or more Caliper [Entity](#entity) "describe" documents, each expressed as [JSON-LD](#jsonldDef).
 * A JSON array consisting of a mix of one or more Caliper [Event](#event) and [Entity](#entity) describe documents, each expressed as [JSON-LD](#jsonldDef). 
 
-## <a name="transport"></a>5.0 Transport Conformance ~~/ REST-base Exchange Conformance~~
+## <a name="transport"></a>5.0 Transport Conformance
 
 Business requirements informed by industry best practices will determine the choice of transport protocol for Caliper [Sensor](#sensor) and [Endpoint](#endpoint) implementers.  _Note that the IMS Caliper certification suite currently requires implementers seeking certification to send data to the certification test [Endpoint](#endpoint) using HTTPS with a bearer token credential consistent with [RFC 6750](#rfc6750)._  Where an alternate transport protocol is preferred for performance or other considerations, it is recommended to add that support in addition to HTTP transport for maximum interoperability.
 
@@ -295,7 +295,7 @@ The following standard HTTP request headers MUST be set for each message sent to
  | Request Header | Requirements |
  | :------------- | :----------- |
  | Accept | \[TODO\] . . . |
- | Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification suite. |
+ | Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification suite and associated with the test [Endpoint](#endpoint). |
  | Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
  | Host | \[TODO\] . . . |
  
@@ -363,7 +363,6 @@ IMS Global would appreciate receiving your comments and suggestions.
 Please contact IMS Global through our website at [http://www.imsglobal.org](http://www.imsglobal.org).
 
 Please refer to Document Name: IMS Caliper Analytics&reg; Certification Guide, version 1.1
-Candidate Final Specification v1.1
 
 Date: 30 November 2017
 
