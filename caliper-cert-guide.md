@@ -128,13 +128,7 @@ As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Cal
 
 Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
 
-### General considerations
-
-\[TODO\] . . .
-
-* Certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  
-* Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
-* The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
+Certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
 
 ### <a name="basicProfile"></a>3.1 Basic Profile
  
@@ -145,8 +139,13 @@ Create and send a *generic* Caliper [Event](#event) to a target endpoint.
 Any Caliper defined action can be used to describe the interaction.
  
 #### Restrictions
-Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
- 
+* Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
+* An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.
+* The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
+* An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [Event](#event) properties are considered optional.
+
 ### <a name="annotationProfile"></a>3.2 Annotation Profile
  
 #### Minimum Conformance
@@ -159,7 +158,10 @@ Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target end
 
 ##### AnnotationEvent Bookmarked 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Bookmarked'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [AnnotationEvent](#annotationEvent) properties are considered optional.
  
 ### <a name="assessmentProfile"></a>3.3 Assessment Profile
  
@@ -173,11 +175,17 @@ Create and send both a started and submitted [AssessmentEvent](#assessmentEvent)
 
 ##### AssessmentEvent Started
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Started'.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [Event](#event) properties are considered optional.
 
 ##### AssessmentEvent Submitted
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Submitted'.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [AssessmentEvent](#assessmentEvent) properties are considered optional.
  
 ### <a name="assignableProfile"></a>3.4 Assignable Profile
  
@@ -191,11 +199,17 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 
 ##### AssignableEvent Started
 * A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Started'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [AssignableEvent](#assignableEvent) properties are considered optional.
 
 ##### AssignableEvent Submitted
 * A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Submitted'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [AssignableEvent](#assignableEvent) properties are considered optional.
  
 ### <a name="forumProfile"></a>3.5 Forum Profile
  
@@ -209,7 +223,10 @@ Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  Al
 
 ##### MessageEvent Posted
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Posted'.
 * A [Message](#message) MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [MessageEvent](#messageEvent) properties are considered optional.
  
 ### <a name="gradingProfile"></a>3.6 Grading Profile
  
@@ -222,7 +239,10 @@ Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [G
 #### Restrictions
 
 ##### GradeEvent Graded
-For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
+* For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Graded'.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [GradeEvent](#gradeEvent) properties are considered optional.
  
 ### <a name="mediaProfile"></a>3.7 Media Profile
  
@@ -236,11 +256,17 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
    
 ##### MediaEvent Started
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Started'.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [MediaEvent](#mediaEvent) properties are considered optional.
 
 ##### MediaEvent Ended
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Ended'.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [MediaEvent](#mediaEvent) properties are considered optional.
  
 ### <a name="readingProfile"></a>3.8 Reading Profile
  
@@ -253,12 +279,18 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 #### Restrictions
  
 ##### NavigationEvent NavigatedTo
- * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'NavigatedTo'.
+* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [NavigationEvent](#navigationEvent) properties are considered optional.
  
 ##### ViewedEvent Viewed 
-  * A [Person](#person) MUST be specified as the `actor` of the interaction.
-  * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Viewed'.
+* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [ViewEvent](#viewEvent) properties are considered optional.
  
 ### <a name="sessionProfile"></a>3.9 Session Profile
  
@@ -272,7 +304,10 @@ Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. 
  
 ##### SessionEvent LoggedIn  
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'LoggedIn'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [SessionEvent](#sessionEvent) properties are considered optional.
  
 ### <a name="toolUseProfile"></a>3.10 Tool Use Profile
  
@@ -286,7 +321,10 @@ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
  
 ##### ToolUseEvent Used
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
+* The `action` value MUST be set to 'Used'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
+* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+* All other [ToolUseEvent](#toolUseEvent) properties are considered optional.
  
 ## <a name="dataFormat"></a>4.0 Data Interchange Format
  
