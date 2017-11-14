@@ -89,8 +89,6 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="iso8601Def"></a>__ISO 8601__: Caliper data and time values are formatted per ISO 8601 with the addition of millisecond precision.  The format is yyyy-MM-ddTHH:mm:ss.SSSZ where 'T' separates the date from the time while 'Z' indicates that the time is set to UTC.
 
-<a name="linkedDataDef"></a>__Linked Data__: A set of design principles first articulated by Tim Berners-Lee for discovering, connecting, and sharing structured data over the Web.  The principles can be summarized as follows: use [IRIs](#iriDef)/[URIs](#uriDef) as names for things; use HTTP [IRIs](#iriDef)/[URIs](#uriDef) so that information about things (e.g., people, objects, concepts) can be retrieved using a standard format; link out to other relevant things by way of their [IRIs](#iriDef)/[URIs](#uriDef) in order to promote discovery of new relationships between things.
-
 <a name="lisDef"></a>__LIS__: Learning Information Services&reg; (LIS&reg;) is an IMS standard that defines how systems manage the exchange of information that describes people, groups, memberships, courses and outcomes.
  
 <a name="ltiDef"></a>__LTI__: Learning Tools Interoperability&reg; (LTI&reg;) is an IMS standard for integration of rich learning applications within educational environments.
@@ -98,8 +96,6 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 <a name="metricProfileDef"></a>__Metric Profile__: models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms and concepts that application designers and developers can draw upon to describe common user interactions in a consistent manner using a shared vocabulary.
 
 <a name="objectDef"></a>__Object__: an [Entity](#entity) that an [Agent](#agent) interacts with that becomes the focus, target or object of an interaction.  A Caliper [Event](#event) includes an `object` attribute for representing the resource.
-
-<a name="pii"></a>__Personally Identifiable Information (PII)__: information that can be used on its own, or with other information, to identify, locate, or contact a single person, or to identify a single person within a context.
 
 <a name="sensorDef"></a>__Sensor__: Software assets deployed within a learning application that implement the [Sensor API&trade;](#sensorAPIDef) for marshalling and transmitting Caliper data to a target endpoint.
 
@@ -159,7 +155,9 @@ Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target end
 #### Required action(s)  
 [Bookmarked](#bookmarked)
  
-#### Annotation Bookmarked Restrictions 
+#### Restrictions
+
+##### AnnotationEvent Bookmarked 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
@@ -171,7 +169,13 @@ Create and send both a started and submitted [AssessmentEvent](#assessmentEvent)
 #### Required action(s)  
 [Started](#started), [Submitted](#submitted)
  
-#### Assessment Started and Submitted Restrictions
+#### Restrictions
+
+##### AssessmentEvent Started
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
+
+##### AssessmentEvent Submitted
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
  
@@ -184,6 +188,12 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 [Started](#started), [Submitted](#submitted)
   
 #### Assignable Started and Submitted Restrictions
+
+##### AssignableEvent Started
+* A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
+* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+
+##### AssignableEvent Submitted
 * A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
@@ -195,7 +205,9 @@ Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  Al
 #### Required action(s)  
 [Posted](#posted)
    
-#### Message Posted Restrictions
+#### Restrictions
+
+##### MessageEvent Posted
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * A [Message](#message) MUST be specified as the `object` of the interaction.
  
@@ -207,7 +219,9 @@ Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [G
 #### Required action(s)  
 [Graded](#graded)
    
-#### Grading Graded Restrictions
+#### Restrictions
+
+##### GradeEvent Graded
 For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
  
 ### <a name="mediaProfile"></a>3.7 Media Profile
@@ -217,8 +231,14 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 
 #### Required action(s)  
 [Started](#started), [Ended](#ended)
+
+#### Restrictions
    
-#### Media Started and Ended Restrictions
+##### MediaEvent Started
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
+
+##### MediaEvent Ended
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
  
@@ -230,74 +250,83 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
  #### Required action(s)  
  [NavigatedTo](#navigatedTo) ([NavigationEvent](#navigationEvent)), [Viewed](#viewed) ([ViewEvent](#viewEvent))
  
-#### Reading NavigatedTo and Viewed Restrictions 
+#### Restrictions
+ 
+##### NavigationEvent NavigatedTo
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
  * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
- ### <a name="sessionProfile"></a>3.9 Session Profile
+##### ViewedEvent Viewed 
+  * A [Person](#person) MUST be specified as the `actor` of the interaction.
+  * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
- #### Minimum Conformance
- Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. All associated actions included in the profile are considered optional for certification purposes.
+### <a name="sessionProfile"></a>3.9 Session Profile
  
- #### Required action(s) 
- [LoggedIn](#loggedIn)
+#### Minimum Conformance
+Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. All associated actions included in the profile are considered optional for certification purposes.
  
- #### Session LoggedIn Restrictions  
- * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
+#### Required action(s) 
+[LoggedIn](#loggedIn)
  
- ### <a name="toolUseProfile"></a>3.10 Tool Use Profile
+#### Restrictions
  
- #### Minimum Conformance
- Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
+##### SessionEvent LoggedIn  
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
  
- #### Required action(s) 
- [Used](#used) action
+### <a name="toolUseProfile"></a>3.10 Tool Use Profile
  
- #### ToolUse Used Requirements
- * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
+#### Minimum Conformance
+Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
  
- ## <a name="dataFormat"></a>4.0 Data Interchange Format
+#### Required action(s) 
+[Used](#used) action
  
- \[TODO\] Describe JSON-LD
+#### Restrictions
  
- ## <a name="transportConformance"></a>5.0 Transport Conformance
+##### ToolUseEvent Used
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
  
- \[TODO\] Summarize transport options . . . .
+## <a name="dataFormat"></a>4.0 Data Interchange Format
  
-
- ### <a name="http"></a>5.1 HTTP Transport Requirements
+\[TODO\] Describe JSON-LD
  
- A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
+## <a name="transportConformance"></a>5.0 Transport Conformance
  
- A Caliper service provider certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as [Envelope](#envelope) `data` array values.  Each [Event](#event) and [Entity](#entity) included in the [Envelope] MUST be expressed as JSON-LD.
+\[TODO\] Summarize transport options . . . .
  
- #### <a name="httpRequest"></a>5.1.1  HTTP Message Requests
+### <a name="http"></a>5.1 HTTP Transport Requirements
  
- Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
+A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
  
- The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
+A Caliper service provider certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as [Envelope](#envelope) `data` array values.  Each [Event](#event) and [Entity](#entity) included in the [Envelope] MUST be expressed as JSON-LD.
+ 
+#### <a name="httpRequest"></a>5.1.1  HTTP Message Requests
+ 
+Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
+ 
+The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
   
-  | Request Header | Requirements |
-  | :------------- | :----------- |
-  | Accept | \[TODO\] . . . |
-  | Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification service and associated with the test endpoint. |
-  | Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
-  | Host | \[TODO\] . . . |
+| Request Header | Requirements |
+| :------------- | :----------- |
+| Accept | \[TODO\] . . . |
+| Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification service and associated with the test endpoint. |
+| Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
+| Host | \[TODO\] . . . |
  
- #### <a name="httpResponse"></a>5.1.2  HTTP Message Responses
+#### <a name="httpResponse"></a>5.1.2  HTTP Message Responses
  
- When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
+When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
   
-  * To signal to a Caliper service provider that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
-  * If a Caliper service provider sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
-  * If a Caliper service provider sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
-  * If a Caliper service provider sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
-  * If a Caliper service provider sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
-  * If a Caliper service provider sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
+* To signal to a Caliper service provider that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
+* If a Caliper service provider sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
+* If a Caliper service provider sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
+* If a Caliper service provider sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
+* If a Caliper service provider sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
+* If a Caliper service provider sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
   
-  The certification service MAY respond to Caliper service provider messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+The certification service MAY respond to Caliper service provider messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
   
 ### <a name="mqtt"></a>5.2 MQTT Transport Requirements
 
@@ -354,7 +383,7 @@ After submitting your successful conformance information and receiving confirmat
 
 ### <a name="certRenewal"></a>8.0 Caliper Certification Renewal
 
-Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of either the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service.
+Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service.
 
 ## <a name="contributors"></a>Contributors
 
