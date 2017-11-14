@@ -45,7 +45,7 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 5.1.2 [HTTP Message Responses](#httpResponse)
   * 5.2 [MQTT Transport Requirements](#mqtt)
     * 5.2.1 \[TODO\] . . .
-* 6.0 [Using the Certification Service](#usingCertService)
+* 6.0 [Using the Caliper Certification Service](#usingCertService)
 * 7.0 [Caliper Certification Mark](#certMark)
 * 8.0 [Certification Renewal](#certRenewal)
 * [Appendix A. Example messages](#appendixA)
@@ -373,7 +373,7 @@ A Caliper sensor utilizing the Message Queue Telemetry Transport (MQTT) publish-
 
 \[TODO\] . . . .
 
-## <a name="usingCertService"></a> 6.0 Using the Certification Service
+## <a name="usingCertService"></a> 6.0 Using the Caliper Certification Service
  
 Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
  
