@@ -27,9 +27,9 @@ THIS SPECIFICATION IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PART
   * 1.2 [Conventions](#conventions)
   * 1.3 [Terminology](#terminology)
 * 2.0 [The Certification Process](#certProcess)
-  * 2.1 [Certification Testing Process](#certTestingProcess)
-  * 2.1.1 [Requirements for Caliper 1.1 Certification](#certRequirements)
-  * 2.1.2 [Caliper Certification Mark](#certMark)
+  * 2.1 [Caliper Certification Requirements](#certReqs)
+  * 2.2 [Certification Testing Process](#certTestingProcess)
+  * 2.3 [Caliper Certification Mark](#certMark)
 * 3.0 [Metric Profile Certification](#profileCert)
   * 3.1 [Basic Profile](#basicProfile)
   * 3.2 [Annotation Profile](#annotationProfile)
@@ -114,27 +114,49 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## 2.0 <a name="certProcess"></a>The Certification Process
 
-### 2.1 <a name="certMark"></a>Conformance Testing Process
+### 2.1 <a name="certReqs"></a>Caliper Certification Requirements
 
-The process for conformance testing implementations of OneRoster includes the following:
+* Your organization MUST be an IMS Contributing or Affiliate Member.
+* You MUST pass the tests using this Certification service.
+* The tests MUST be completed by a designated representative of the member organization and you must agree that there is no mis-representation or manipulation of the results in the submitted report.
+* You MUST submit your report via this Certification Service to [conformance@imsglobal.org](mailto:conformance@imsglobal.org).
+* The submission process allows you to report explanations of any anomalies you encounter during the testing process.
 
-1. Visit the Caliper Certification Suite at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper)
-  
-2. Follow the onscreen instructions to run the tests.  
+Certification is for a particular release of Caliper's Metric Profiles and must be re-done for each new release of the software.
 
-3. Once the test has been successfully run, submit a print out of the test results along with the following information to [conformance@imsglobal.org](#mailto:conformance@imsglobal.org):
+### 2.2 <a name="certMark"></a>Conformance Testing Process
 
-  * Your name
-  * Your organization
-  * Your product name and version
-  * Date the product was tested
-  * Whether you are a Service/Data Provider or a Service/Data Consumer
-  * ~~Whether you support the REST version~~
-  * The optional features supported by your system (these must also have been subjected to conformance testing).
+1. Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
+
+2. The certification service provides a playground for testing your Caliper messages.  Click the "Start Testing" link under __Test Your Product__ to access the playground.  \[TODO\] . . . .
+
+3. Once you are ready to commence certification testing, click the "Certify Your Product" link under __Certify Your Product__ to commence testing.  
+
+4.  Complete the online form by providing the following information:
+
+    * Product name
+    * Product version
+    * Product URL
+    * Product description
+    * Caliper specification version
+    * Member name
+    * Member email address
+    * Member organization
+
+5. Click the green "Start Certification" button.  To terminate testing click the white "Cancel" button.
+
+6. Follow the onscreen instructions to run the tests.  Configure the host software to send Caliper messages to the provided endpoint URL.  Include the bearer token value in the HTTP header of each request (example: 'Authorization: Bearer 91d89521-4951-48fe-b376-aac1b2cb4749').
+
+7. Initiate test.  Send messages to the certification service endpoint.  
+
+8. When messages are received by the Certification service the online directions will be replaced with a view displaying conformance progress. 
+
+\[TODO\] . . .
+
 
 All Tests must be passed successfully to be considered IMS compliant.
 
-#### <a name="certMark"></a>2.1.2 Caliper Certification Mark
+#### <a name="certMark"></a>2.3 Caliper Certification Mark
 
 After you have submitted your successful conformance information to [conformance@imsglobal.org](#mailto:conformance@imsglobal.org) and received confirmation and a registration number from IMS Global you may then apply the appropriate conformance mark. The IMS Global conformance chart will list your conformance details. If you have any questions, please feel free to contact us at any point.  Products without an IMS conformance registration number are not considered compliant by IMS Global.
 
@@ -268,7 +290,7 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
 
 ## <a name="sensor"></a>4.0 Service Provider Sensor Conformance
 
-A Caliper service provider MUST be capable of serializing and sending a Caliper [Envelope](#envelope) containing the following payloads to the designated certification suite [Endpoint](#endpoint).
+A Caliper service provider MUST be capable of serializing and sending a Caliper [Envelope](#envelope) containing the following payloads to the designated certification service [Endpoint](#endpoint).
 
 * A JSON array consisting of one or more Caliper [Event](#event) documents, each expressed as [JSON-LD](#jsonldDef).
 * A JSON array consisting of one or more Caliper [Entity](#entity) "describe" documents, each expressed as [JSON-LD](#jsonldDef).
@@ -276,13 +298,13 @@ A Caliper service provider MUST be capable of serializing and sending a Caliper 
 
 ## <a name="transport"></a>5.0 Transport Conformance
 
-Business requirements informed by industry best practices will determine the choice of transport protocol for Caliper [Sensor](#sensor) and [Endpoint](#endpoint) implementers.  _Note that the IMS Caliper certification suite currently requires implementers seeking certification to send data to the certification test [Endpoint](#endpoint) using HTTPS with a bearer token credential consistent with [RFC 6750](#rfc6750)._  Where an alternate transport protocol is preferred for performance or other considerations, it is recommended to add that support in addition to HTTP transport for maximum interoperability.
+Business requirements informed by industry best practices will determine the choice of transport protocol for Caliper [Sensor](#sensor) and [Endpoint](#endpoint) implementers.  _Note that the IMS Caliper certification service currently requires implementers seeking certification to send data to the certification test [Endpoint](#endpoint) using HTTPS with a bearer token credential consistent with [RFC 6750](#rfc6750)._  Where an alternate transport protocol is preferred for performance or other considerations, it is recommended to add that support in addition to HTTP transport for maximum interoperability.
 
 Irrespective of the chosen transport protocol, each message sent by a [Sensor](#sensor) to a target [Endpoint](#endpoint) MUST consist of a single JSON representation of a Caliper [Envelope](#envelope). 
 
 #### 5.1 HTTP Transport Requirements
 
-A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) MUST demonstrate that is capable of communicating with the Caliper certification suite over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
+A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
 
 ##### 5.1.1 General Message Requirements
 * Each message MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).
@@ -290,26 +312,26 @@ A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) MUS
 
 ##### 5.1.2 HTTP Request Headers
 
-The following standard HTTP request headers MUST be set for each message sent to the certification suite [Endpoint](#endpoint):
+The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
  
  | Request Header | Requirements |
  | :------------- | :----------- |
  | Accept | \[TODO\] . . . |
- | Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification suite and associated with the test [Endpoint](#endpoint). |
+ | Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification service and associated with the test [Endpoint](#endpoint). |
  | Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
  | Host | \[TODO\] . . . |
  
-##### 5.1.3 Certification Suite HTTP Response Behavior
- When communicating over HTTP the certification suite [Endpoint](#httpEndpoint) will exhibit the following response behavior:
+##### 5.1.3 Certification service HTTP Response Behavior
+ When communicating over HTTP the certification service [Endpoint](#httpEndpoint) will exhibit the following response behavior:
  
- * To signal to a Caliper service provider that it has successfully received a message the certification suite [Endpoint](#httpEndpoint) will reply with a `2xx` class status code.  The body of a successful response will be empty.
- * If a Caliper service provider sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification suite will reply with a `400 Bad Request` response.
- * If a Caliper service provider sends a malformed Caliper [Envelope](#envelope) (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification suite will reply with a `400 Bad Request` response.
- * If a Caliper service provider sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification suite is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification suite will reply with a `401 Unauthorized` response.
- * If a Caliper service provider sends a message with a `Content-Type` other than "application/json", the certification suite will reply with a `415 Unsupported Media Type` response.
- * If a Caliper service provider sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the [Endpoint](#httpEndpoint) cannot support the certification suite will reply with a `422 Unprocessable Entity` response.
+ * To signal to a Caliper service provider that it has successfully received a message the certification service [Endpoint](#httpEndpoint) will reply with a `2xx` class status code.  The body of a successful response will be empty.
+ * If a Caliper service provider sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
+ * If a Caliper service provider sends a malformed Caliper [Envelope](#envelope) (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
+ * If a Caliper service provider sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
+ * If a Caliper service provider sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
+ * If a Caliper service provider sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the [Endpoint](#httpEndpoint) cannot support the certification service will reply with a `422 Unprocessable Entity` response.
  
- The certification suite MAY respond to Caliper service provider messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification suite MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+ The certification service MAY respond to Caliper service provider messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
 
 ## <a name="contributors"></a>Contributors
 
