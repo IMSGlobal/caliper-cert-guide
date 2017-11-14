@@ -337,9 +337,9 @@ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
  
 ### <a name="http"></a>5.1 HTTP Transport Requirements
  
-A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
+A Caliper sensor utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper sensor MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
  
-A Caliper service provider certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as [Envelope](#envelope) `data` array values.  Each [Event](#event) and [Entity](#entity) included in the [Envelope] MUST be expressed as JSON-LD.
+A Caliper sensor certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as [Envelope](#envelope) `data` array values.  Each [Event](#event) and [Entity](#entity) included in the [Envelope] MUST be expressed as JSON-LD.
  
 #### <a name="httpRequest"></a>5.1.1  HTTP Message Requests
  
@@ -358,18 +358,18 @@ The following standard HTTP request headers MUST be set for each message sent to
  
 When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
   
-* To signal to a Caliper service provider that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
-* If a Caliper service provider sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
-* If a Caliper service provider sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
-* If a Caliper service provider sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
-* If a Caliper service provider sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
-* If a Caliper service provider sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
+* To signal to a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
+* If a Caliper sensor sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
+* If a Caliper sensor sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
+* If a Caliper sensor sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
+* If a Caliper sensor sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
+* If a Caliper sensor sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
   
-The certification service MAY respond to Caliper service provider messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+The certification service MAY respond to Caliper sensor messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
   
 ### <a name="mqtt"></a>5.2 MQTT Transport Requirements
 
-A Caliper service provider utilizing the Message Queue Telemetry Transport (MQTT) publish-subscribe messaging protocol MUST demonstrate . . . .
+A Caliper sensor utilizing the Message Queue Telemetry Transport (MQTT) publish-subscribe messaging protocol MUST demonstrate . . . .
 
 \[TODO\] . . . .
 
