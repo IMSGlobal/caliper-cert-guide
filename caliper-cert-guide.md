@@ -26,11 +26,8 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 1.1 [Status of this Document](#docStatus)
   * 1.2 [Conventions](#conventions)
   * 1.3 [Terminology](#terminology)
-* 2.0 [The Certification Process](#certProcess)
-  * 2.1 [Caliper Certification Requirements](#certReqs)
-  * 2.2 [Certification Testing Process](#certTestingProcess)
-  * 2.3 [Caliper Certification Mark](#certMark)
-* 3.0 [Metric Profile Certification](#profileCert)
+* 2.0 [Caliper Certification Prerequisites](#certPreReqs)
+* 3.0 [Caliper Metric Profile Conformance](#profileConformance)
   * 3.1 [Basic Profile](#basicProfile)
   * 3.2 [Annotation Profile](#annotationProfile)
   * 3.3 [Assessment Profile](#assessmentProfile)
@@ -41,8 +38,16 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 3.8 [Reading Profile](#readingProfile)
   * 3.9 [Session Profile](#sessionProfile)
   * 3.10 [Tool Use Profile](#toolUseProfile)
-* 4.0 [Service Provider Sensor Conformance](#sensor)
-* 5.0 [Transport Conformance](#transport)
+* 4.0 [Data Interchange Format](#dataFormat)
+* 5.0 [Transport Conformance](#transportConformance)
+  * 5.1 [HTTP Transport Requirements](#http)
+  * 5.1.1 [HTTP Message Requests](#httpRequest)
+  * 5.1.2 [HTTP Message Responses](#httpResponse)
+  * 5.2 [MQTT Transport Requirements](#mqtt)
+    * 5.2.1 \[TODO\] . . .
+* 6.0 [Using the Certification Service](#usingCertService)
+* 7.0 [Caliper Certification Mark](#certMark)
+* 8.0 [Certification Renewal](#certRenewal)
 * [List of Contributors](#contributors)
 * [References](#references)
 * [About this Document](#aboutThisDoc)
@@ -112,57 +117,18 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="uuidDef"></a>__UUID__: a 128-bit identifier that does not require a registration authority to assure uniqueness.  However, absolute uniqueness is not guaranteed although the collision probability is considered extremely low. Caliper recommends use of randomly or pseudo-randomly generated version 4 UUIDs.  Each Caliper [Event](#event) MUST be assigned a UUID that is expressed as a [URN](#urnDef) using the form `urn:uuid:<UUID>` as described in [RFC 4122](#rfc4122).
 
-## <a name="certProcess"></a>2.0 The Certification Process
+## <a name="certPreReqs"></a>2.0 Caliper Certification Prerequisites
 
-### <a name="certReqs"></a>2.1 Caliper Certification Requirements
+Certain prerequisites must be met before you can certify your platform, application or service as Caliper compliant. 
 
 * Your organization MUST be an IMS Contributing or Affiliate Member.
 * You MUST pass the tests using this Certification service.
-* The tests MUST be completed by a designated representative of the member organization and you must agree that there is no mis-representation or manipulation of the results in the submitted report.
-* You MUST submit your report via this Certification Service to [conformance@imsglobal.org](mailto:conformance@imsglobal.org).
-* The submission process allows you to report explanations of any anomalies you encounter during the testing process.
+* The tests MUST be completed by a designated representative of the member organization and you must agree that there is no misrepresentation or manipulation of the results in the submitted report.
+* You MUST submit your report via the Caliper Certification Service.
 
-Certification is for a particular release of Caliper's Metric Profiles and must be re-done for each new release of the software.
+## <a name="profileConformance"></a>3.0 Metric Profile Certification
 
-### <a name="certMark"></a>2.2 Conformance Testing Process
-
-1. Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
-
-2. The certification service provides a playground for testing your Caliper messages.  Click the "Start Testing" link under __Test Your Product__ to access the playground.  \[TODO\] . . . .
-
-3. Once you are ready to commence certification testing, click the "Certify Your Product" link under __Certify Your Product__ to commence testing.  
-
-4.  Complete the online form by providing the following information:
-
-    * Product name
-    * Product version
-    * Product URL
-    * Product description
-    * Caliper specification version
-    * Member name
-    * Member email address
-    * Member organization
-
-5. Click the green "Start Certification" button.  To terminate testing click the white "Cancel" button.
-
-6. Follow the onscreen instructions to run the tests.  Configure the host software to send Caliper messages to the provided endpoint URL.  Include the bearer token value in the HTTP header of each request (example: 'Authorization: Bearer 91d89521-4951-48fe-b376-aac1b2cb4749').
-
-7. Initiate test.  Send messages to the certification service endpoint.  
-
-8. When messages are received by the Certification service the online directions will be replaced with a view displaying conformance progress. 
-
-\[TODO\] . . .
-
-
-All Tests must be passed successfully to be considered IMS compliant.
-
-#### <a name="certMark"></a>2.3 Caliper Certification Mark
-
-After you have submitted your successful conformance information to [conformance@imsglobal.org](#mailto:conformance@imsglobal.org) and received confirmation and a registration number from IMS Global you may then apply the appropriate conformance mark. The IMS Global conformance chart will list your conformance details. If you have any questions, please feel free to contact us at any point.  Products without an IMS conformance registration number are not considered compliant by IMS Global.
-
-## <a name="profileCert"></a>3.0 Metric Profile Certification
-
-As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions.
+As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. . . .
 
 Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
 
@@ -174,164 +140,221 @@ Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
 * Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).
 * The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
 
- ### <a name="basicProfile"></a>3.1 Basic Profile
+### <a name="basicProfile"></a>3.1 Basic Profile
  
- #### Minimum Conformance
- Create and send a *generic* Caliper [Event](#event) to a target [Endpoint](#endpoint).  At least one Caliper [action](#actions) MUST be implemented.
+#### Minimum Conformance
+Create and send a *generic* Caliper [Event](#event) to a target endpoint.
  
- #### Requirements
- * Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Only generic events are allowed to be described using the [Event](#event) supertype.
+#### Required action(s)
+Any Caliper defined action can be used to describe the interaction.
  
- ### <a name="annotationProfile"></a>3.2 Annotation Profile
+#### Restrictions
+Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
  
- #### Minimum Conformance
-  Create and send an [AnnotationEvent](#annotationEvent) to a target [Endpoint](#endpoint).  The [Bookmarked](#bookmarked) action is required and MUST be implemented.  All other supported actions are considered optional.
+### <a name="annotationProfile"></a>3.2 Annotation Profile
  
- #### Additional Requirements  
- * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The `generated` [Annotation](#annotation) SHOULD be specified.  If expressed as an object both the `annotator` and `annotated` [DigitalResource](#digitalResource) SHOULD be referenced.
+#### Minimum Conformance
+Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
+    
+#### Required action(s)  
+[Bookmarked](#bookmarked)
  
- ### <a name="assessmentProfile"></a>3.3 Assessment Profile
+#### Annotation Bookmarked Restrictions 
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
- #### Minimum Conformance
- Create and send an [AssessmentEvent](#assessmentEvent) to a target [Endpoint](#endpoint).  The [Started](#started) and [Submitted](#submitted) actions are required and MUST be implemented.  All other supported events and actions are considered optional.
+### <a name="assessmentProfile"></a>3.3 Assessment Profile
  
- #### Additional Requirements
- * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * The [Attempt](#attempt) SHOULD reference both the `assignee` and the assigned [Assessment](#assessment) or [AssessmentItem](#assessmentItem).
- * For a [Started](#started) action, the learner's `generated` [Attempt](#attempt) SHOULD be specified.  If the [Attempt](#attempt) is included, it  MUST be specified with the `count` value set to 1 for a first attempt and incremented by 1 for each subsequent attempt.
- * For a [Paused](#paused), [Resumed](#resumed) and [Reset](#reset) actions, if the [Attempt](#attempt) is specified, the current `count` value MUST NOT be changed.
- * For a [Restarted](#restarted) action, if the [Attempt](#attempt) is specified, the `count` value MUST be incremented by 1.
- * Parent-child relationships that exist between [AssessmentItem](#assessmentItem) and [Assessment](#assessment) attempts MAY be represented via the [Attempt](#attempt) `isPartOf` property.
- * For a [Completed](#completed) action, the learner's `generated` [Response](#response) MAY be specified.  The [Response](#response) SHOULD reference the associated `attempt`.
- * When navigating to an [Assessment](#assessment) the [DigitalResource](#digitalResource) or [SoftwareApplication](#softwareApplication) that constitutes the referring context MAY be specified as the `referrer`.  For an [AssessmentItemEvent](#assessmentItemEvent) the prior [AssessmentItem](#assessmentItem), if known, MAY be specified as the `referrer`.
+#### Minimum Conformance
+Create and send both a started and submitted [AssessmentEvent](#assessmentEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
  
- ### <a name="assignableProfile"></a>3.4 Assignable Profile
+#### Required action(s)  
+[Started](#started), [Submitted](#submitted)
  
- #### Minimum Conformance
- Create and send an [AssignableEvent](#assignableEvent) to a target [Endpoint](#endpoint). The [Started](#started) and [Submitted](#submitted) actions are required and MUST be implemented.  The [Completed](#completed) action SHOULD be implemented.  All other supported events and actions are considered optional.
+#### Assessment Started and Submitted Restrictions
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
  
- #### Additional Requirements  
- * For the [AssignableEvent](#assignableEvent), a [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction; For the [NavigationEvent](#navigationEvent) and [ViewEvent](#navigationEvent), a [Person](#person) MUST be specified as the `actor` of the interaction.
- * The [Attempt](#attempt) SHOULD reference both the `assignee` and the assigned  [AssignableDigitalResource](#assignableDigitalResource).
- * For a [Started](#started) action, the learner's `generated` [Attempt](#attempt) SHOULD be specified.  If the [Attempt](#attempt) is included, it  MUST be specified with the `count` value set to 1 for a first attempt and incremented by 1 for each subsequent attempt.
- * For a [Paused](#paused), [Resumed](#resumed) and [Reset](#reset) actions, if the [Attempt](#attempt) is specified, the current `count` value MUST NOT be changed.
- * For a [Restarted](#restarted) action, if the [Attempt](#attempt) is specified, the `count` value MUST be incremented by 1.
- * Parent-child relationships that exist between [AssignableDigitalResource](#assignableDigitalResource) attempts MAY be represented via the [Attempt](#attempt) `isPartOf` property.
- * For [Completed](#completed) actions, the learner's `generated` [Response](#response) MAY be specified.  The [Response](#response) SHOULD reference the associated `attempt`.
- * Parent-child relationships that exist between [DigitalResource](#digitalResource) attempts MAY be represented via the [Attempt](#attempt) `isPartOf` property.
- * For [Completed](#completed) actions, the learner's `generated` [Response](#response) MAY be specified.  The [Response](#response) SHOULD reference the associated `attempt`.
- * When navigating to a [AssignableDigitalResource](#assignableDigitalResource) the [DigitalResource](#digitalResource) or [SoftwareApplication](#softwareApplication) that constitutes the referring context MAY be specified as the `referrer`.
+### <a name="assignableProfile"></a>3.4 Assignable Profile
  
- ### <a name="forumProfile"></a>3.5 Forum Profile
+#### Minimum Conformance
+Create and send both a started and submitted [AssignableEvent](#assignableEvent) to a target endpoint. All other event types and associated actions included in the profile are considered optional for certification purposes.
  
- #### Minimum Conformance
- Create and send a [MessageEvent](#messageEvent) to a target [Endpoint](#endpoint). The [Posted](#posted) action is required and MUST be implemented.  All other supported events and actions are considered optional. 
+#### Required action(s)  
+[Started](#started), [Submitted](#submitted)
+  
+#### Assignable Started and Submitted Restrictions
+* A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
+* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
- #### Additional Requirements  
- * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * When the [Message](#message) is in the form of a reply, the prior [Message](#message) that prompted the reply SHOULD be referenced via the [Message](#message) `replyTo` property.
- * Parent-child relationships that exist between a [Message](#message), [Thread](#thread) and a [Forum](#forum) MAY be represented by use of the `isPartOf` property.
- * When navigating to a [Forum](#forum), [Thread](#thread) or [Message](#message) the [DigitalResource](#digitalResource) or [SoftwareApplication](#softwareApplication) that constitutes the referring context MAY be specified as the `referrer`.
+### <a name="forumProfile"></a>3.5 Forum Profile
  
- ### <a name="gradingProfile"></a>3.6 Grading Profile
+#### Minimum Conformance
+Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
  
- #### Minimum Conformance
- Create and send a Caliper [GradeEvent](#gradeEvent) to a target [Endpoint](#endpoint).  The [Graded](#graded) action is required and MUST be implemented.
+#### Required action(s)  
+[Posted](#posted)
+   
+#### Message Posted Restrictions
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* A [Message](#message) MUST be specified as the `object` of the interaction.
  
- #### Additional Requirements
- * For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.
- * For a [Graded](#graded) action, the `generated` [Score](#score) SHOULD be specified.
+### <a name="gradingProfile"></a>3.6 Grading Profile
  
- ### <a name="mediaProfile"></a>3.7 Media Profile
+#### Minimum Conformance
+Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [Graded](#graded) action is required and MUST be implemented.
  
- #### Minimum Conformance
- Create and send a [MediaEvent](#mediaEvent) to a target endpoint. The [Started](#started) and [Ended](#ended) actions are required and MUST be implemented.  The [Paused](#paused), [Resumed](#resumed) and [Restarted](#restarted) actions SHOULD be implemented.  All other supported events and actions are considered optional.
+#### Required action(s)  
+[Graded](#graded)
+   
+#### Grading Graded Restrictions
+For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
  
- #### Additional Requirements  
- * A [Person](#person) MUST be specified as the `actor` of the interaction.
- * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
- * A [MediaLocation](#mediaLocation) MAY be specified as the `target` in order to indicate the current location in an audio or video stream.
- * For a [Started](#started) or [Restarted](#restarted) action, the [MediaLocation](#mediaLocation) `currentTime` value MUST be set to the beginning or initial starting location in the audio or video stream.
- * For a [Paused](#paused) action the [MediaLocation](#mediaLocation) `currentTime` value MUST be set to the location in the audio or video stream where the pause occurred.
- * For a [Resumed](#resumed) action the [MediaLocation](#mediaLocation) `currentTime` value MUST be set to the location in the audio or video stream where the previous pause occurred.
- * For a [Ended](#ended) action the [MediaLocation](#mediaLocation) `currentTime` value MUST be set to the ending or closing location in the audio or video stream.
- * For other [MediaEvent](#mediaEvent) supported actions the [MediaLocation](#mediaLocation) `currentTime` value MUST be set to the location in the audio or video stream where the action occurred.
- * When navigating to a [MediaObject](#mediaObject) the [DigitalResource](#digitalResource) or [SoftwareApplication](#softwareApplication) that constitutes the referring context MAY be specified as the `referrer`.
+### <a name="mediaProfile"></a>3.7 Media Profile
  
- ### <a name="readingProfile"></a>3.8 Reading Profile
+#### Minimum Conformance
+Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
+
+#### Required action(s)  
+[Started](#started), [Ended](#ended)
+   
+#### Media Started and Ended Restrictions
+* A [Person](#person) MUST be specified as the `actor` of the interaction.
+* A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
  
- #### Minimum Conformance
- Create and send a [NavigationEvent](#navigationEvent) and a [ViewEvent](#viewEvent) to a target [Endpoint](#endpoint).  The [NavigatedTo](#navigatedTo) and [Viewed](#viewed) actions are required and MUST be implemented.
+### <a name="readingProfile"></a>3.8 Reading Profile
  
- #### Additional Requirements  
+#### Minimum Conformance
+ Create and send both a navigatedTo [NavigationEvent](#navigationEvent) and a viewed [ViewEvent](#viewEvent) to a target endpoint.
+ 
+ #### Required action(s)  
+ [NavigatedTo](#navigatedTo) ([NavigationEvent](#navigationEvent)), [Viewed](#viewed) ([ViewEvent](#viewEvent))
+ 
+#### Reading NavigatedTo and Viewed Restrictions 
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
  * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
- * A [Frame](#frame) MAY be specified as the `target` in order to indicate an indexed segment or location.
- * When navigating to digital content the [DigitalResource](#digitalResource) or [SoftwareApplication](#softwareApplication) that constitutes the referring context MAY be specified as the `referrer`.
  
  ### <a name="sessionProfile"></a>3.9 Session Profile
  
  #### Minimum Conformance
- Create and send a [SessionEvent](#sessionEvent) to a target [Endpoint](#endpoint). The [LoggedIn](#loggedIn) action is required and MUST be implemented.
+ Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. All associated actions included in the profile are considered optional for certification purposes.
  
- #### Requirements  
- * Although optional, the relevant user `session` SHOULD be specified.
- * For a [LoggedIn](#loggedIn) action, if the `actor` is attempting to access a particular [DigitalResource](#digitalResource) the resource MAY be designated as the `target` of the interaction.
+ #### Required action(s) 
+ [LoggedIn](#loggedIn)
+ 
+ #### Session LoggedIn Restrictions  
+ * A [Person](#person) MUST be specified as the `actor` of the interaction.
+ * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
  
  ### <a name="toolUseProfile"></a>3.10 Tool Use Profile
  
  #### Minimum Conformance
- Create and send a Caliper [ToolUseEvent](#toolUseEvent) to a target [Endpoint](#endpoint).  The [Used](#used) action is required and MUST be implemented.
+ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
  
- #### Additional Requirements
+ #### Required action(s) 
+ [Used](#used) action
+ 
+ #### ToolUse Used Requirements
  * A [Person](#person) MUST be specified as the `actor` of the interaction.
  * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
-
-## <a name="sensor"></a>4.0 Service Provider Sensor Conformance
-
-A Caliper service provider MUST be capable of serializing and sending a Caliper [Envelope](#envelope) containing the following payloads to the designated certification service [Endpoint](#endpoint).
-
-* A JSON array consisting of one or more Caliper [Event](#event) documents, each expressed as [JSON-LD](#jsonldDef).
-* A JSON array consisting of one or more Caliper [Entity](#entity) "describe" documents, each expressed as [JSON-LD](#jsonldDef).
-* A JSON array consisting of a mix of one or more Caliper [Event](#event) and [Entity](#entity) describe documents, each expressed as [JSON-LD](#jsonldDef). 
-
-## <a name="transport"></a>5.0 Transport Conformance
-
-Business requirements informed by industry best practices will determine the choice of transport protocol for Caliper [Sensor](#sensor) and [Endpoint](#endpoint) implementers.  _Note that the IMS Caliper certification service currently requires implementers seeking certification to send data to the certification test [Endpoint](#endpoint) using HTTPS with a bearer token credential consistent with [RFC 6750](#rfc6750)._  Where an alternate transport protocol is preferred for performance or other considerations, it is recommended to add that support in addition to HTTP transport for maximum interoperability.
-
-Irrespective of the chosen transport protocol, each message sent by a [Sensor](#sensor) to a target [Endpoint](#endpoint) MUST consist of a single JSON representation of a Caliper [Envelope](#envelope). 
-
-#### 5.1 HTTP Transport Requirements
-
-A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
-
-##### 5.1.1 General Message Requirements
-* Each message MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).
-* Messages MUST be sent using the POST request method.
-
-##### 5.1.2 HTTP Request Headers
-
-The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
  
- | Request Header | Requirements |
- | :------------- | :----------- |
- | Accept | \[TODO\] . . . |
- | Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification service and associated with the test [Endpoint](#endpoint). |
- | Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
- | Host | \[TODO\] . . . |
+ ## <a name="dataFormat"></a>4.0 Data Interchange Format
  
-##### 5.1.3 Certification service HTTP Response Behavior
- When communicating over HTTP the certification service [Endpoint](#httpEndpoint) will exhibit the following response behavior:
+ \[TODO\] Describe JSON-LD
  
- * To signal to a Caliper service provider that it has successfully received a message the certification service [Endpoint](#httpEndpoint) will reply with a `2xx` class status code.  The body of a successful response will be empty.
- * If a Caliper service provider sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
- * If a Caliper service provider sends a malformed Caliper [Envelope](#envelope) (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
- * If a Caliper service provider sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
- * If a Caliper service provider sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
- * If a Caliper service provider sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the [Endpoint](#httpEndpoint) cannot support the certification service will reply with a `422 Unprocessable Entity` response.
+ ## <a name="transportConformance"></a>5.0 Transport Conformance
  
- The certification service MAY respond to Caliper service provider messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+ \[TODO\] Summarize transport options . . . .
+ 
+
+ ### <a name="http"></a>5.1 HTTP Transport Requirements
+ 
+ A Caliper service provider utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper service provider MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
+ 
+ A Caliper service provider certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as [Envelope](#envelope) `data` array values.  Each [Event](#event) and [Entity](#entity) included in the [Envelope] MUST be expressed as JSON-LD.
+ 
+ #### <a name="httpRequest"></a>5.1.1  HTTP Message Requests
+ 
+ Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
+ 
+ The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
+  
+  | Request Header | Requirements |
+  | :------------- | :----------- |
+  | Accept | \[TODO\] . . . |
+  | Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification service and associated with the test endpoint. |
+  | Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
+  | Host | \[TODO\] . . . |
+ 
+ #### <a name="httpResponse"></a>5.1.2  HTTP Message Responses
+ 
+ When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
+  
+  * To signal to a Caliper service provider that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
+  * If a Caliper service provider sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
+  * If a Caliper service provider sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
+  * If a Caliper service provider sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
+  * If a Caliper service provider sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
+  * If a Caliper service provider sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
+  
+  The certification service MAY respond to Caliper service provider messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+  
+### <a name="mqtt"></a>5.2 MQTT Transport Requirements
+
+A Caliper service provider utilizing the Message Queue Telemetry Transport (MQTT) publish-subscribe messaging protocol MUST demonstrate . . . .
+
+\[TODO\] . . . .
+
+## <a name="usingCertService"></a> 6.0 Using the Certification Service
+ 
+Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
+ 
+The certification service provides a playground for testing your Caliper messages.  Click the "Start Testing" link under __Test Your Product__ to access the playground.
+ 
+ \[TODO\] . . . describe using the playground to send a Caliper test fixture using curl.
+ 
+### Example: Using curl to post a Caliper Envelope to a Certification Service Playground Endpoint
+```text
+curl --request POST \
+--url https://caliper.imsglobal.org/caliper/2c925d43-7707-4fd7-ac87-c814afbe5621/message \
+--header 'Accept: application/json' \ 
+--header 'Authorization: Bearer 2c925d43-7707-4fd7-ac87-c814afbe5621' \
+--header 'Content-Type: application/json' \
+--data @caliperEnvelopeToolUseEvent.json
+``` 
+
+Once you are ready to commence certification testing, click the "Certify Your Product" link under __Certify Your Product__ to commence testing.  
+ 
+The following steps will guide you through the process.  
+ 
+1. Complete the online form by providing the following information:
+ 
+   * Product name
+   * Product version
+   * Product URL
+   * Product description
+   * Caliper specification version
+   * Member name
+   * Member email address
+   * Member organization
+ 
+2. Click the green "Start Certification" button.  To terminate testing click the white "Cancel" button.
+ 
+3. Follow the onscreen instructions to run the tests.  Configure the host software to send Caliper messages to the test endpoint URL provided onscreen.
+ 
+4. Initiate test.  Send messages to the certification service endpoint.  
+ 
+5. When messages are received by the Certification service the online directions will be replaced with a view displaying conformance progress. 
+ 
+ \[TODO\] Continue describing steps . . .
+
+### <a name="certMark"></a>7.0 Caliper Certification Mark
+
+After submitting your successful conformance information and receiving confirmation and a registration number from IMS Global you may then apply the appropriate conformance mark. The IMS Global conformance chart will list your conformance details. If you have any questions, please feel free to contact us at any point.  Products without an IMS conformance registration number are not considered compliant by IMS Global.
+
+### <a name="certRenewal"></a>8.0 Caliper Certification Renewal
+
+Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of either the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service.
 
 ## <a name="contributors"></a>Contributors
 
@@ -366,19 +389,17 @@ The following Caliper Working Group participants contributed to the writing of t
 
 <a name="rfc7807"></a>__RFC 7807__.  IETF.  M. Nottingham, E. Wilde.  "Problem Details for HTTP APIs."  March 2017.  URL: https://tools.ietf.org/html/rfc7807
 
-<a name="wordnet"></a>__WordNet__.  Princeton University.  WordNet&reg;.  A lexical database for English. 2010.  URL: https://wordnet.princeton.edu/
-
 ## <a name="aboutThisDoc"></a>About this Document
 
-IMS Global Learning Consortium, Inc. ("IMS Global") is publishing the information contained in this document ("Specification") for purposes of scientific, experimental, and scholarly collaboration only.
+IMS Global Learning Consortium, Inc. ("IMS Global") is publishing the information contained in this document ("Guide") for purposes of scientific, experimental, and scholarly collaboration only.
 
-IMS Global makes no warranty or representation regarding the accuracy or completeness of the Specification.
+IMS Global makes no warranty or representation regarding the accuracy or completeness of the Guide.
 
 This material is provided on an "As Is" and "As Available" basis.
 
-The Specification is at all times subject to change and revision without notice.
+The Guide is at all times subject to change and revision without notice.
 
-It is your sole responsibility to evaluate the usefulness, accuracy, and completeness of the Specification as it relates to you.
+It is your sole responsibility to evaluate the usefulness, accuracy, and completeness of the Guide as it relates to you.
 
 IMS Global would appreciate receiving your comments and suggestions.
 
