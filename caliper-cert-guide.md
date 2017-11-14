@@ -12,13 +12,13 @@ IMS takes no position regarding the validity or scope of any intellectual proper
 
 Copyright &copy; 2017 IMS Global Learning Consortium. All Rights Reserved.
 
-Use of this specification to develop products or services is governed by the license with IMS found on the IMS website: http://www.imsglobal.org/speclicense.html.
+Use of this guide to develop products or services is governed by the license with IMS found on the IMS website: http://www.imsglobal.org/speclicense.html.
 
 Permission is granted to all parties to use excerpts from this document as needed in producing requests for proposals.
 
 The limited permissions granted above are perpetual and will not be revoked by IMS or its successors or assigns.
 
-THIS SPECIFICATION IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, ANY WARRANTY OF NON INFRINGEMENT IS EXPRESSLY DISCLAIMED. ANY USE OF THIS SPECIFICATION SHALL BE MADE ENTIRELY AT THE IMPLEMENTER'S OWN RISK, AND NEITHER THE CONSORTIUM, NOR ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER, DIRECTLY OR INDIRECTLY, ARISING FROM THE USE OF THIS SPECIFICATION.
+THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, ANY WARRANTY OF NON INFRINGEMENT IS EXPRESSLY DISCLAIMED. ANY USE OF THIS GUIDE SHALL BE MADE ENTIRELY AT THE IMPLEMENTER'S OWN RISK, AND NEITHER THE CONSORTIUM, NOR ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER, DIRECTLY OR INDIRECTLY, ARISING FROM THE USE OF THIS GUIDE.
 
 ## Table of Contents
 
@@ -112,9 +112,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="uuidDef"></a>__UUID__: a 128-bit identifier that does not require a registration authority to assure uniqueness.  However, absolute uniqueness is not guaranteed although the collision probability is considered extremely low. Caliper recommends use of randomly or pseudo-randomly generated version 4 UUIDs.  Each Caliper [Event](#event) MUST be assigned a UUID that is expressed as a [URN](#urnDef) using the form `urn:uuid:<UUID>` as described in [RFC 4122](#rfc4122).
 
-## 2.0 <a name="certProcess"></a>The Certification Process
+## <a name="certProcess"></a>2.0 The Certification Process
 
-### 2.1 <a name="certReqs"></a>Caliper Certification Requirements
+### <a name="certReqs"></a>2.1 Caliper Certification Requirements
 
 * Your organization MUST be an IMS Contributing or Affiliate Member.
 * You MUST pass the tests using this Certification service.
@@ -124,7 +124,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 Certification is for a particular release of Caliper's Metric Profiles and must be re-done for each new release of the software.
 
-### 2.2 <a name="certMark"></a>Conformance Testing Process
+### <a name="certMark"></a>2.2 Conformance Testing Process
 
 1. Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
 
