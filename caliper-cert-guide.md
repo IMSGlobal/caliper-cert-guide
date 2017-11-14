@@ -48,6 +48,7 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 * 6.0 [Using the Certification Service](#usingCertService)
 * 7.0 [Caliper Certification Mark](#certMark)
 * 8.0 [Certification Renewal](#certRenewal)
+* [Appendix A. Example messages](#appendixA)
 * [List of Contributors](#contributors)
 * [References](#references)
 * [About this Document](#aboutThisDoc)
@@ -377,18 +378,6 @@ A Caliper service provider utilizing the Message Queue Telemetry Transport (MQTT
 Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
  
 The certification service provides a playground for testing your Caliper messages.  Click the "Start Testing" link under __Test Your Product__ to access the playground.
- 
- \[TODO\] . . . describe using the playground to send a Caliper test fixture using curl.
- 
-### Example: Using curl to post a Caliper Envelope to a Certification Service Playground Endpoint
-```text
-curl --request POST \
---url https://caliper.imsglobal.org/caliper/2c925d43-7707-4fd7-ac87-c814afbe5621/message \
---header 'Accept: application/json' \ 
---header 'Authorization: Bearer 2c925d43-7707-4fd7-ac87-c814afbe5621' \
---header 'Content-Type: application/json' \
---data @caliperEnvelopeToolUseEvent.json
-``` 
 
 Once you are ready to commence certification testing, click the "Certify Your Product" link under __Certify Your Product__ to commence testing.  
  
@@ -422,6 +411,20 @@ After submitting your successful conformance information and receiving confirmat
 ### <a name="certRenewal"></a>8.0 Caliper Certification Renewal
 
 Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service.
+
+## <a name="appendixA"></a>Appendix A. Example Messages
+
+\[TODO\] Add examples
+
+### Example: Using curl to post a Caliper Envelope Test Fixture to the Certification Service over HTTP
+```text
+curl --request POST \
+--url https://caliper.imsglobal.org/caliper/2c925d43-7707-4fd7-ac87-c814afbe5621/message \
+--header 'Accept: application/json' \ 
+--header 'Authorization: Bearer 2c925d43-7707-4fd7-ac87-c814afbe5621' \
+--header 'Content-Type: application/json' \
+--data @caliperEnvelopeToolUseEvent.json
+``` 
 
 ## <a name="contributors"></a>Contributors
 
