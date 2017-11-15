@@ -408,9 +408,9 @@ The following steps will guide you through the process.
 
 After submitting your successful conformance information and receiving confirmation and a registration number from IMS Global you may then apply the appropriate conformance mark. The IMS Global conformance chart will list your conformance details. If you have any questions, please feel free to contact us at any point.  Products without an IMS conformance registration number are not considered compliant by IMS Global.
 
-### <a name="certRenewal"></a>8.0 Caliper Certification Renewal
+### <a name="certRenewal"></a>8.0 Caliper Certification Details
 
-Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service.
+Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service. All IMS Certifications require that you renew and retest your certification after one year.
 
 ## <a name="appendixA"></a>Appendix A. Example Messages
 
