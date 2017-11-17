@@ -38,7 +38,13 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 3.8 [Reading Profile](#readingProfile)
   * 3.9 [Session Profile](#sessionProfile)
   * 3.10 [Tool Use Profile](#toolUseProfile)
-* 4.0 [Data Interchange Format](#dataFormat)
+* 4.0 [Data Interchange Format](#dataFormat) OR \[TODO\] JSON-LD Binding
+  * 4.1 [JSON-LD](#jsonld)  OR \[TODO\] Key Concepts
+    * 4.1.1 [The Context](#jsonldContext)
+    * 4.1.2 [Node Identifiers](#jsonldNodeIdentifiers)
+    * 4.1.3 [Type Coercion](#jsonldNodeIdentifiers)
+    * 4.1.4 [Expressing Events as JSON-LD](#jsonldEvents)
+    * 4.1.5 [Expressing Entities as JSON-LD](#jsonldEntities)
 * 5.0 [Transport Conformance](#transportConformance)
   * 5.1 [HTTP Transport Requirements](#http)
   * 5.1.1 [HTTP Message Requests](#httpRequest)
@@ -74,9 +80,13 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="actorDef"></a>__Actor__: An actor is an [Agent](#agent) capable of initiating or performing an [action](#actionDef) on a thing or as part of a process.  A Caliper [Event](#event) includes an `actor` attribute for representing the [Agent](#agent). 
 
+<a name="blankNodeDef"></a>__Blank Node Identifier__: a string that begins with "_:" that is used to identify an [Entity](#entity) for which an [IRI](#iriDef) is not provided.  An [Entity](#entity) provisioned with a blank node identifier is neither dereferenceable nor has meaning outside the scope of the [JSON-LD](#jsonldDef) document within which it resides.
+
 <a name="actionDef"></a>__Action__: something performed or done to accomplish a purpose.  Caliper [Event](#event) subtypes define a controlled vocabulary of one or more [actions](#actions) relevant to the activity domain.  A Caliper [Event](#event) includes an `action` attribute for expressing the associated action.     
 
 <a name="contextDef"></a>__Context__: a special [JSON-LD](http://json-ld.org/spec/latest/json-ld/) keyword that maps the terms employed in a JSON document to [IRIs](https://www.ietf.org/rfc/rfc3987.txt) that link to one or more published vocabularies.  Inclusion of a [JSON-LD](http://json-ld.org/spec/latest/json-ld/) context provides an economical way of communicating document semantics to services interested in consuming Caliper event data.
+
+<a name="describeDef"></a>__Describe__: \[TODO\] . . . .
 
 <a name="endpointDef"></a>__Endpoint__: a receiver or consumer of Caliper data that is bound to a specific network protocol.  
 
@@ -89,6 +99,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 <a name="iriDef"></a>__IRI__: The Internationalized Resource Identifier (IRI) extends the Uniform Resource Identifier ([URI](#uriDef)) scheme by using characters drawn from the Universal character set rather than US-ASCII per [RFC 3987](https://www.ietf.org/rfc/rfc3987.txt).  [Linked Data](#linkedData) rely on IRIs to refer to most nodes and properties.
 
 <a name="iso8601Def"></a>__ISO 8601__: Caliper data and time values are formatted per ISO 8601 with the addition of millisecond precision.  The format is yyyy-MM-ddTHH:mm:ss.SSSZ where 'T' separates the date from the time while 'Z' indicates that the time is set to UTC.
+
+<a name="linkedDataDef"></a>__Linked Data__: A set of design principles first articulated by Tim Berners-Lee for discovering, connecting, and sharing structured data over the Web.  The principles can be summarized as follows: use [IRIs](#iriDef)/[URIs](#uriDef) as names for things; use HTTP [IRIs](#iriDef)/[URIs](#uriDef) so that information about things (e.g., people, objects, concepts) can be retrieved using a standard format; link out to other relevant things by way of their [IRIs](#iriDef)/[URIs](#uriDef) in order to promote discovery of new relationships between things.
 
 <a name="lisDef"></a>__LIS__: Learning Information Services&reg; (LIS&reg;) is an IMS standard that defines how systems manage the exchange of information that describes people, groups, memberships, courses and outcomes.
  
@@ -129,7 +141,7 @@ As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Cal
 
 Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
 
-Certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
+Certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.  
 
 ### <a name="basicProfile"></a>3.1 Basic Profile
  
@@ -141,11 +153,10 @@ Any Caliper defined action can be used to describe the interaction.
  
 #### Restrictions
 * Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
-* An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.
+* The `type` value must be set to "Event". 
+* An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.  The `actor` value MUST be expressed either as an object or as a string corresponding to the actor's IRI.
 * The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
-* An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [Event](#event) properties are considered optional.
+* An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
 
 ### <a name="annotationProfile"></a>3.2 Annotation Profile
  
@@ -157,12 +168,11 @@ Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target end
  
 #### Restrictions
 
-##### AnnotationEvent Bookmarked 
+##### AnnotationEvent Bookmarked
+* The `type` value must be set to "AnnotationEvent". 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Bookmarked'.
+* The `action` value MUST be set to "Bookmarked".
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [AnnotationEvent](#annotationEvent) properties are considered optional.
  
 ### <a name="assessmentProfile"></a>3.3 Assessment Profile
  
@@ -175,18 +185,16 @@ Create and send both a started and submitted [AssessmentEvent](#assessmentEvent)
 #### Restrictions
 
 ##### AssessmentEvent Started
+* The `type` value must be set to "AssessmentEvent". 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Started'.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [Event](#event) properties are considered optional.
 
 ##### AssessmentEvent Submitted
+* The `type` value must be set to "AssessmentEvent". 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Submitted'.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [AssessmentEvent](#assessmentEvent) properties are considered optional.
  
 ### <a name="assignableProfile"></a>3.4 Assignable Profile
  
@@ -199,18 +207,16 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 #### Assignable Started and Submitted Restrictions
 
 ##### AssignableEvent Started
+* The `type` value must be set to "AssignableEvent". 
 * A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Started'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [AssignableEvent](#assignableEvent) properties are considered optional.
 
 ##### AssignableEvent Submitted
+* The `type` value must be set to "AssignableEvent".
 * A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Submitted'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [AssignableEvent](#assignableEvent) properties are considered optional.
  
 ### <a name="forumProfile"></a>3.5 Forum Profile
  
@@ -223,11 +229,10 @@ Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  Al
 #### Restrictions
 
 ##### MessageEvent Posted
+* The `type` value must be set to "MessageEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Posted'.
 * A [Message](#message) MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [MessageEvent](#messageEvent) properties are considered optional.
  
 ### <a name="gradingProfile"></a>3.6 Grading Profile
  
@@ -240,10 +245,9 @@ Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [G
 #### Restrictions
 
 ##### GradeEvent Graded
+* The `type` value must be set to "GradeEvent".
 * For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Graded'.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [GradeEvent](#gradeEvent) properties are considered optional.
  
 ### <a name="mediaProfile"></a>3.7 Media Profile
  
@@ -256,18 +260,16 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 #### Restrictions
    
 ##### MediaEvent Started
+* The `type` value must be set to "MediaEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Started'.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [MediaEvent](#mediaEvent) properties are considered optional.
 
 ##### MediaEvent Ended
+* The `type` value must be set to "MediaEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Ended'.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [MediaEvent](#mediaEvent) properties are considered optional.
  
 ### <a name="readingProfile"></a>3.8 Reading Profile
  
@@ -280,18 +282,16 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 #### Restrictions
  
 ##### NavigationEvent NavigatedTo
+* The `type` value must be set to "NavigationEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'NavigatedTo'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [NavigationEvent](#navigationEvent) properties are considered optional.
  
-##### ViewedEvent Viewed 
+##### ViewedEvent Viewed
+* The `type` value must be set to "ViewEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Viewed'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [ViewEvent](#viewEvent) properties are considered optional.
  
 ### <a name="sessionProfile"></a>3.9 Session Profile
  
@@ -303,12 +303,11 @@ Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. 
  
 #### Restrictions
  
-##### SessionEvent LoggedIn  
+##### SessionEvent LoggedIn
+* The `type` value must be set to "SessionEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'LoggedIn'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [SessionEvent](#sessionEvent) properties are considered optional.
  
 ### <a name="toolUseProfile"></a>3.10 Tool Use Profile
  
@@ -321,16 +320,61 @@ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
 #### Restrictions
  
 ##### ToolUseEvent Used
+* The `type` value must be set to "ToolUseEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Used'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
-* an `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* All other [ToolUseEvent](#toolUseEvent) properties are considered optional.
- 
+
 ## <a name="dataFormat"></a>4.0 Data Interchange Format
- 
-\[TODO\] Describe JSON-LD
- 
+
+\[TODO\] General intro OR MERGE 4.1 into 4.0
+
+### <a name="jsonld"></a>4.1 JSON-LD
+Caliper events and entities are serialized as [JSON-LD](#jsonldDef), a JSON-based data interchange format that encourages use of shared vocabularies and discoverable key:value identifiers when constructing JSON documents.
+
+#### <a name="jsonldContext"></a>4.1.1 The Context
+[JSON-LD](#jsonldDef) documents require inclusion of a *context*, denoted by the `@context` keyword, a property employed to map document [Terms](#termDef) to [IRIs](#iriDef).  [JSON-LD](#jsonldDef) contexts can be embedded inline or referenced externally in a document.  Inclusion of a [JSON-LD](#jsonldDef) context provides an economical way for Caliper to communicate document semantics to services interested in consuming Caliper event data.
+
+IMS Global provides a remote Caliper 1.1 JSON-LD [context](http://purl.imsglobal.org/ctx/caliper/v1p1) document for mapping Caliper [Terms](#termDef) to [IRIs](#iriDef).  ~~Both node types and typed values are specified in the external IMS Caliper JSON-LD [context](http://purl.imsglobal.org/ctx/caliper/v1p1).~~  Implementers are encouraged to familiarize themselves with the term definitions described therein.
+
+Caliper consumers require accurate [JSON-LD](#jsonldDef) context definitions to be capable of interpreting coerced values.  For Caliper defined [Terms](#terms) implementers need only reference the external IMS Caliper JSON-LD [context](http://purl.imsglobal.org/ctx/caliper/v1p1) in their [Event](#event) or [Entity](#entity) *[describe](#describeDef)* [JSON-LD](#jsonldDef) documents in order to link to the associated term definitions.  A Caliper [Event](#event) or [Entity](#entity) containing coerced values that do not map to an explicit context declaration will be considered nonconformant.
+
+##### Requirements
+* Each Caliper [Event](#event) and [Entity](#entity) *[describe](#describeDef)* document generated by a [Sensor](#sensor) MUST be provisioned with a [JSON-LD](#jsonldDef) `@context` defined as a property of the top-level object.  
+* The `@context` property type MAY be defined as a JSON string, object or array.
+  * If the top-level `@context` value is defined as a string it MUST be set to the Caliper remote context "http://purl.imsglobal.org/ctx/caliper/v1p1".
+  * If the top-level `@context` value is defined inline as an object it MUST . . . . \[REVIEW\] FOR TOP-LEVEL CONTEXTS BAN "@context": {inline} ?
+  * If the top-level `@context` value is defined as an array of multiple contexts, the remote Caliper [JSON-LD](#jsonldDef) context MUST be listed last in order to ensure that Caliper terms retain their primacy given that [JSON-LD](#jsonldDef) parsers rely on a "most-recently-defined-wins" approach when evaluating duplicate terms.
+* Additional remote or inline _local_ contexts may be referenced any time a JSON object is defined in order to ascribe meaning to terms not described by the model.  Duplicate context references SHOULD be avoided.  Moreover nested _local_ contexts that are added to the _active_ context at processing time MUST NOT override Caliper terms defined by the top-level context.
+
+#### <a name="jsonldNodeIdentifiers"></a>4.1.2 Node Identifiers
+Caliper specifies the use of [IRIs](#iriDef) for identifying nodes (i.e., the things being described) and their attributes.  [IRIs](#iriDef) may be represented ~~either~~ as an absolute IRI containing a scheme, path and optional query and fragment segments ~~or as a relative IRI minus the scheme and/or domain that is resolved relative to a base IRI defined in a JSON-LD context.~~  If an [IRI](#iriDef) is deemed inappropriate for the resource a [blank node](#blankNodeDef) identifier may be assigned.
+
+#### <a name="jsonldTypeCoercion"></a>4.1.3 Type Coercion
+Caliper permits certain [Event](#event) and [Entity](#entity) property values to be expressed either as a JSON object or a string corresponding to the object's [IRI](#iriDef).  [JSON-LD](#jsonldDef) also supports the _coercion_ of data values to specified types based on value type mappings defined in a [JSON-LD](#jsonldDef) context.  In a [JSON-LD](#jsonldDef) context term definition the keywords `@id` or `@vocab` may be assigned as a value in order to signal to a [JSON-LD](#jsonldDef) parser that if the value is set to a string it is to be interpreted as an [IRI](#iriDef).  Type coercion of this sort provides representational flexibility that implementers are encouraged to leverage.
+
+#### <a name="jsonldEvents"></a>4.1.4 Expressing Events as JSON-LD
+
+* _Expressed as an object_:
+  * A [JSON-LD](#jsonldDef) `@context` must be defined as outlined above in section \[TODO\] X.  
+  * The `id` property MUST be assigned a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). 
+  * The `type` value MUST be set to the relevant Caliper term (e.g., "NavigationEvent").
+  * The `actor` value MUST be set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed either as an object or as a string corresponding to the actor's IRI. 
+  * The `action` value MUST be set to the relevant action term (e.g., "NavigatedTo") specified by the governing Metric Profile. 
+  * The `object` value MUST be set to . . . \[TODO\]  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
+  * An `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
+  * All other [Event](#event) properties are considered optional.
+  
+#### <a name="jsonldEntities"></a>4.1.5 Expressing Entities as JSON-LD
+
+* _Expressed as an object_:
+  * If generated as a *[describe](#describeDef)* a [JSON-LD](#jsonldDef) `@context` must be defined as outlined above in section \[TODO\] X.  Otherwise, omit the otherwise duplicate `@context` property for Caliper entities participating in an [Event](#event) . . . [JSON-LD](#jsonldDef) inheritance rules.
+  * The 'id' property MUST be assigned a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
+  * The `type` value MUST be set to the relevant Caliper term (e.g., "DigitalResource").
+  * All other [Event](#event) properties are considered optional.
+* _Expressed as a string_:
+  * The value must be set to the entity's [IRI](#iriDef).
+  
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
 \[TODO\] Summarize transport options . . . .
@@ -339,7 +383,7 @@ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
  
 A Caliper sensor utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper sensor MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
  
-A Caliper sensor certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as [Envelope](#envelope) `data` array values.  Each [Event](#event) and [Entity](#entity) included in the [Envelope] MUST be expressed as JSON-LD.
+A Caliper sensor certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as envelope `data` array values.  Each [Event](#event) and [Entity](#entity) included in the envelope MUST be expressed as JSON-LD.
  
 #### <a name="httpRequest"></a>5.1.1  HTTP Message Requests
  
@@ -415,6 +459,22 @@ Caliper certification covers individual metric profiles only and is scoped to th
 ## <a name="appendixA"></a>Appendix A. Example Messages
 
 \[TODO\] Add examples
+
+### Example: DUMP IN FAVOR OR REFERRING TO SPEC EXAMPLE
+```
+{
+  "@context": {
+    "id": "@id",
+    "type": "@type",
+    "caliper": "http://purl.imsglobal.org/caliper/",
+    . . .
+    "actor": {"@id": "caliper:actor", "@type": "@id"},
+    . . .
+    "action": {"@id": "caliper:action","@type": "@vocab"},
+    . . .
+  }
+}
+```
 
 ### Example: Using curl to post a Caliper Envelope Test Fixture to the Certification Service over HTTP
 ```text
