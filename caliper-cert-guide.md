@@ -362,9 +362,9 @@ A Caliper [Event](#event) is a generic type that describes the relationship esta
 * A top-level `@context` MUST be specified as described above in section \[TODO\] X.
 * The `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property referenced is mandatory.    
   * `id`: set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). 
-  * `type`: set the value to the relevant Caliper term (e.g., "NavigationEvent").
+  * `type`: set the string value to the relevant Caliper term (e.g., "NavigationEvent").
   * `actor`: set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. 
-  * `action`: set the value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. 
+  * `action`: set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. 
   * `object`: set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile.  The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI.
   * `eventTime`: set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
 * Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
@@ -379,8 +379,8 @@ An [Entity](#entity) participating in an [Event](#event) can be expressed as an 
   ~~* Each [Entity](#entity) property MUST be specified only once.~~
   * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See section \[TODO\] X for more details regarding context handling.
   * The `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory. 
-    * `id`: set the value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
-     * `type`: set the value to the relevant Caliper term (e.g., "DigitalResource").
+    * `id`: set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
+     * `type`: set the string value to the relevant Caliper term (e.g., "DigitalResource").
   * Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
 * _A Caliper Entity expressed as a string_:
   * The value must be set to the entity's [IRI](#iriDef).
@@ -402,7 +402,7 @@ Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [En
 * The `sensor`, `sendTime`, `dataVersion` and `data` properties are required.  ~~Each property MUST be referenced only once.~~  No custom properties are permitted.
   * `sensor`: set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef).
   * `eventTime`: set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message.
-  * `dataVersion`: set the value to "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the Caliper 1.1 specification governs the form of the Caliper entities and events contained in the `data` payload.
+  * `dataVersion`: set the string value to "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the Caliper 1.1 specification governs the form of the Caliper entities and events contained in the `data` payload.
   * `data`: an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope.
 
 #### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
