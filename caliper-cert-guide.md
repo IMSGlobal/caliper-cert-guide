@@ -26,8 +26,8 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 1.1 [Status of this Document](#docStatus)
   * 1.2 [Conventions](#conventions)
   * 1.3 [Terminology](#terminology)
-* 2.0 [Caliper Certification Prerequisites](#certPreReqs)
-* 3.0 [Caliper Metric Profile Conformance](#profileConformance)
+* 2.0 [Certification Prerequisites](#certPreReqs)
+* 3.0 [Metric Profile Conformance](#profileConformance)
   * 3.1 [Basic Profile](#basicProfile)
   * 3.2 [Annotation Profile](#annotationProfile)
   * 3.3 [Assessment Profile](#assessmentProfile)
@@ -51,9 +51,9 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 5.1.2 [HTTP Message Responses](#httpResponse)
   * 5.2 [MQTT Transport Requirements](#mqtt)
     * 5.2.1 \[TODO\] . . .
-* 6.0 [Using the Caliper Certification Service](#usingCertService)
-* 7.0 [Caliper Certification Mark](#certMark)
-* 8.0 [Certification Renewal](#certRenewal)
+* 6.0 [Using the Certification Service](#usingCertService)
+* 7.0 [Certification Mark](#certMark)
+* 8.0 [Certification Expiration and Renewal](#certRenewal)
 * [Appendix A. Example messages](#appendixA)
 * [List of Contributors](#contributors)
 * [References](#references)
@@ -126,7 +126,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="uuidDef"></a>__UUID__: a 128-bit identifier that does not require a registration authority to assure uniqueness.  However, absolute uniqueness is not guaranteed although the collision probability is considered extremely low. Caliper recommends use of randomly or pseudo-randomly generated version 4 UUIDs.  Each Caliper [Event](#event) MUST be assigned a UUID that is expressed as a [URN](#urnDef) using the form `urn:uuid:<UUID>` as described in [RFC 4122](#rfc4122).
 
-## <a name="certPreReqs"></a>2.0 Caliper Certification Prerequisites
+## <a name="certPreReqs"></a>2.0 Certification Prerequisites
 
 Certain prerequisites must be met before you can certify your platform, application or service as Caliper compliant. 
 
@@ -417,7 +417,7 @@ A Caliper sensor utilizing the Message Queue Telemetry Transport (MQTT) publish-
 
 \[TODO\] . . . .
 
-## <a name="usingCertService"></a> 6.0 Using the Caliper Certification Service
+## <a name="usingCertService"></a> 6.0 Using the Certification Service
  
 Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
  
@@ -448,11 +448,11 @@ The following steps will guide you through the process.
  
  \[TODO\] Continue describing steps . . .
 
-### <a name="certMark"></a>7.0 Caliper Certification Mark
+### <a name="certMark"></a>7.0 Certification Mark
 
 After submitting your successful conformance information and receiving confirmation and a registration number from IMS Global you may then apply the appropriate conformance mark. The IMS Global conformance chart will list your conformance details. If you have any questions, please feel free to contact us at any point.  Products without an IMS conformance registration number are not considered compliant by IMS Global.
 
-### <a name="certRenewal"></a>8.0 Caliper Certification Expiration and Renewal
+### <a name="certRenewal"></a>8.0 Certification Expiration and Renewal
 
 Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service. All IMS Certifications require that you renew and retest your certification after one year.
 
