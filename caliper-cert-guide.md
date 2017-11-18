@@ -47,8 +47,9 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 4.3 [Expressing Entities as JSON-LD](#jsonldEntities)
 * 5.0 [Transport Conformance](#transportConformance)
   * 5.1 [HTTP Transport Requirements](#http)
-    * 5.1.1 [HTTP Message Requests](#httpRequest)
-    * 5.1.2 [HTTP Message Responses](#httpResponse)
+    * 5.1.1 [The Envelope](#envelope)
+    * 5.1.2 [HTTP Message Requests](#httpRequest)
+    * 5.1.3 [HTTP Message Responses](#httpResponse)
   * 5.2 [MQTT Transport Requirements](#mqtt)
     * 5.2.1 \[TODO\] . . .
 * 6.0 [Using the Certification Service](#usingCertService)
@@ -357,7 +358,7 @@ Caliper permits certain [Event](#event) and [Entity](#entity) property values to
 A Caliper [Event](#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  ~~Each [Event](#event) instance MUST be provisioned with a unique identifier.~~  Considered as a JSON data structure an [Event](#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
 
 #### Requirements
-* Each [Event](#event) property MUST be specified only once.
+~~* Each [Event](#event) property MUST be specified only once.~~
 * A top-level `@context` MUST be specified as described above in section \[TODO\] X.
 * The `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property referenced is mandatory.    
   * `id`: set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). 
@@ -375,7 +376,7 @@ An [Entity](#entity) participating in an [Event](#event) can be expressed as an 
 
 #### Requirements
 * _A Caliper Entity expressed as a JSON object_:
-  * Each [Entity](#entity) property MUST be specified only once.
+  ~~* Each [Entity](#entity) property MUST be specified only once.~~
   * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See section \[TODO\] X for more details regarding context handling.
   * The `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory. 
     * `id`: set the value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
@@ -391,10 +392,20 @@ An [Entity](#entity) participating in an [Event](#event) can be expressed as an 
 ### <a name="http"></a>5.1 HTTP Transport Requirements
  
 A Caliper sensor utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper sensor MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
+
+Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document.
  
-A Caliper sensor certifying over HTTP MUST be capable of serializing and sending Caliper data using a Caliper [Envelope](#envelope), a JSON data structure that includes metadata about the emitting service as well as a `data` array property for holding the Caliper [Event](#event) and [Entity](#entity) payload.  Caliper [Event](#event) and [Entity](#entity) data MUST be transmitted as envelope `data` array values.  Each [Event](#event) and [Entity](#entity) included in the envelope MUST be expressed as JSON-LD.
- 
-#### <a name="httpRequest"></a>5.1.1  HTTP Message Requests
+### <a name="envelope"></a>5.1.1 The Envelope
+Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a purpose-built JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) "describe" included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
+
+#### Requirements
+* The `sensor`, `sendTime`, `dataVersion` and `data` properties are required.  ~~Each property MUST be referenced only once.~~  No custom properties are permitted.
+  * `sensor`: set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef).
+  * `eventTime`: set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message.
+  * `dataVersion`: set the value to "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the Caliper 1.1 specification governs the form of the Caliper entities and events contained in the `data` payload.
+  * `data`: an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope.
+
+#### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
  
 Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
  
@@ -407,7 +418,7 @@ The following standard HTTP request headers MUST be set for each message sent to
 | Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
 | Host | \[TODO\] . . . |
  
-#### <a name="httpResponse"></a>5.1.2  HTTP Message Responses
+#### <a name="httpResponse"></a>5.1.3  HTTP Message Responses
  
 When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
   
