@@ -369,7 +369,7 @@ Caliper permits certain [Event](#event) and [Entity](#entity) property values to
 
 * _Caliper Entity expressed as an object_:
   * If generated as a *[describe](#describeDef)* a [JSON-LD](#jsonldDef) `@context` must be defined as outlined above in section \[TODO\] X.  Otherwise, omit the otherwise duplicate `@context` property for Caliper entities participating in an [Event](#event) . . . [JSON-LD](#jsonldDef) inheritance rules.
-  * The 'id' property MUST be assigned a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
+  * The `id` property MUST be assigned a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
   * The `type` value MUST be set to the relevant Caliper term (e.g., "DigitalResource").
   * All other [Event](#event) properties are considered optional.
 * _Caliper Entity expressed as a string_:
