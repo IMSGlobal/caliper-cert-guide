@@ -47,8 +47,8 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
     * 4.1.5 [Expressing Entities as JSON-LD](#jsonldEntities)
 * 5.0 [Transport Conformance](#transportConformance)
   * 5.1 [HTTP Transport Requirements](#http)
-  * 5.1.1 [HTTP Message Requests](#httpRequest)
-  * 5.1.2 [HTTP Message Responses](#httpResponse)
+    * 5.1.1 [HTTP Message Requests](#httpRequest)
+    * 5.1.2 [HTTP Message Responses](#httpResponse)
   * 5.2 [MQTT Transport Requirements](#mqtt)
     * 5.2.1 \[TODO\] . . .
 * 6.0 [Using the Certification Service](#usingCertService)
