@@ -43,8 +43,8 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
     * 4.1.1 [The Context](#jsonldContext)
     * 4.1.2 [Node Identifiers](#jsonldNodeIdentifiers)
     * 4.1.3 [Type Coercion](#jsonldNodeIdentifiers)
-    * 4.1.4 [Expressing Events as JSON-LD](#jsonldEvents)
-    * 4.1.5 [Expressing Entities as JSON-LD](#jsonldEntities)
+  * 4.2 [Expressing Events as JSON-LD](#jsonldEvents)
+  * 4.3 [Expressing Entities as JSON-LD](#jsonldEntities)
 * 5.0 [Transport Conformance](#transportConformance)
   * 5.1 [HTTP Transport Requirements](#http)
     * 5.1.1 [HTTP Message Requests](#httpRequest)
@@ -353,9 +353,9 @@ Caliper specifies the use of [IRIs](#iriDef) for identifying nodes (i.e., the th
 #### <a name="jsonldTypeCoercion"></a>4.1.3 Type Coercion
 Caliper permits certain [Event](#event) and [Entity](#entity) property values to be expressed either as a JSON object or a string corresponding to the object's [IRI](#iriDef).  [JSON-LD](#jsonldDef) also supports the _coercion_ of data values to specified types based on value type mappings defined in a [JSON-LD](#jsonldDef) context.  In a [JSON-LD](#jsonldDef) context term definition the keywords `@id` or `@vocab` may be assigned as a value in order to signal to a [JSON-LD](#jsonldDef) parser that if the value is set to a string it is to be interpreted as an [IRI](#iriDef).  Type coercion of this sort provides representational flexibility that implementers are encouraged to leverage.
 
-#### <a name="jsonldEvents"></a>4.1.4 Expressing Events as JSON-LD
+### <a name="jsonldEvents"></a>4.2 Expressing Events as JSON-LD
 
-* _Expressed as an object_:
+* _Caliper Event expressed as an object_:
   * A [JSON-LD](#jsonldDef) `@context` must be defined as outlined above in section \[TODO\] X.  
   * The `id` property MUST be assigned a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). 
   * The `type` value MUST be set to the relevant Caliper term (e.g., "NavigationEvent").
@@ -365,14 +365,14 @@ Caliper permits certain [Event](#event) and [Entity](#entity) property values to
   * An `eventTime` MUST be specified.  The value MUST be expressed as an ISO 8601 date and time value expressed with millisecond precision using the format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
   * All other [Event](#event) properties are considered optional.
   
-#### <a name="jsonldEntities"></a>4.1.5 Expressing Entities as JSON-LD
+### <a name="jsonldEntities"></a>4.3 Expressing Entities as JSON-LD  
 
-* _Expressed as an object_:
+* _Caliper Entity expressed as an object_:
   * If generated as a *[describe](#describeDef)* a [JSON-LD](#jsonldDef) `@context` must be defined as outlined above in section \[TODO\] X.  Otherwise, omit the otherwise duplicate `@context` property for Caliper entities participating in an [Event](#event) . . . [JSON-LD](#jsonldDef) inheritance rules.
   * The 'id' property MUST be assigned a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
   * The `type` value MUST be set to the relevant Caliper term (e.g., "DigitalResource").
   * All other [Event](#event) properties are considered optional.
-* _Expressed as a string_:
+* _Caliper Entity expressed as a string_:
   * The value must be set to the entity's [IRI](#iriDef).
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
