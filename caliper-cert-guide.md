@@ -348,7 +348,7 @@ Caliper permits certain [Event](#event) and [Entity](#entity) property values to
 A Caliper [Event](#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  Considered as a JSON data structure an [Event](#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
 
 #### Requirements
-* A top-level `@context` MUST be specified as described above in section \[TODO\] X.
+* A top-level `@context` MUST be specified as described above in section [4.1](#jsonldContext).
 * The `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property referenced is mandatory.    
   * `id`: set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). 
   * `type`: set the string value to the relevant Caliper term (e.g., "NavigationEvent").
@@ -365,7 +365,7 @@ An [Entity](#entity) participating in an [Event](#event) can be expressed as an 
 
 #### Requirements
 * _A Caliper Entity expressed as a JSON object_:
-  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See section \[TODO\] X for more details regarding context handling.
+  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See section '3.1 Context' in the [Caliper 1.1 Specification](#caliperSpec) for more details regarding context handling.
   * The `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory. 
     * `id`: set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
      * `type`: set the string value to the relevant Caliper term (e.g., "DigitalResource").
