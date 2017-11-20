@@ -86,7 +86,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="contextDef"></a>__Context__: a special [JSON-LD](http://json-ld.org/spec/latest/json-ld/) keyword that maps the terms employed in a JSON document to [IRIs](https://www.ietf.org/rfc/rfc3987.txt) that link to one or more published vocabularies.  Inclusion of a [JSON-LD](http://json-ld.org/spec/latest/json-ld/) context provides an economical way of communicating document semantics to services interested in consuming Caliper event data.
 
-<a name="describeDef"></a>__Describe__: \[TODO\] . . . .
+<a name="describeDef"></a>__Describe__: a Caliper message containing an Entity that is not directly associated with an Event. Entities can be sent asynchronously from Events using `Describe` messages in order to reduce verbosity (e.g. sending a Person entity as a `Describe` avoids having to repeat the Person object in each Event that includes it). For more information, refer to the Sensor API section in the [Caliper 1.1. Specification](#caliperSpec).
 
 <a name="endpointDef"></a>__Endpoint__: a receiver or consumer of Caliper data that is bound to a specific network protocol.  
 
