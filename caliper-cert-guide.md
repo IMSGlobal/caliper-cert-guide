@@ -365,7 +365,7 @@ As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#e
 
 #### Requirements
 * _A Caliper Entity expressed as a JSON object_:
-  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See section '3.1 Context' in the [Caliper 1.1 Specification](#caliperSpec) for more details regarding context handling.
+  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See the [Caliper 1.1 Specification](#caliperSpec), section 3.1 for more details regarding context handling.
   * The `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory. 
     * `id`: set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized.
      * `type`: set the string value to the relevant Caliper term (e.g., "DigitalResource").
