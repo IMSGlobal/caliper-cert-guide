@@ -361,7 +361,7 @@ A Caliper [Event](#event) is a generic type that describes the relationship esta
 ### <a name="jsonldEntities"></a>4.5 Expressing Entities as JSON-LD
 A Caliper [Entity](#entity) is a generic type that represents objects that participate in learning-related activities.  A variety of [Entity](#entity) subtypes have been defined in order to better describe people, groups, organizations, digital content, courses, software applications, and other objects that constitute the "stuff" of a Caliper [Event](#event).  Like an [Event](#event), an [Entity](#entity) is considered semi-structured data consisting of an unordered set of key:value pairs.  
 
-An [Entity](#entity) participating in an [Event](#event) can be expressed as an object or as a string that corresponds to the [IRI](#iriDef) defined for the [Entity](#entity).
+As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).
 
 #### Requirements
 * _A Caliper Entity expressed as a JSON object_:
