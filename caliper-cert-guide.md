@@ -131,13 +131,14 @@ Certain prerequisites must be met before you can certify your platform, applicat
 * The tests MUST be completed by a designated representative of the member organization and you must agree that there is no misrepresentation or manipulation of the results in the submitted report.
 * You MUST submit your report via the Caliper Certification Service.
 
-## <a name="profileConformance"></a>3.0 Metric Profile Certification
+## <a name="profileConformance"></a>3.0 Sensor Metric Profile Certification
 
-As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. . . .
+As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
 
-Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
+Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail. 
 
-Certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.  
+The data emitted by a Sensor MUST conform to the syntactical restrictions defined in [Data Interchange Format](#dataFormat).
+Note that for all profiles, certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.  
 
 ### <a name="basicProfile"></a>3.1 Basic Profile
  
