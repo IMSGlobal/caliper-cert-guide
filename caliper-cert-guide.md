@@ -86,7 +86,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="contextDef"></a>__Context__: a special [JSON-LD](http://json-ld.org/spec/latest/json-ld/) keyword that maps the terms employed in a JSON document to [IRIs](https://www.ietf.org/rfc/rfc3987.txt) that link to one or more published vocabularies.  Inclusion of a [JSON-LD](http://json-ld.org/spec/latest/json-ld/) context provides an economical way of communicating document semantics to services interested in consuming Caliper event data.
 
-<a name="describeDef"></a>__Describe__: \[TODO\] . . . .
+<a name="describeDef"></a>__Describe__: a Caliper message containing an Entity that is not directly associated with an Event. Entities can be sent asynchronously from Events using `Describe` messages in order to reduce verbosity (e.g. sending a Person entity as a `Describe` avoids having to repeat the Person object in each Event that includes it). For more information, refer to the Sensor API section in the [Caliper 1.1. Specification](#caliperSpec).
 
 <a name="endpointDef"></a>__Endpoint__: a receiver or consumer of Caliper data that is bound to a specific network protocol.  
 
@@ -101,10 +101,6 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 <a name="iso8601Def"></a>__ISO 8601__: Caliper data and time values are formatted per ISO 8601 with the addition of millisecond precision.  The format is yyyy-MM-ddTHH:mm:ss.SSSZ where 'T' separates the date from the time while 'Z' indicates that the time is set to UTC.
 
 <a name="linkedDataDef"></a>__Linked Data__: A set of design principles first articulated by Tim Berners-Lee for discovering, connecting, and sharing structured data over the Web.  The principles can be summarized as follows: use [IRIs](#iriDef)/[URIs](#uriDef) as names for things; use HTTP [IRIs](#iriDef)/[URIs](#uriDef) so that information about things (e.g., people, objects, concepts) can be retrieved using a standard format; link out to other relevant things by way of their [IRIs](#iriDef)/[URIs](#uriDef) in order to promote discovery of new relationships between things.
-
-<a name="lisDef"></a>__LIS__: Learning Information Services&reg; (LIS&reg;) is an IMS standard that defines how systems manage the exchange of information that describes people, groups, memberships, courses and outcomes.
- 
-<a name="ltiDef"></a>__LTI__: Learning Tools Interoperability&reg; (LTI&reg;) is an IMS standard for integration of rich learning applications within educational environments.
 
 <a name="metricProfileDef"></a>__Metric Profile__: models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms and concepts that application designers and developers can draw upon to describe common user interactions in a consistent manner using a shared vocabulary.
 
@@ -135,13 +131,14 @@ Certain prerequisites must be met before you can certify your platform, applicat
 * The tests MUST be completed by a designated representative of the member organization and you must agree that there is no misrepresentation or manipulation of the results in the submitted report.
 * You MUST submit your report via the Caliper Certification Service.
 
-## <a name="profileConformance"></a>3.0 Metric Profile Certification
+## <a name="profileConformance"></a>3.0 Sensor Metric Profile Certification
 
-As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. . . .
+As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
 
-Each Caliper profile is also a unit of certification.  \[TODO\] . . . .
+Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail. 
 
-Certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.  
+The data emitted by a Sensor MUST conform to the syntactical restrictions defined in [Data Interchange Format](#dataFormat).
+Note that for all profiles, certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.  
 
 ### <a name="basicProfile"></a>3.1 Basic Profile
  
@@ -351,7 +348,7 @@ Caliper permits certain [Event](#event) and [Entity](#entity) property values to
 A Caliper [Event](#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  Considered as a JSON data structure an [Event](#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
 
 #### Requirements
-* A top-level `@context` MUST be specified as described above in section \[TODO\] X.
+* A top-level `@context` MUST be specified as described above in section [4.1](#jsonldContext).
 * The `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property referenced is mandatory.    
   * `id`: set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). 
   * `type`: set the string value to the relevant Caliper term (e.g., "NavigationEvent").
@@ -368,7 +365,7 @@ An [Entity](#entity) participating in an [Event](#event) can be expressed as an 
 
 #### Requirements
 * _A Caliper Entity expressed as a JSON object_:
-  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See section \[TODO\] X for more details regarding context handling.
+  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See section '3.1 Context' in the [Caliper 1.1 Specification](#caliperSpec) for more details regarding context handling.
   * The `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory. 
     * `id`: set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be provided although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it to retrieve machine-readable data.
      * `type`: set the string value to the relevant Caliper term (e.g., "DigitalResource").
