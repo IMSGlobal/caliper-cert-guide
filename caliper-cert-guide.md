@@ -379,11 +379,17 @@ IMS Global provides a remote Caliper 1.1 [JSON-LD](#jsonldDef) context document 
 * Referencing the remote Caliper [JSON-LD](#jsonldDef) context document in the top-level `@context` is mandatory.  The terms it defines MUST NOT be defined inline as an object.
 * Additional remote or inline _local_ contexts may be referenced any time a JSON object is defined in order to ascribe meaning to terms not described by the model.  These contexts are additive in nature and can be defined as a string, object or array.  Duplicate context references SHOULD be omitted when serializing the object.  Moreover, nested _local_ contexts that are added to the _active_ context at processing time MUST NOT override Caliper terms defined by the top-level context.
 
+For example [JSON-LD](#jsonldDef) context usage see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1.
+
 ### <a name="jsonldNodeIdentifiers"></a>4.2 Node Identifiers
 Caliper specifies the use of [IRIs](#iriDef) for identifying nodes (i.e., the things being described) and their attributes.  [IRI](#iriDef) values MUST be absolute containing a scheme, path and optional query and fragment segments.  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be used as an identifier although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it in future to retrieve machine-readable data over HTTP.  If an [IRI](#iriDef) is deemed inappropriate for the resource a [blank node](#blankNodeDef) identifier may be assigned.
 
+For additional information regarding identifiers see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.2.
+
 ### <a name="jsonldTypeCoercion"></a>4.3 Type Coercion
 Caliper permits [Entity](#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).  [JSON-LD](#jsonldDef) also supports the _coercion_ of data values to specified types based on value type mappings defined in a [JSON-LD](#jsonldDef) context.  For a given `@type` the keywords `@id` or `@vocab` may be assigned as a value in order to signal to a [JSON-LD](#jsonldDef) parser that if a term's instance value is set to a string it is to be interpreted as an [IRI](#iriDef).  Type coercion of this sort provides representational flexibility that implementers are encouraged to leverage.
+
+For examples of coerced Caliper values see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.3.
 
 ### <a name="jsonldEvents"></a>4.4 Expressing Events as JSON-LD
 A Caliper [Event](#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  Considered as a JSON data structure an [Event](#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
@@ -407,15 +413,15 @@ A Caliper [Entity](#entity) is a generic type that represents objects that parti
 
 As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).
 
-If a Caliper [Entity](#entity) is expressed as a JSON object the `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization. 
+If an [Entity](#entity) is expressed as a JSON object the `id` and `type` properties are required and MUST be specified.  If transmitted as a _[describe](#describeDef)_ a top-level @context MUST also be specified.  Otherwise, omit the `@context` when the [Entity](#entity) is specified as a value in an [Event](#event) except in cases where custom terms are specified.  See section [4.1](#jsonldContext) above for more details regarding [JSON-LD](#jsonldDef) context handling.  
+
+All other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization. 
 
 | Property | Disposition |
 | :------- | :---------- |
-| @context | If sent as a _[describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context (e.g. a custom [Entity](#entity)).  Otherwise, omit the duplicate `@context`.  See the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1 for more details regarding context handling. | 
+| @context | If the [Entity](#entity) is transmitted as a _[describe](#describeDef)_ a top-level `@context` MUST be specified.  Otherwise, omit the `@context` when the [Entity](#entity) is specified as a value in an [Event](#event) except in cases where custom terms are specified. |
 | id | set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized. | 
 | type | set the string value to the relevant Caliper term (e.g., "DigitalResource"). |
-
-If a Caliper Entity is expressed as a string set the value to the entity's [IRI](#iriDef).
 
 For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), appendix C.
   
