@@ -390,12 +390,14 @@ Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [En
 #### <a name="envelope"></a>5.1.1 The Envelope
 Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) "describe" included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
 
-#### Requirements
-* The `sensor`, `sendTime`, `dataVersion` and `data` properties are required.  No custom properties are permitted.
-  * `sensor`: set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef).
-  * `eventTime`: set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message.
-  * `dataVersion`: set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the Caliper 1.1 specification governs the form of the Caliper entities and events contained in the `data` payload.
-  * `data`: an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope.
+The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` properties MUST be specified.  No custom properties are permitted.
+
+| Property | Requirements |
+| :------- | :----------- |
+| `sensor` | set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
+| `eventTime` | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
+| `dataVersion` | set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the Caliper 1.1 specification governs the form of the Caliper entities and events contained in the `data` payload. |
+| `data` | an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope. |
 
 #### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
  
