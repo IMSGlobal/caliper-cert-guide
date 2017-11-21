@@ -405,10 +405,9 @@ The following standard HTTP request headers MUST be set for each message sent to
   
 | Request Header | Requirements |
 | :------------- | :----------- |
-| Accept | \[TODO\] . . . |
-| Authorization | The HTTP request header `Authorization` value MUST be set to the Bearer Token provided by the certification service and associated with the test endpoint. |
-| Content-Type | The HTTP request header `Content-Type` value MUST be set to the IANA media type "application/json". |
-| Host | \[TODO\] . . . |
+| Authorization | set to the Bearer Token provided by the certification service and associated with the test endpoint. |
+| Content-Type | set to the IANA media type "application/json". |
+| Host | set to the test endpoint URL provided by the certification service. |
  
 #### <a name="httpResponse"></a>5.1.3  HTTP Message Responses
  
