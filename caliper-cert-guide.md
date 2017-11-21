@@ -142,7 +142,10 @@ The data emitted by a Sensor MUST conform to the syntactical restrictions define
 Note that for all profiles, certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.  
 
 ### <a name="basicProfile"></a>3.1 Basic Profile
-The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. Any of the Caliper actions and entities described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), can be used to describe the interaction between an `actor` and an `object`.
+The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.1.
 
 #### Minimum Conformance
 Create and send a *generic* Caliper [Event](#event) to a target endpoint.
@@ -158,7 +161,11 @@ Any Caliper defined action can be used to describe the interaction.
 * An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
 
 ### <a name="annotationProfile"></a>3.2 Annotation Profile
- 
+The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](#digitalResource).  
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.2.
+
 #### Minimum Conformance
 Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
     
@@ -174,6 +181,10 @@ Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target end
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
 ### <a name="assessmentProfile"></a>3.3 Assessment Profile
+The Caliper Assessment Profile models assessment-related activities including interactions with individual assessment items.
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.3.  
  
 #### Minimum Conformance
 Create and send both a started and submitted [AssessmentEvent](#assessmentEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -196,6 +207,10 @@ Create and send both a started and submitted [AssessmentEvent](#assessmentEvent)
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
  
 ### <a name="assignableProfile"></a>3.4 Assignable Profile
+The Assignable Profile models activities associated with the assignment of digital content to a learner for completion according to specific criteria.
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.4.
  
 #### Minimum Conformance
 Create and send both a started and submitted [AssignableEvent](#assignableEvent) to a target endpoint. All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -218,6 +233,10 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
 ### <a name="forumProfile"></a>3.5 Forum Profile
+The Caliper Forum Profile models learners and others participating in online forum communities.
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.5.
  
 #### Minimum Conformance
 Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -234,6 +253,10 @@ Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  Al
 * A [Message](#message) MUST be specified as the `object` of the interaction.
  
 ### <a name="gradingProfile"></a>3.6 Grading Profile
+The Caliper Grading Profile models grading activities performed by an [Agent](#agent), typically a [Person](#person) or a [SoftwareApplication](#softwareApplication).
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.6.
  
 #### Minimum Conformance
 Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [Graded](#graded) action is required and MUST be implemented.
@@ -249,6 +272,10 @@ Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [G
 * The `action` value MUST be set to 'Graded'.
  
 ### <a name="mediaProfile"></a>3.7 Media Profile
+The Caliper Media Profile models interactions between learners and rich content such as audio, images and video.
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.7.
  
 #### Minimum Conformance
 Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -271,6 +298,10 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
  
 ### <a name="readingProfile"></a>3.8 Reading Profile
+The Caliper Reading Profile models activities associated with navigating to and viewing digital textual content.
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.8.
  
 #### Minimum Conformance
  Create and send both a navigatedTo [NavigationEvent](#navigationEvent) and a viewed [ViewEvent](#viewEvent) to a target endpoint.
@@ -293,6 +324,10 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
 ### <a name="sessionProfile"></a>3.9 Session Profile
+The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](#person) interacting with a [SoftwareApplication](#softwareApplication).
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.9.
  
 #### Minimum Conformance
 Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. All associated actions included in the profile are considered optional for certification purposes.
@@ -309,6 +344,10 @@ Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. 
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
  
 ### <a name="toolUseProfile"></a>3.10 Tool Use Profile
+The Caliper Tool Use Profile models an intended interaction between a user and a tool.
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.10.
  
 #### Minimum Conformance
 Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
