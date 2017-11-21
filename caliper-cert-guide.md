@@ -60,11 +60,11 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 
 ## <a name="introduction"></a>1.0 Introduction
 
-The Caliper Analytics&reg; specification provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
+The [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
 
-This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should also note that behavioral requirements for Caliper Endpoints are provided in Section 5.0 of the [Caliper 1.1 Specification](#caliperSpec).
+This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should also note that behavioral requirements for Caliper Endpoints are provided in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 5.0.
 
 ### <a name="docStatus"></a>1.1 Status of this Document
 This document is the Final Release, meaning the technical solution is now made available as a public document and as such several IMS Members have successfully completed conformance certification at the time of the release of this document.
@@ -87,7 +87,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="contextDef"></a>__Context__: a special [JSON-LD](http://json-ld.org/spec/latest/json-ld/) keyword that maps the terms employed in a JSON document to [IRIs](https://www.ietf.org/rfc/rfc3987.txt) that link to one or more published vocabularies.  Inclusion of a [JSON-LD](http://json-ld.org/spec/latest/json-ld/) context provides an economical way of communicating document semantics to services interested in consuming Caliper event data.
 
-<a name="describeDef"></a>__Describe__: a Caliper message containing an Entity that is not directly associated with an Event. Entities can be sent asynchronously from Events using `Describe` messages in order to reduce verbosity (e.g. sending a Person entity as a `Describe` avoids having to repeat the Person object in each Event that includes it). For more information, refer to the Sensor API section in the [Caliper 1.1. Specification](#caliperSpec).
+<a name="describeDef"></a>__Describe__: a Caliper message containing an Entity that is not directly associated with an Event. Entities can be sent asynchronously from Events using `Describe` messages in order to reduce verbosity (e.g. sending a Person entity as a `Describe` avoids having to repeat the Person object in each Event that includes it). For more information, refer to the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.0.
 
 <a name="endpointDef"></a>__Endpoint__: a receiver or consumer of Caliper data that is bound to a specific network protocol.  
 
@@ -95,7 +95,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="eventDef"></a>__Event__: describes a relationship established between an [Agent](#agent) (the `actor`) and an [Entity](#entity) (the `object`) formed as a result of a purposeful `action` undertaken by the `actor` in connection to the `object` at a particular moment in time.
 
-<a name="jsonldDef"></a>__JSON-LD__: a specification providing a JSON-based data serialization and messaging format, processing algorithms and API for working with [Linked Data](#linkedData).  The messages described in this specification are intended to be used in programming environments that support [JSON-LD](http://json-ld.org/spec/latest/json-ld/).
+<a name="jsonldDef"></a>__JSON-LD__: a specification providing a JSON-based data serialization and messaging format, processing algorithms and API for working with [Linked Data](#linkedData).  The messages described in this guide are intended to be used in programming environments that support [JSON-LD](http://json-ld.org/spec/latest/json-ld/).
 
 <a name="iriDef"></a>__IRI__: The Internationalized Resource Identifier (IRI) extends the Uniform Resource Identifier ([URI](#uriDef)) scheme by using characters drawn from the Universal character set rather than US-ASCII per [RFC 3987](https://www.ietf.org/rfc/rfc3987.txt).  [Linked Data](#linkedData) rely on IRIs to refer to most nodes and properties.
 
@@ -109,7 +109,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="sensorDef"></a>__Sensor__: Software assets deployed within a learning application that implement the [Sensor API&trade;](#sensorAPIDef) for marshalling and transmitting Caliper data to a target endpoint.
 
-<a name="sensorAPIDef"></a>__Sensor API&trade;__: The standard set of methods and supported parameters that a [Sensor](#sensorDef) implements according to this specification in order to transmit Caliper data in an interoperable way.
+<a name="sensorAPIDef"></a>__Sensor API&trade;__: The standard set of methods and supported parameters that a [Sensor](#sensorDef) implements according to the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.0 in order to transmit Caliper data in an interoperable way.
 
 <a name="termDef"></a>__Term__: a word or short expression that expands to an [IRI](#iriDef) when mapped to a JSON-LD [context](#contextDef) document. Terms are employed by Caliper as `type` property string values in order to distinguish between various JSON representations of entities and events defined by the Caliper information model.
 
@@ -134,15 +134,16 @@ Certain prerequisites MUST be met before you can certify your platform, applicat
 
 ## <a name="profileConformance"></a>3.0 Metric Profile Certification
 
-As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
+As described more fully in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
 
 Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail. 
 
 The data emitted by a Sensor MUST conform to the syntactical restrictions defined in [Data Interchange Format](#dataFormat).
-Note that for all profiles, certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.  
+Note that for all profiles, certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.  
 
 ### <a name="basicProfile"></a>3.1 Basic Profile
- 
+The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. Any of the Caliper actions and entities described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), can be used to describe the interaction between an `actor` and an `object`.
+
 #### Minimum Conformance
 Create and send a *generic* Caliper [Event](#event) to a target endpoint.
  
@@ -153,7 +154,7 @@ Any Caliper defined action can be used to describe the interaction.
 * Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
 * The `type` value MUST be set to "Event". 
 * An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.  The `actor` value MUST be expressed either as an object or as a string corresponding to the actor's IRI.
-* The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
+* The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.
 * An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
 
 ### <a name="annotationProfile"></a>3.2 Annotation Profile
@@ -366,7 +367,7 @@ As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#e
 
 #### Requirements
 * _A Caliper Entity expressed as a JSON object_:
-  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See the [Caliper 1.1 Specification](#caliperSpec), section 3.1 for more details regarding context handling.
+  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1 for more details regarding context handling.
   * The `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory. 
     * `id`: set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized.
      * `type`: set the string value to the relevant Caliper term (e.g., "DigitalResource").
@@ -393,7 +394,7 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 | :------- | :----------- |
 | `sensor` | set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
 | `eventTime` | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
-| `dataVersion` | set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the Caliper 1.1 specification governs the form of the Caliper entities and events contained in the `data` payload. |
+| `dataVersion` | set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
 | `data` | an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope. |
 
 #### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
