@@ -67,7 +67,7 @@ This document is the certification guide for Caliper [Sensors](#sensorDef). In t
 ### <a name="docStatus"></a>1.1 Status of this Document
 This document is the Final Release, meaning the technical solution is now made available as a public document and as such several IMS Members have successfully completed conformance certification at the time of the release of this document.
     
-IMS strongly encourages its members and the community to provide feedback to continue the evolution and improvement of the Caliper specification. To join the IMS developer and conformance certification community focused on Caliper please visit \[TODO\] . . . .
+IMS strongly encourages its members and the community to provide feedback to continue the evolution and improvement of the Caliper specification. To join the IMS developer and conformance certification community focused on Caliper please visit https://www.imsglobal.org/activity/caliper.
     
 Public contributions, comments and questions can be posted here: \[TODO\] . . . .
 
