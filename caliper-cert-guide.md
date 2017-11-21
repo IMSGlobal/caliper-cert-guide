@@ -54,7 +54,6 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 * 6.0 [Using the Certification Service](#usingCertService)
 * 7.0 [Certification Mark](#certMark)
 * 8.0 [Certification Expiration and Renewal](#certRenewal)
-* [Appendix A. Example messages](#appendixA)
 * [List of Contributors](#contributors)
 * [References](#references)
 * [About this Document](#aboutThisDoc)
@@ -468,36 +467,6 @@ After submitting your successful conformance information and receiving confirmat
 ## <a name="certRenewal"></a>8.0 Certification Expiration and Renewal
 
 Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service. All IMS Certifications require that you renew and retest your certification after one year.
-
-## <a name="appendixA"></a>Appendix A. Example Messages
-
-\[TODO\] Add examples
-
-### Example: DUMP IN FAVOR OR REFERRING TO SPEC EXAMPLE
-```
-{
-  "@context": {
-    "id": "@id",
-    "type": "@type",
-    "caliper": "http://purl.imsglobal.org/caliper/",
-    . . .
-    "actor": {"@id": "caliper:actor", "@type": "@id"},
-    . . .
-    "action": {"@id": "caliper:action","@type": "@vocab"},
-    . . .
-  }
-}
-```
-
-### Example: Using curl to post a Caliper Envelope Test Fixture to the Certification Service over HTTP
-```text
-curl --request POST \
---url https://caliper.imsglobal.org/caliper/2c925d43-7707-4fd7-ac87-c814afbe5621/message \
---header 'Accept: application/json' \ 
---header 'Authorization: Bearer 2c925d43-7707-4fd7-ac87-c814afbe5621' \
---header 'Content-Type: application/json' \
---data @caliperEnvelopeToolUseEvent.json
-``` 
 
 ## <a name="contributors"></a>Contributors
 
