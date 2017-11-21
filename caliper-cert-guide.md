@@ -388,9 +388,9 @@ Caliper permits [Entity](#entity) values to be expressed either as a JSON object
 ### <a name="jsonldEvents"></a>4.4 Expressing Events as JSON-LD
 A Caliper [Event](#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  Considered as a JSON data structure an [Event](#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
 
-The `@context`, `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
+The [Event](#event) `@context`, `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property specified is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
 
-| Required Property | Disposition |
+| Property | Disposition |
 | :------- | :----------- |
 | @context | A top-level [JSON-LD](jsonldDef) context MUST be specified as described above in section [4.1](#jsonldContext). |
 | id | set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). | 
@@ -405,15 +405,17 @@ A Caliper [Entity](#entity) is a generic type that represents objects that parti
 
 As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).
 
-#### Requirements
-* _A Caliper Entity expressed as a JSON object_:
-  * If sent as a _[Describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context.  Otherwise, omit the duplicate `@context`.  See the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1 for more details regarding context handling.
-  * The `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory. 
-    * `id`: set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized.
-     * `type`: set the string value to the relevant Caliper term (e.g., "DigitalResource").
-  * Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
-* _A Caliper Entity expressed as a string_:
-  * The value MUST be set to the entity's [IRI](#iriDef).
+If a Caliper [Entity](#entity) is expressed as a JSON object the `id` and `type` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization. 
+
+| Property | Disposition |
+| :------- | :---------- |
+| @context | If sent as a _[describe](#describeDef)_ a top-level `@context` MUST be specified.  If included as part of an [Event](#event) a local `@context` SHOULD be specified if the term is not described in the active [JSON-LD](#jsonldDef) context (e.g. a custom [Entity](#entity)).  Otherwise, omit the duplicate `@context`.  See the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1 for more details regarding context handling. | 
+| id | set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized. | 
+| type | set the string value to the relevant Caliper term (e.g., "DigitalResource"). |
+
+If a Caliper Entity is expressed as a string set the value to the entity's [IRI](#iriDef).
+
+For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), appendix C.
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
@@ -430,12 +432,14 @@ Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [En
 
 The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` properties MUST be specified.  No custom properties are permitted.
 
-| Property | Requirements |
-| :------- | :----------- |
+| Required Property | Disposition |
+| :---------------- | :----------- |
 | sensor | set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
 | eventTime | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
 | dataVersion | set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
 | data | an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope. |
+
+For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
 
 #### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
  
@@ -443,7 +447,7 @@ Each HTTP message sent to the Certification service MUST consist of a single ser
  
 The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
   
-| Request Header | Requirements |
+| Request Header | Disposition |
 | :------------- | :----------- |
 | Authorization | set to the Bearer Token provided by the certification service and associated with the test endpoint. |
 | Content-Type | set to the IANA media type "application/json". |
