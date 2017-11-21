@@ -388,16 +388,17 @@ Caliper permits [Entity](#entity) values to be expressed either as a JSON object
 ### <a name="jsonldEvents"></a>4.4 Expressing Events as JSON-LD
 A Caliper [Event](#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  Considered as a JSON data structure an [Event](#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
 
-#### Requirements
-* A top-level `@context` MUST be specified as described above in section [4.1](#jsonldContext).
-* The `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property referenced is mandatory.    
-  * `id`: set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). 
-  * `type`: set the string value to the relevant Caliper term (e.g., "NavigationEvent").
-  * `actor`: set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. 
-  * `action`: set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. 
-  * `object`: set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile.  The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI.
-  * `eventTime`: set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified.
-* Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
+The `@context`, `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
+
+| Required Property | Disposition |
+| :------- | :----------- |
+| @context | A top-level [JSON-LD](jsonldDef) context MUST be specified as described above in section [4.1](#jsonldContext). |
+| id | set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). | 
+| type | set the string value to the relevant Caliper term (e.g., "NavigationEvent"). |
+| actor | set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. |
+| action | set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. |
+| object | set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile. The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI. |
+| eventTime | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified. |
   
 ### <a name="jsonldEntities"></a>4.5 Expressing Entities as JSON-LD
 A Caliper [Entity](#entity) is a generic type that represents objects that participate in learning-related activities.  A variety of [Entity](#entity) subtypes have been defined in order to better describe people, groups, organizations, digital content, courses, software applications, and other objects that constitute the "stuff" of a Caliper [Event](#event).  Like an [Event](#event), an [Entity](#entity) is considered semi-structured data consisting of an unordered set of key:value pairs.  
@@ -431,10 +432,10 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 
 | Property | Requirements |
 | :------- | :----------- |
-| `sensor` | set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
-| `eventTime` | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
-| `dataVersion` | set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
-| `data` | an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope. |
+| sensor | set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
+| eventTime | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
+| dataVersion | set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
+| data | an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope. |
 
 #### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
  
