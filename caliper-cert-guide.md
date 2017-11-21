@@ -483,7 +483,7 @@ The following Caliper Working Group participants contributed to the writing of t
 
 ## <a name="references"></a>References
 
-<a name="caliperSpec"></a>Anthony Whyte, Viktor Haag, Linda Feng, Matt Ashbourne, Wes LaMarche and Etienne Pelaprat.  Caliper Analytics® Specification, version 1.1.  30 November 2017.  URL: \[TODO\] . . . .
+<a name="caliperSpec"></a>Anthony Whyte, Viktor Haag, Linda Feng, Markus Gylling, Matt Ashbourne, Wes LaMarche and Etienne Pelaprat.  Caliper Analytics® Specification, version 1.1.  30 November 2017.  URL: http://www.imsglobal.org/caliper-spec-v1p1
 
 <a name="jsonldSyntax"></a>__JSON-LD Syntax__.  W3C.  M. Sporny, D. Longley, G. Kellog, M. Lanthaler and N. Lindström.  JSON-LD 1.1.  A JSON-based Serialization for Linked Data. 15 February 2017.  URL: http://json-ld.org/spec/latest/json-ld/
 
