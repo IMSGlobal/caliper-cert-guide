@@ -399,6 +399,8 @@ The [Event](#event) `@context`, `id`, `type`, `actor`, `action`, `object` and `e
 | action | set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. |
 | object | set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile. The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI. |
 | eventTime | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified. |
+
+For example [Event](#event) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), appendix B.
   
 ### <a name="jsonldEntities"></a>4.5 Expressing Entities as JSON-LD
 A Caliper [Entity](#entity) is a generic type that represents objects that participate in learning-related activities.  A variety of [Entity](#entity) subtypes have been defined in order to better describe people, groups, organizations, digital content, courses, software applications, and other objects that constitute the "stuff" of a Caliper [Event](#event).  Like an [Event](#event), an [Entity](#entity) is considered semi-structured data consisting of an unordered set of key:value pairs.  
