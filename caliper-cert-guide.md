@@ -64,10 +64,7 @@ The Caliper Analytics&reg; specification provides a structured approach to descr
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
 
-This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, 
-certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the 
-intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should 
-also note that behavioral requirements for Caliper Endpoints are provided in Section 5.0 of the [Caliper 1.1 Specification](#caliperSpec).
+This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should also note that behavioral requirements for Caliper Endpoints are provided in Section 5.0 of the [Caliper 1.1 Specification](#caliperSpec).
 
 ### <a name="docStatus"></a>1.1 Status of this Document
 This document is the Final Release, meaning the technical solution is now made available as a public document and as such several IMS Members have successfully completed conformance certification at the time of the release of this document.
@@ -128,11 +125,11 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## <a name="certPreReqs"></a>2.0 Certification Prerequisites
 
-Certain prerequisites must be met before you can certify your platform, application or service as Caliper compliant. 
+Certain prerequisites MUST be met before you can certify your platform, application or service as Caliper compliant. 
 
 * Your organization MUST be an IMS Contributing or Affiliate Member.
 * You MUST pass the tests using this Certification service.
-* The tests MUST be completed by a designated representative of the member organization and you must agree that there is no misrepresentation or manipulation of the results in the submitted report.
+* The tests MUST be completed by a designated representative of the member organization and you MUST agree that there is no misrepresentation or manipulation of the results in the submitted report.
 * You MUST submit your report via the Caliper Certification Service.
 
 ## <a name="profileConformance"></a>3.0 Metric Profile Certification
@@ -154,7 +151,7 @@ Any Caliper defined action can be used to describe the interaction.
  
 #### Restrictions
 * Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
-* The `type` value must be set to "Event". 
+* The `type` value MUST be set to "Event". 
 * An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.  The `actor` value MUST be expressed either as an object or as a string corresponding to the actor's IRI.
 * The `action` vocabulary is limited to the supported actions described in the Caliper specification and no other.
 * An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
@@ -170,7 +167,7 @@ Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target end
 #### Restrictions
 
 ##### AnnotationEvent Bookmarked
-* The `type` value must be set to "AnnotationEvent". 
+* The `type` value MUST be set to "AnnotationEvent". 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to "Bookmarked".
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
@@ -186,13 +183,13 @@ Create and send both a started and submitted [AssessmentEvent](#assessmentEvent)
 #### Restrictions
 
 ##### AssessmentEvent Started
-* The `type` value must be set to "AssessmentEvent". 
+* The `type` value MUST be set to "AssessmentEvent". 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Started'.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
 
 ##### AssessmentEvent Submitted
-* The `type` value must be set to "AssessmentEvent". 
+* The `type` value MUST be set to "AssessmentEvent". 
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Submitted'.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
@@ -208,13 +205,13 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 #### Assignable Started and Submitted Restrictions
 
 ##### AssignableEvent Started
-* The `type` value must be set to "AssignableEvent". 
+* The `type` value MUST be set to "AssignableEvent". 
 * A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Started'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
 
 ##### AssignableEvent Submitted
-* The `type` value must be set to "AssignableEvent".
+* The `type` value MUST be set to "AssignableEvent".
 * A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Submitted'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
@@ -230,7 +227,7 @@ Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  Al
 #### Restrictions
 
 ##### MessageEvent Posted
-* The `type` value must be set to "MessageEvent".
+* The `type` value MUST be set to "MessageEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Posted'.
 * A [Message](#message) MUST be specified as the `object` of the interaction.
@@ -246,7 +243,7 @@ Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [G
 #### Restrictions
 
 ##### GradeEvent Graded
-* The `type` value must be set to "GradeEvent".
+* The `type` value MUST be set to "GradeEvent".
 * For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Graded'.
  
@@ -261,13 +258,13 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 #### Restrictions
    
 ##### MediaEvent Started
-* The `type` value must be set to "MediaEvent".
+* The `type` value MUST be set to "MediaEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Started'.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
 
 ##### MediaEvent Ended
-* The `type` value must be set to "MediaEvent".
+* The `type` value MUST be set to "MediaEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Ended'.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
@@ -283,13 +280,13 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 #### Restrictions
  
 ##### NavigationEvent NavigatedTo
-* The `type` value must be set to "NavigationEvent".
+* The `type` value MUST be set to "NavigationEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'NavigatedTo'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
 ##### ViewedEvent Viewed
-* The `type` value must be set to "ViewEvent".
+* The `type` value MUST be set to "ViewEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Viewed'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
@@ -305,7 +302,7 @@ Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. 
 #### Restrictions
  
 ##### SessionEvent LoggedIn
-* The `type` value must be set to "SessionEvent".
+* The `type` value MUST be set to "SessionEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'LoggedIn'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
@@ -321,7 +318,7 @@ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
 #### Restrictions
  
 ##### ToolUseEvent Used
-* The `type` value must be set to "ToolUseEvent".
+* The `type` value MUST be set to "ToolUseEvent".
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Used'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
@@ -375,7 +372,7 @@ As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#e
      * `type`: set the string value to the relevant Caliper term (e.g., "DigitalResource").
   * Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
 * _A Caliper Entity expressed as a string_:
-  * The value must be set to the entity's [IRI](#iriDef).
+  * The value MUST be set to the entity's [IRI](#iriDef).
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
