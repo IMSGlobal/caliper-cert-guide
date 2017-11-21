@@ -2,7 +2,7 @@
 
 # IMS Global Learning Consortium, Inc.
 
-# Caliper Analytics&reg; Certification Guide, version 1.1
+# Caliper Analytics&reg; Sensor Certification Guide, version 1.1
 
 ## IPR and Distribution Notices
 
@@ -54,7 +54,6 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 * 6.0 [Using the Certification Service](#usingCertService)
 * 7.0 [Certification Mark](#certMark)
 * 8.0 [Certification Expiration and Renewal](#certRenewal)
-* [Appendix A. Example messages](#appendixA)
 * [List of Contributors](#contributors)
 * [References](#references)
 * [About this Document](#aboutThisDoc)
@@ -64,6 +63,11 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 The Caliper Analytics&reg; specification provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
+
+This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, 
+certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the 
+intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should 
+also note that behavioral requirements for Caliper Endpoints are provided in Section 5.0 of the [Caliper 1.1 Specification](#caliperSpec).
 
 ### <a name="docStatus"></a>1.1 Status of this Document
 This document is the Final Release, meaning the technical solution is now made available as a public document and as such several IMS Members have successfully completed conformance certification at the time of the release of this document.
@@ -131,7 +135,7 @@ Certain prerequisites must be met before you can certify your platform, applicat
 * The tests MUST be completed by a designated representative of the member organization and you must agree that there is no misrepresentation or manipulation of the results in the submitted report.
 * You MUST submit your report via the Caliper Certification Service.
 
-## <a name="profileConformance"></a>3.0 Sensor Metric Profile Certification
+## <a name="profileConformance"></a>3.0 Metric Profile Certification
 
 As described more fully in the [Caliper 1.1 specification](#caliperSpec) the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
 
@@ -463,36 +467,6 @@ After submitting your successful conformance information and receiving confirmat
 ## <a name="certRenewal"></a>8.0 Certification Expiration and Renewal
 
 Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service. All IMS Certifications require that you renew and retest your certification after one year.
-
-## <a name="appendixA"></a>Appendix A. Example Messages
-
-\[TODO\] Add examples
-
-### Example: DUMP IN FAVOR OR REFERRING TO SPEC EXAMPLE
-```
-{
-  "@context": {
-    "id": "@id",
-    "type": "@type",
-    "caliper": "http://purl.imsglobal.org/caliper/",
-    . . .
-    "actor": {"@id": "caliper:actor", "@type": "@id"},
-    . . .
-    "action": {"@id": "caliper:action","@type": "@vocab"},
-    . . .
-  }
-}
-```
-
-### Example: Using curl to post a Caliper Envelope Test Fixture to the Certification Service over HTTP
-```text
-curl --request POST \
---url https://caliper.imsglobal.org/caliper/2c925d43-7707-4fd7-ac87-c814afbe5621/message \
---header 'Accept: application/json' \ 
---header 'Authorization: Bearer 2c925d43-7707-4fd7-ac87-c814afbe5621' \
---header 'Content-Type: application/json' \
---data @caliperEnvelopeToolUseEvent.json
-``` 
 
 ## <a name="contributors"></a>Contributors
 
