@@ -394,7 +394,7 @@ The `@context`, `id`, `type`, `actor`, `action`, `object` and `eventTime` proper
 | :------- | :----------- |
 | @context | A top-level [JSON-LD](jsonldDef) context MUST be specified as described above in section [4.1](#jsonldContext). |
 | id | set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). | 
-| type | set the string value to the relevant Caliper term (e.g., "NavigationEvent"). |
+| type | set the string value to the relevant Caliper term (e.g., "AssessmentEvent"). |
 | actor | set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. |
 | action | set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. |
 | object | set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile. The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI. |
