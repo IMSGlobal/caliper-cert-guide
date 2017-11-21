@@ -21,23 +21,22 @@ The limited permissions granted above are perpetual and will not be revoked by I
 THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, ANY WARRANTY OF NON INFRINGEMENT IS EXPRESSLY DISCLAIMED. ANY USE OF THIS GUIDE SHALL BE MADE ENTIRELY AT THE IMPLEMENTER'S OWN RISK, AND NEITHER THE CONSORTIUM, NOR ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER, DIRECTLY OR INDIRECTLY, ARISING FROM THE USE OF THIS GUIDE.
 
 ## Table of Contents
-
 * 1.0 [Introduction](#introduction)
   * 1.1 [Status of this Document](#docStatus)
   * 1.2 [Conventions](#conventions)
   * 1.3 [Terminology](#terminology)
 * 2.0 [Certification Prerequisites](#certPreReqs)
 * 3.0 [Metric Profile Conformance](#profileConformance)
-  * 3.1 [Basic Profile](#basicProfile)
-  * 3.2 [Annotation Profile](#annotationProfile)
-  * 3.3 [Assessment Profile](#assessmentProfile)
-  * 3.4 [Assignable Profile](#assignableProfile)
-  * 3.5 [Forum Profile](#forumProfile)
-  * 3.6 [Grading Profile](#gradingProfile)
-  * 3.7 [Media Profile](#mediaProfile)
-  * 3.8 [Reading Profile](#readingProfile)
-  * 3.9 [Session Profile](#sessionProfile)
-  * 3.10 [Tool Use Profile](#toolUseProfile)
+  * 3.1 [Annotation Profile](#annotationProfile)
+  * 3.2 [Assessment Profile](#assessmentProfile)
+  * 3.3 [Assignable Profile](#assignableProfile)
+  * 3.4 [Forum Profile](#forumProfile)
+  * 3.5 [Grading Profile](#gradingProfile)
+  * 3.6 [Media Profile](#mediaProfile)
+  * 3.7 [Reading Profile](#readingProfile)
+  * 3.8 [Session Profile](#sessionProfile)
+  * 3.9 [Tool Use Profile](#toolUseProfile)
+  * 3.10 [Basic Profile](#basicProfile)
 * 4.0 [Data Interchange Format](#dataFormat)
   * 4.1 [JSON-LD Context](#jsonldContext)
   * 4.2 [Node Identifiers](#jsonldNodeIdentifiers)
@@ -59,7 +58,6 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 * [About this Document](#aboutThisDoc)
 
 ## <a name="introduction"></a>1.0 Introduction
-
 The [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
@@ -74,11 +72,9 @@ IMS strongly encourages its members and the community to provide feedback to con
 Public contributions, comments and questions can be posted here: \[TODO\] . . . .
 
 ### <a name="conventions"></a>1.2 Conventions
-
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](#rfc2119).  A Sensor implementation that fails to implement a MUST/REQUIRED/SHALL requirement or fails to abide by a MUST NOT/SHALL NOT prohibition is considered nonconformant.  SHOULD/SHOULD NOT/RECOMMENDED statements constitute a best practice.  Ignoring a best practice does not violate conformance but a decision to disregard such guidance should be carefully considered.  MAY/OPTIONAL statements indicate that implementers are entirely free to choose whether or not to implement the option.
 
 ### <a name="terminology"></a>1.3 Terminology
-
 <a name="actorDef"></a>__Actor__: An actor is an [Agent](#agent) capable of initiating or performing an [action](#actionDef) on a thing or as part of a process.  A Caliper [Event](#event) includes an `actor` attribute for representing the [Agent](#agent). 
 
 <a name="blankNodeDef"></a>__Blank Node Identifier__: a string that begins with "_:" that is used to identify an [Entity](#entity) for which an [IRI](#iriDef) is not provided.  An [Entity](#entity) provisioned with a blank node identifier is neither dereferenceable nor has meaning outside the scope of the [JSON-LD](#jsonldDef) document within which it resides.
@@ -124,7 +120,6 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 <a name="uuidDef"></a>__UUID__: a 128-bit identifier that does not require a registration authority to assure uniqueness.  However, absolute uniqueness is not guaranteed although the collision probability is considered extremely low. Caliper recommends use of randomly or pseudo-randomly generated version 4 UUIDs.  Each Caliper [Event](#event) MUST be assigned a UUID that is expressed as a [URN](#urnDef) using the form `urn:uuid:<UUID>` as described in [RFC 4122](#rfc4122).
 
 ## <a name="certPreReqs"></a>2.0 Certification Prerequisites
-
 Certain prerequisites MUST be met before you can certify your platform, application or service as Caliper compliant. 
 
 * Your organization MUST be an IMS Contributing or Affiliate Member.
@@ -133,7 +128,6 @@ Certain prerequisites MUST be met before you can certify your platform, applicat
 * You MUST submit your report via the Caliper Certification Service.
 
 ## <a name="profileConformance"></a>3.0 Metric Profile Certification
-
 As described more fully in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
 
 Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail. 
@@ -141,30 +135,11 @@ Each Caliper profile is also a unit of certification for Caliper [Sensor](#senso
 The data emitted by a Sensor MUST conform to the syntactical restrictions defined in [Data Interchange Format](#dataFormat).
 Note that for all profiles, certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.  
 
-### <a name="basicProfile"></a>3.1 Basic Profile
-The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
-
-#### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.1.
-
-#### Minimum Conformance
-Create and send a *generic* Caliper [Event](#event) to a target endpoint.
- 
-#### Required action(s)
-Any Caliper defined action can be used to describe the interaction.
- 
-#### Restrictions
-* Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
-* The `type` value MUST be set to "Event". 
-* An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.  The `actor` value MUST be expressed either as an object or as a string corresponding to the actor's IRI.
-* The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.
-* An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
-
-### <a name="annotationProfile"></a>3.2 Annotation Profile
+### <a name="annotationProfile"></a>3.1 Annotation Profile
 The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](#digitalResource).  
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.2.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.1.
 
 #### Minimum Conformance
 Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -180,11 +155,11 @@ Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target end
 * The `action` value MUST be set to "Bookmarked".
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
-### <a name="assessmentProfile"></a>3.3 Assessment Profile
+### <a name="assessmentProfile"></a>3.2 Assessment Profile
 The Caliper Assessment Profile models assessment-related activities including interactions with individual assessment items.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.3.  
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.2.  
  
 #### Minimum Conformance
 Create and send both a started and submitted [AssessmentEvent](#assessmentEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -206,11 +181,11 @@ Create and send both a started and submitted [AssessmentEvent](#assessmentEvent)
 * The `action` value MUST be set to 'Submitted'.
 * An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
  
-### <a name="assignableProfile"></a>3.4 Assignable Profile
+### <a name="assignableProfile"></a>3.3 Assignable Profile
 The Assignable Profile models activities associated with the assignment of digital content to a learner for completion according to specific criteria.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.4.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.3.
  
 #### Minimum Conformance
 Create and send both a started and submitted [AssignableEvent](#assignableEvent) to a target endpoint. All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -232,11 +207,11 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 * The `action` value MUST be set to 'Submitted'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
-### <a name="forumProfile"></a>3.5 Forum Profile
+### <a name="forumProfile"></a>3.4 Forum Profile
 The Caliper Forum Profile models learners and others participating in online forum communities.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.5.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.4.
  
 #### Minimum Conformance
 Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -252,11 +227,11 @@ Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  Al
 * The `action` value MUST be set to 'Posted'.
 * A [Message](#message) MUST be specified as the `object` of the interaction.
  
-### <a name="gradingProfile"></a>3.6 Grading Profile
+### <a name="gradingProfile"></a>3.5 Grading Profile
 The Caliper Grading Profile models grading activities performed by an [Agent](#agent), typically a [Person](#person) or a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.6.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.5.
  
 #### Minimum Conformance
 Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [Graded](#graded) action is required and MUST be implemented.
@@ -271,11 +246,11 @@ Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [G
 * For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Graded'.
  
-### <a name="mediaProfile"></a>3.7 Media Profile
+### <a name="mediaProfile"></a>3.6 Media Profile
 The Caliper Media Profile models interactions between learners and rich content such as audio, images and video.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.7.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.6.
  
 #### Minimum Conformance
 Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -297,11 +272,11 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 * The `action` value MUST be set to 'Ended'.
 * A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
  
-### <a name="readingProfile"></a>3.8 Reading Profile
+### <a name="readingProfile"></a>3.7 Reading Profile
 The Caliper Reading Profile models activities associated with navigating to and viewing digital textual content.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.8.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.7.
  
 #### Minimum Conformance
  Create and send both a navigatedTo [NavigationEvent](#navigationEvent) and a viewed [ViewEvent](#viewEvent) to a target endpoint.
@@ -323,11 +298,11 @@ See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2
 * The `action` value MUST be set to 'Viewed'.
 * A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
  
-### <a name="sessionProfile"></a>3.9 Session Profile
+### <a name="sessionProfile"></a>3.8 Session Profile
 The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](#person) interacting with a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.9.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.8.
  
 #### Minimum Conformance
 Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. All associated actions included in the profile are considered optional for certification purposes.
@@ -343,11 +318,11 @@ Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. 
 * The `action` value MUST be set to 'LoggedIn'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
  
-### <a name="toolUseProfile"></a>3.10 Tool Use Profile
+### <a name="toolUseProfile"></a>3.9 Tool Use Profile
 The Caliper Tool Use Profile models an intended interaction between a user and a tool.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.10.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.9.
  
 #### Minimum Conformance
 Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
@@ -362,6 +337,25 @@ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
 * A [Person](#person) MUST be specified as the `actor` of the interaction.
 * The `action` value MUST be set to 'Used'.
 * A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
+
+### <a name="basicProfile"></a>3.10 Basic Profile
+The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
+
+#### Profile Description
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.1.
+
+#### Minimum Conformance
+Create and send a *generic* Caliper [Event](#event) to a target endpoint.
+ 
+#### Required action(s)
+Any Caliper defined action can be used to describe the interaction.
+ 
+#### Restrictions
+* Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
+* The `type` value MUST be set to "Event". 
+* An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.  The `actor` value MUST be expressed either as an object or as a string corresponding to the actor's IRI.
+* The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.
+* An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
 
 ## <a name="dataFormat"></a>4.0 Data Interchange Format
 Caliper events and entities are serialized as [JSON-LD](#jsonldDef), a JSON-based data interchange format that encourages use of shared vocabularies and discoverable key:value identifiers when constructing JSON documents.
@@ -430,7 +424,6 @@ For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification,
 \[TODO\] Summarize transport options . . . .
  
 ### <a name="http"></a>5.1 HTTP Transport Requirements
- 
 A Caliper sensor utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper sensor MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
 
 Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document.
@@ -450,7 +443,6 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
 
 #### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
- 
 Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
  
 The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
@@ -475,13 +467,11 @@ When communicating over HTTP the certification service endpoint will exhibit the
 The certification service MAY respond to Caliper sensor messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
   
 ### <a name="mqtt"></a>5.2 MQTT Transport Requirements
-
 A Caliper sensor utilizing the Message Queue Telemetry Transport (MQTT) publish-subscribe messaging protocol MUST demonstrate . . . .
 
 \[TODO\] . . . .
 
 ## <a name="usingCertService"></a> 6.0 Using the Certification Service
- 
 Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
  
 The certification service provides a playground for testing your Caliper messages.  Click the "Start Testing" link under __Test Your Product__ to access the playground.
@@ -512,15 +502,12 @@ The following steps will guide you through the process.
  \[TODO\] Continue describing steps . . .
 
 ## <a name="certMark"></a>7.0 Certification Mark
-
 After submitting your successful conformance information and receiving confirmation and a registration number from IMS Global you may then apply the appropriate conformance mark. The IMS Global conformance chart will list your conformance details. If you have any questions, please feel free to contact us at any point.  Products without an IMS conformance registration number are not considered compliant by IMS Global.
 
 ## <a name="certRenewal"></a>8.0 Certification Expiration and Renewal
-
 Caliper certification covers individual metric profiles only and is scoped to the specific version of the Caliper specification tested.  Major or minor releases of the Caliper specification and/or associated metric profiles will require recertification of your upgraded platform, application or service. All IMS Certifications require that you renew and retest your certification after one year.
 
 ## <a name="contributors"></a>Contributors
-
 The following Caliper Working Group participants contributed to the writing of this guide:
 
 #### Authors
@@ -532,7 +519,6 @@ The following Caliper Working Group participants contributed to the writing of t
 | Lisa Mattson | IMS Global |
 
 ## <a name="references"></a>References
-
 <a name="caliperSpec"></a>Anthony Whyte, Viktor Haag, Linda Feng, Markus Gylling, Matt Ashbourne, Wes LaMarche and Etienne Pelaprat.  Caliper Analytics® Specification, version 1.1.  30 November 2017.  URL: http://www.imsglobal.org/caliper-spec-v1p1
 
 <a name="jsonldSyntax"></a>__JSON-LD Syntax__.  W3C.  M. Sporny, D. Longley, G. Kellog, M. Lanthaler and N. Lindström.  JSON-LD 1.1.  A JSON-based Serialization for Linked Data. 15 February 2017.  URL: http://json-ld.org/spec/latest/json-ld/
@@ -554,7 +540,6 @@ The following Caliper Working Group participants contributed to the writing of t
 <a name="rfc7807"></a>__RFC 7807__.  IETF.  M. Nottingham, E. Wilde.  "Problem Details for HTTP APIs."  March 2017.  URL: https://tools.ietf.org/html/rfc7807
 
 ## <a name="aboutThisDoc"></a>About this Document
-
 IMS Global Learning Consortium, Inc. ("IMS Global") is publishing the information contained in this document ("Guide") for purposes of scientific, experimental, and scholarly collaboration only.
 
 IMS Global makes no warranty or representation regarding the accuracy or completeness of the Guide.
