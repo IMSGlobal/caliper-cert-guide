@@ -413,7 +413,7 @@ A Caliper [Entity](#entity) is a generic type that represents objects that parti
 
 As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).
 
-If an [Entity](#entity) is expressed as a JSON object the `id` and `type` properties are required and MUST be specified.  If transmitted as a _[describe](#describeDef)_ a top-level @context MUST also be specified.  Otherwise, omit the `@context` when the [Entity](#entity) is specified as a value in an [Event](#event) except in cases where custom terms are specified.  See section [4.1](#jsonldContext) above for more details regarding [JSON-LD](#jsonldDef) context handling.  
+If an [Entity](#entity) is expressed as a JSON object the `id` and `type` properties are required and MUST be specified.  If transmitted as a _[describe](#describeDef)_ a top-level `@context` MUST also be specified.  Otherwise, omit the `@context` when the [Entity](#entity) is specified as a value in an [Event](#event) except in cases where custom terms are specified.  See section [4.1](#jsonldContext) above for more details regarding [JSON-LD](#jsonldDef) context handling.  
 
 All other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization. 
 
