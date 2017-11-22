@@ -67,7 +67,7 @@ This document is the certification guide for Caliper [Sensors](#sensorDef). In t
 ### <a name="docStatus"></a>1.1 Status of this Document
 This document is the Final Release, meaning the technical solution is now made available as a public document and as such several IMS Members have successfully completed conformance certification at the time of the release of this document.
     
-IMS strongly encourages its members and the community to provide feedback to continue the evolution and improvement of the Caliper specification. To join the IMS developer and conformance certification community focused on Caliper please visit \[TODO\] . . . .
+IMS strongly encourages its members and the community to provide feedback to continue the evolution and improvement of the Caliper specification. To join the IMS developer and conformance certification community focused on Caliper please visit https://www.imsglobal.org/activity/caliper.
     
 Public contributions, comments and questions can be posted here: \[TODO\] . . . .
 
@@ -476,9 +476,7 @@ Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch
  
 The certification service provides a playground for testing your Caliper messages.  Click the "Start Testing" link under __Test Your Product__ to access the playground.
 
-Once you are ready to commence certification testing, click the "Certify Your Product" link under __Certify Your Product__ to commence testing.  
- 
-The following steps will guide you through the process.  
+Once you are ready to commence certification testing, click the "Certify Your Product" link under __Certify Your Product__ to commence testing.  The following steps will guide you through the process.  A [screencast](https://youtu.be/iLCsB2CI7aw) of the certification workflow is available for review.
  
 1. Complete the online form by providing the following information:
  
@@ -493,13 +491,17 @@ The following steps will guide you through the process.
  
 2. Click the green "Start Certification" button.  To terminate testing click the white "Cancel" button.
  
-3. Follow the onscreen instructions to run the tests.  Configure the host software to send Caliper messages to the test endpoint URL provided onscreen.
+3. An "Instructions" page provides both a test endpoint URL and a bearer token.  Configure your software to send Caliper messages to the test endpoint URL.  For each request, set the HTTP `Authorization` header field value to the provided bearer token and the HTTP `Host` header field value to the provided endpoint URL.
  
-4. Initiate test.  Send messages to the certification service endpoint.  
+4. Initiate the product test, sending messages to the certification service endpoint.  
  
-5. When messages are received by the Certification service the online directions will be replaced with a view displaying conformance progress. 
- 
- \[TODO\] Continue describing steps . . .
+5. When the first message is received by the Certification service the "Instructions" page will be replaced with a view displaying conformance progress.  A list of available Caliper metric profiles is displayed on the left side of the page.  A log of submitted messages or "items" is displayed on the right side of the page.  As messages are processed metric profile certifications that have been attained will be indicated by check marks.  Clicking a profile's plus (+) link will display a list of profile events and actions processed successfully.  Clicking the log "items" link provides additional information regarding events processed, errors encountered and individual message JSON-LD documents received.
+
+6. Once testing is complete click the "Complete Certification" button.
+
+7. Read the confirmation statement and then click the "Submit Certification Results" button.
+
+8. Repeat the test as necessary in order to certify against additional metric profiles or address previous failed tests.
 
 ## <a name="certMark"></a>7.0 Certification Mark
 After submitting your successful conformance information and receiving confirmation and a registration number from IMS Global you may then apply the appropriate conformance mark. The IMS Global conformance chart will list your conformance details. If you have any questions, please feel free to contact us at any point.  Products without an IMS conformance registration number are not considered compliant by IMS Global.
