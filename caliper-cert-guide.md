@@ -193,7 +193,7 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 #### Required action(s)  
 [Started](#started), [Submitted](#submitted)
   
-#### Assignable Started and Submitted Restrictions
+#### Restrictions
 
 ##### AssignableEvent Started
 * The `type` value MUST be set to "AssignableEvent". 
