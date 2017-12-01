@@ -139,7 +139,7 @@ Note that for all profiles, certain [Event](#event) properties are required and 
 The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](#digitalResource).  
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.1.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1.
 
 #### Minimum Conformance
 Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -159,7 +159,7 @@ Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target end
 The Caliper Assessment Profile models assessment-related activities including interactions with individual assessment items.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.2.  
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.2.  
  
 #### Minimum Conformance
 Create and send both a started and submitted [AssessmentEvent](#assessmentEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -185,7 +185,7 @@ Create and send both a started and submitted [AssessmentEvent](#assessmentEvent)
 The Assignable Profile models activities associated with the assignment of digital content to a learner for completion according to specific criteria.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.3.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.3.
  
 #### Minimum Conformance
 Create and send both a started and submitted [AssignableEvent](#assignableEvent) to a target endpoint. All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -211,7 +211,7 @@ Create and send both a started and submitted [AssignableEvent](#assignableEvent)
 The Caliper Forum Profile models learners and others participating in online forum communities.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.4.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.4.
  
 #### Minimum Conformance
 Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -231,7 +231,7 @@ Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  Al
 The Caliper Grading Profile models grading activities performed by an [Agent](#agent), typically a [Person](#person) or a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.5.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.5.
  
 #### Minimum Conformance
 Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [Graded](#graded) action is required and MUST be implemented.
@@ -250,7 +250,7 @@ Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [G
 The Caliper Media Profile models interactions between learners and rich content such as audio, images and video.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.6.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.6.
  
 #### Minimum Conformance
 Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
@@ -276,7 +276,7 @@ Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other eve
 The Caliper Reading Profile models activities associated with navigating to and viewing digital textual content.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.7.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.7.
  
 #### Minimum Conformance
  Create and send both a navigatedTo [NavigationEvent](#navigationEvent) and a viewed [ViewEvent](#viewEvent) to a target endpoint.
@@ -302,7 +302,7 @@ See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2
 The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](#person) interacting with a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.8.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.8.
  
 #### Minimum Conformance
 Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. All associated actions included in the profile are considered optional for certification purposes.
@@ -322,7 +322,7 @@ Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. 
 The Caliper Tool Use Profile models an intended interaction between a user and a tool.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.9.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.9.
  
 #### Minimum Conformance
 Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
@@ -342,7 +342,7 @@ Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
 The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 2.3.1.
+See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.10.
 
 #### Minimum Conformance
 Create and send a *generic* Caliper [Event](#event) to a target endpoint.
