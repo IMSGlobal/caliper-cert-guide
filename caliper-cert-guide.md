@@ -366,7 +366,7 @@ Create and send a *generic* Caliper [Event](#event) to the certification service
 Any Caliper defined action can be used to describe the interaction.
 
 #### Required Object
-[Entity](#entity) or subtype]
+[Entity](#entity) or subtype
 
 #### Other Requirements
 Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
