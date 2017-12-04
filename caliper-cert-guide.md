@@ -103,7 +103,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="objectDef"></a>__Object__: an [Entity](#entity) that an [Agent](#agent) interacts with that becomes the focus, target or object of an interaction.  A Caliper [Event](#event) includes an `object` attribute for representing the resource.
 
-<a name="sensorDef"></a>__Sensor__: Software assets deployed within a learning application that implement the [Sensor API&trade;](#sensorAPIDef) for marshalling and transmitting Caliper data to a target endpoint.
+<a name="sensorDef"></a>__Sensor__: Software assets deployed within a learning application that implement the [Sensor API&trade;](#sensorAPIDef) for marshalling and transmitting Caliper data to the certification service endpoint.
 
 <a name="sensorAPIDef"></a>__Sensor API&trade;__: The standard set of methods and supported parameters that a [Sensor](#sensorDef) implements according to the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.0 in order to transmit Caliper data in an interoperable way.
 
@@ -130,10 +130,20 @@ Certain prerequisites MUST be met before you can certify your platform, applicat
 ## <a name="profileConformance"></a>3.0 Metric Profile Certification
 As described more fully in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
 
-Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail. 
+Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail.
 
-The data emitted by a Sensor MUST conform to the syntactical restrictions defined in [Data Interchange Format](#dataFormat).
-Note that for all profiles, certain [Event](#event) properties are required and MUST be specified.  Required properties include `id`, `type`, `actor`, `action`, `object` and `eventTime`.  All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each property referenced is mandatory.  Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the [Entity](#entity) [IRI](#iriDef).  The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.  
+#### General Requirements 
+* Certain [Event](#event) properties are required and MUST be specified.  Required properties include: 
+  * `id`
+  * `type`
+  * `actor`
+  * `action`
+  * `object`
+  * `eventTime`  
+* All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each required and/or optional property specified is mandatory.
+* Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the resource's [IRI](#iriDef).  
+* The actions vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), Appendix A, and no other.
+* Serialized Events and Entities MUST conform to the syntactical requirements defined in section [4.0](#dataFormat) below.  This includes referencing one or more JSON-LD [contexts](#contextDef) by including the JSON-LD `@context` keyword and value as required.  
 
 ### <a name="annotationProfile"></a>3.1 Annotation Profile
 The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](#digitalResource).  
@@ -142,18 +152,22 @@ The Caliper Annotation Profile models activities related to the annotation of a 
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1.
 
 #### Minimum Conformance
-Create and send a bookmarked [AnnotationEvent](#annotationEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
-    
-#### Required action(s)  
-[Bookmarked](#bookmarked)
- 
-#### Restrictions
+Create and send a "Bookmarked" [AnnotationEvent](#annotationEvent) to the certification service endpoint.  All other actions included in the profile are considered optional for certification purposes.
 
-##### AnnotationEvent Bookmarked
-* The `type` value MUST be set to "AnnotationEvent". 
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to "Bookmarked".
-* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+#### Required Event
+[AnnotationEvent](#annotationEvent)
+
+#### Required Actor
+[Person](#person)
+ 
+#### Required Action  
+[Bookmarked](#bookmarked)
+
+#### Required Object
+[DigitalResource](#digitalResource) or subtype
+
+#### Recommended Generated Entity
+[BookmarkAnnotation](#bookmarkAnnotation)
  
 ### <a name="assessmentProfile"></a>3.2 Assessment Profile
 The Caliper Assessment Profile models assessment-related activities including interactions with individual assessment items.
@@ -162,24 +176,22 @@ The Caliper Assessment Profile models assessment-related activities including in
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.2.  
  
 #### Minimum Conformance
-Create and send both a started and submitted [AssessmentEvent](#assessmentEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
- 
-#### Required action(s)  
-[Started](#started), [Submitted](#submitted)
- 
-#### Restrictions
+Create and send a "Started" [AssessmentEvent](#assessmentEvent) followed by a "Submitted" [AssessmentEvent](#assessmentEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
-##### AssessmentEvent Started
-* The `type` value MUST be set to "AssessmentEvent". 
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Started'.
-* An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
+#### Required Event
+[AssessmentEvent](#assessmentEvent)
 
-##### AssessmentEvent Submitted
-* The `type` value MUST be set to "AssessmentEvent". 
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Submitted'.
-* An [Assessment](#assessment) MUST be specified as the `object` of the interaction.
+#### Required Actor
+[Person](#person)
+
+#### Required Actions
+[Started](#started), [Submitted](#submitted) 
+
+#### Required Object
+[Assessment](#assessment)
+
+#### Recommended Generated Entity
+[Attempt](#attempt)
  
 ### <a name="assignableProfile"></a>3.3 Assignable Profile
 The Assignable Profile models activities associated with the assignment of digital content to a learner for completion according to specific criteria.
@@ -188,24 +200,22 @@ The Assignable Profile models activities associated with the assignment of digit
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.3.
  
 #### Minimum Conformance
-Create and send both a started and submitted [AssignableEvent](#assignableEvent) to a target endpoint. All other event types and associated actions included in the profile are considered optional for certification purposes.
- 
-#### Required action(s)  
-[Started](#started), [Submitted](#submitted)
-  
-#### Restrictions
+Create and send a "Started" [AssignableEvent](#assignableEvent) followed by a "Submitted" [AssignableEvent](#assignableEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
-##### AssignableEvent Started
-* The `type` value MUST be set to "AssignableEvent". 
-* A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Started'.
-* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+#### Required Event
+[AssignableEvent](#assignableEvent) 
 
-##### AssignableEvent Submitted
-* The `type` value MUST be set to "AssignableEvent".
-* A [Person](#person) or [Group](#group) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Submitted'.
-* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+#### Required Actor
+[Person](#person)
+
+#### Required Actions
+[Started](#started), [Submitted](#submitted)   
+
+#### Required Object
+[AssignableDigitalResource](#assignableDigitalResource)
+
+#### Recommended Generated Entity
+[Attempt](#attempt)
  
 ### <a name="forumProfile"></a>3.4 Forum Profile
 The Caliper Forum Profile models learners and others participating in online forum communities.
@@ -214,18 +224,19 @@ The Caliper Forum Profile models learners and others participating in online for
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.4.
  
 #### Minimum Conformance
-Create and send a posted [MessageEvent](#messageEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
- 
-#### Required action(s)  
-[Posted](#posted)
-   
-#### Restrictions
+Create and send a "Posted" [MessageEvent](#messageEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
-##### MessageEvent Posted
-* The `type` value MUST be set to "MessageEvent".
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Posted'.
-* A [Message](#message) MUST be specified as the `object` of the interaction.
+#### Required Event
+[MessageEvent](#messageEvent)
+
+#### Required Actor
+[Person](#person)
+
+#### Required Action  
+[Posted](#posted)
+
+#### Required Object
+[Message](#message)
  
 ### <a name="gradingProfile"></a>3.5 Grading Profile
 The Caliper Grading Profile models grading activities performed by an [Agent](#agent), typically a [Person](#person) or a [SoftwareApplication](#softwareApplication).
@@ -234,17 +245,25 @@ The Caliper Grading Profile models grading activities performed by an [Agent](#a
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.5.
  
 #### Minimum Conformance
-Create and send a graded [GradeEvent](#gradeEvent) to a target endpoint.  The [Graded](#graded) action is required and MUST be implemented.
- 
-#### Required action(s)  
-[Graded](#graded)
-   
-#### Restrictions
+Create and send a "Graded" [GradeEvent](#gradeEvent) to the certification service endpoint.  All other actions included in the profile are considered optional for certification purposes.
 
-##### GradeEvent Graded
-* The `type` value MUST be set to "GradeEvent".
-* For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Graded'.
+#### Required Event
+[GradeEvent](#gradeEvent)
+
+#### Required Actor
+[Person](#person) or [SoftwareApplication](#softwareApplication)
+
+#### Required Action  
+[Graded](#graded)
+
+#### Required Object
+[Attempt](#attempt)
+
+#### Recommended Generated Entity
+[Score](#score)
+
+#### Other Requirements
+For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
  
 ### <a name="mediaProfile"></a>3.6 Media Profile
 The Caliper Media Profile models interactions between learners and rich content such as audio, images and video.
@@ -253,24 +272,22 @@ The Caliper Media Profile models interactions between learners and rich content 
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.6.
  
 #### Minimum Conformance
-Create and send a [MediaEvent](#mediaEvent) to a target endpoint.  All other event types and associated actions included in the profile are considered optional for certification purposes.
+Create and send a "Started" [MediaEvent](#mediaEvent) followed by an "Ended" [MediaEvent](#mediaEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
-#### Required action(s)  
-[Started](#started), [Ended](#ended)
+#### Required Event
+[MediaEvent](#mediaEvent)
 
-#### Restrictions
-   
-##### MediaEvent Started
-* The `type` value MUST be set to "MediaEvent".
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Started'.
-* A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
+#### Required Actor
+[Person](#person)
 
-##### MediaEvent Ended
-* The `type` value MUST be set to "MediaEvent".
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Ended'.
-* A [MediaObject](#mediaObject) or one of its subtypes MUST be specified as the `object` of the interaction.
+#### Required Actions
+[Started](#started), [Ended](#ended) 
+
+#### Required Object
+[MediaObject](#mediaObject) or subtype
+
+#### Recommended Target Entity
+[MediaLocation](#mediaLocation)
  
 ### <a name="readingProfile"></a>3.7 Reading Profile
 The Caliper Reading Profile models activities associated with navigating to and viewing digital textual content.
@@ -279,24 +296,19 @@ The Caliper Reading Profile models activities associated with navigating to and 
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.7.
  
 #### Minimum Conformance
- Create and send both a navigatedTo [NavigationEvent](#navigationEvent) and a viewed [ViewEvent](#viewEvent) to a target endpoint.
- 
- #### Required action(s)  
- [NavigatedTo](#navigatedTo) ([NavigationEvent](#navigationEvent)), [Viewed](#viewed) ([ViewEvent](#viewEvent))
- 
-#### Restrictions
- 
-##### NavigationEvent NavigatedTo
-* The `type` value MUST be set to "NavigationEvent".
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'NavigatedTo'.
-* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
- 
-##### ViewedEvent Viewed
-* The `type` value MUST be set to "ViewEvent".
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Viewed'.
-* A [DigitalResource](#digitalResource) or one of its subtypes MUST be specified as the `object` of the interaction.
+ Create and send both a "NavigatedTo" [NavigationEvent](#navigationEvent) and a "Viewed" [ViewEvent](#viewEvent) to the certification service endpoint.
+
+#### Required Event
+[NavigationEvent](#navigationEvent), [ViewEvent](#viewEvent)
+
+#### Required Actor
+[Person](#person)
+
+#### Required Actions
+[NavigatedTo](#navigatedTo), [Viewed](#viewed)  
+
+#### Required Object
+[DigitalResource](#digitalResource) or subtype
  
 ### <a name="sessionProfile"></a>3.8 Session Profile
 The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](#person) interacting with a [SoftwareApplication](#softwareApplication).
@@ -305,18 +317,19 @@ The Caliper Session Profile models the creation and subsequent termination of a 
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.8.
  
 #### Minimum Conformance
-Create and send a logged in [SessionEvent](#sessionEvent) to a target endpoint. All associated actions included in the profile are considered optional for certification purposes.
- 
-#### Required action(s) 
-[LoggedIn](#loggedIn)
- 
-#### Restrictions
- 
-##### SessionEvent LoggedIn
-* The `type` value MUST be set to "SessionEvent".
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'LoggedIn'.
-* A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
+Create and send a "LoggedIn" [SessionEvent](#sessionEvent) to the certification service endpoint. All other actions included in the profile are considered optional for certification purposes.
+
+#### Required Event
+[SessionEvent](#sessionEvent)
+
+#### Required Actor
+[Person](#person)
+
+#### Required Action 
+[LoggedIn](#loggedIn) 
+
+#### Required Object
+[SoftwareApplication](#softwareApplication)
  
 ### <a name="toolUseProfile"></a>3.9 Tool Use Profile
 The Caliper Tool Use Profile models an intended interaction between a user and a tool.
@@ -325,18 +338,20 @@ The Caliper Tool Use Profile models an intended interaction between a user and a
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.9.
  
 #### Minimum Conformance
-Create and send a used [ToolUseEvent](#toolUseEvent) to a target endpoint.
- 
-#### Required action(s) 
-[Used](#used) action
- 
-#### Restrictions
- 
-##### ToolUseEvent Used
-* The `type` value MUST be set to "ToolUseEvent".
-* A [Person](#person) MUST be specified as the `actor` of the interaction.
-* The `action` value MUST be set to 'Used'.
-* A [SoftwareApplication](#softwareApplication) MUST be specified as the `object` of the interaction.
+Create and send a "Used" [ToolUseEvent](#toolUseEvent) to the certification service endpoint.
+
+#### Required Event
+[ToolUseEvent](#toolUseEvent)
+
+#### Required Actor
+[Person](#person)
+
+#### Required Action  
+[Used](#used)
+
+#### Required Object
+[SoftwareApplication](#softwareApplication)
+
 
 ### <a name="basicProfile"></a>3.10 Basic Profile
 The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
@@ -345,17 +360,22 @@ The Caliper Basic Profile provides a generic [Event](#event) for describing lear
 See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.10.
 
 #### Minimum Conformance
-Create and send a *generic* Caliper [Event](#event) to a target endpoint.
- 
-#### Required action(s)
+Create and send a *generic* Caliper [Event](#event) to the certification service endpoint.
+
+#### Required Event
+[Event](#event)
+
+#### Required Actor
+[Agent](#agent) or subtype
+
+#### Required Action
 Any Caliper defined action can be used to describe the interaction.
- 
-#### Restrictions
-* Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
-* The `type` value MUST be set to "Event". 
-* An [Agent](#Agent) or one of its subtypes MUST be specified as the `actor` of the interaction.  The `actor` value MUST be expressed either as an object or as a string corresponding to the actor's IRI.
-* The `action` vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), and no other.
-* An [Entity](#entity) or one of its subtypes MUST be specified as the `object` of the interaction.  The `object` value MUST be expressed either as an object or as a string corresponding to the object's IRI.
+
+#### Required Object
+[Entity](#entity) or subtype]
+
+#### Other Requirements
+Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
 
 ## <a name="dataFormat"></a>4.0 Data Interchange Format
 Caliper events and entities are serialized as [JSON-LD](#jsonldDef), a JSON-based data interchange format that encourages use of shared vocabularies and discoverable key:value identifiers when constructing JSON documents.
