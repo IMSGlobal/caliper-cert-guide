@@ -133,13 +133,7 @@ As described more fully in the [Caliper Analytics&reg; Specification, version 1.
 Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail.
 
 #### General Requirements 
-* Certain [Event](#event) properties are required and MUST be specified.  Required properties include: 
-  * `id`
-  * `type`
-  * `actor`
-  * `action`
-  * `object`
-  * `eventTime`  
+* Certain [Event](#event) properties are required and MUST be specified.  Required properties include: `id`, `type`, `actor`, `action`, `object` and `eventTime`.  
 * All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each required and/or optional property specified is mandatory.
 * Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the resource's [IRI](#iriDef).  
 * The actions vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), Appendix A, and no other.
