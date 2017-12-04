@@ -407,12 +407,12 @@ The [Event](#event) `@context`, `id`, `type`, `actor`, `action`, `object` and `e
 | Property | Disposition |
 | :------- | :----------- |
 | @context | A top-level [JSON-LD](jsonldDef) context MUST be specified as described above in section [4.1](#jsonldContext). |
-| id | set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). | 
-| type | set the string value to the relevant Caliper term (e.g., "AssessmentEvent"). |
-| actor | set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. |
-| action | set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. |
-| object | set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile. The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI. |
-| eventTime | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified. |
+| id | Set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). | 
+| type | Set the string value to the relevant Caliper term (e.g., "AssessmentEvent"). |
+| actor | Set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. |
+| action | Set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. |
+| object | Set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile. The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI. |
+| eventTime | Set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified. |
 
 For example [Event](#event) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), appendix B.
   
@@ -428,8 +428,8 @@ All other properties are optional and MAY be omitted when describing an [Entity]
 | Property | Disposition |
 | :------- | :---------- |
 | @context | If the [Entity](#entity) is transmitted as a _[describe](#describeDef)_ a top-level `@context` MUST be specified.  Otherwise, omit the `@context` when the [Entity](#entity) is specified as a value in an [Event](#event) except in cases where custom terms are specified. |
-| id | set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized. | 
-| type | set the string value to the relevant Caliper term (e.g., "DigitalResource"). |
+| id | Set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized. | 
+| type | Set the string value to the relevant Caliper term (e.g., "DigitalResource"). |
 
 For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), appendix C.
   
@@ -449,9 +449,9 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 
 | Required Property | Disposition |
 | :---------------- | :----------- |
-| sensor | set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
-| eventTime | set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
-| dataVersion | set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
+| sensor | Set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
+| eventTime | Set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
+| dataVersion | Set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
 | data | an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope. |
 
 For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
@@ -463,9 +463,9 @@ The following standard HTTP request headers MUST be set for each message sent to
   
 | Request Header | Disposition |
 | :------------- | :----------- |
-| Authorization | set to the Bearer Token provided by the certification service and associated with the test endpoint. |
-| Content-Type | set to the IANA media type "application/json". |
-| Host | set to the test endpoint URL provided by the certification service. |
+| Authorization | Set to the Bearer Token provided by the certification service and associated with the test endpoint. |
+| Content-Type | Set to the IANA media type "application/json". |
+| Host | Set to the test endpoint URL provided by the certification service. |
  
 #### <a name="httpResponse"></a>5.1.3  HTTP Message Responses
  
