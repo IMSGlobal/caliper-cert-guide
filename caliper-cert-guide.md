@@ -433,7 +433,7 @@ For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification,
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
-A [Sensor](#sensor) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service.  Messages MUST be sent utilizing the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).
+A Caliper [Sensor](#sensor) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service [Endpoint](#endpoint).  Certification is limited to message exchanges using the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).  Messages MUST be sent using the POST request method.  The [Sensor](#sensor) MUST also support message authentication using the `Authorization` request header, setting the value to the provided bearer token.
  
 #### <a name="envelope"></a>5.1 The Envelope
 Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
@@ -456,7 +456,7 @@ The following standard HTTP request headers MUST be set for each message sent to
   
 | Request Header | Disposition |
 | :------------- | :----------- |
-| Authorization | Set to the Bearer Token provided by the certification service and associated with the test endpoint. |
+| Authorization | Set to the bearer token provided by the certification service and associated with the test endpoint. |
 | Content-Type | Set to the IANA media type "application/json". |
 | Host | Set to the test endpoint URL provided by the certification service. |
  
