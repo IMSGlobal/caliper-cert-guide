@@ -44,12 +44,10 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 4.4 [Expressing Events as JSON-LD](#jsonldEvents)
   * 4.5 [Expressing Entities as JSON-LD](#jsonldEntities)
 * 5.0 [Transport Conformance](#transportConformance)
-  * 5.1 [HTTP Transport Requirements](#http)
-    * 5.1.1 [The Envelope](#envelope)
-    * 5.1.2 [HTTP Message Requests](#httpRequest)
-    * 5.1.3 [HTTP Message Responses](#httpResponse)
-  * 5.2 [MQTT Transport Requirements](#mqtt)
-    * 5.2.1 \[TODO\] . . .
+  * 5.1 [The Envelope](#envelope)
+  * 5.2 [HTTP Message Requests](#httpRequest)
+  * 5.3 [HTTP Message Responses](#httpResponse)
+  * 5.4 [Other Transport Protocols](#otherTransports)
 * 6.0 [Using the Certification Service](#usingCertService)
 * 7.0 [Certification Mark](#certMark)
 * 8.0 [Certification Expiration and Renewal](#certRenewal)
@@ -435,15 +433,10 @@ For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification,
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
-\[TODO\] Summarize transport options . . . .
+A [Sensor](#sensor) MUST demonstrate that is capable of communicating with the Caliper certification service utilizing the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).
  
-### <a name="http"></a>5.1 HTTP Transport Requirements
-A Caliper sensor utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper sensor MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
-
-Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document.
- 
-#### <a name="envelope"></a>5.1.1 The Envelope
-Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) "describe" included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
+#### <a name="envelope"></a>5.1 The Envelope
+Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
 
 The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` properties MUST be specified.  No custom properties are permitted.
 
@@ -456,7 +449,7 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 
 For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
 
-#### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
+#### <a name="httpRequest"></a>5.2 HTTP Message Requests
 Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
  
 The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
@@ -467,7 +460,7 @@ The following standard HTTP request headers MUST be set for each message sent to
 | Content-Type | Set to the IANA media type "application/json". |
 | Host | Set to the test endpoint URL provided by the certification service. |
  
-#### <a name="httpResponse"></a>5.1.3  HTTP Message Responses
+#### <a name="httpResponse"></a>5.3 HTTP Message Responses
  
 When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
   
@@ -480,10 +473,8 @@ When communicating over HTTP the certification service endpoint will exhibit the
   
 The certification service MAY respond to Caliper sensor messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
   
-### <a name="mqtt"></a>5.2 MQTT Transport Requirements
-A Caliper sensor utilizing the Message Queue Telemetry Transport (MQTT) publish-subscribe messaging protocol MUST demonstrate . . . .
-
-\[TODO\] . . . .
+#### <a name="otherTransports"></a>5.4 Other Transport Protocols
+[Caliper Analytics&reg; Specification, version 1.1](#caliperSpec) defines the use of a single transport protocol (HTTP/HTTPS).  However, IMS Global is interested in specifying the use of other transport protocols that support the exchange of Caliper data.  Organizations wishing to work with IMS Global to define how other transport protocols can be added to the Caliper specification should contact the Caliper Working Group directly or indicate interest via the [public forum](https://www.imsglobal.org/forums/ims-glc-public-forums-and-resources/caliper-analytics-public-forum).
 
 ## <a name="usingCertService"></a> 6.0 Using the Certification Service
 Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
