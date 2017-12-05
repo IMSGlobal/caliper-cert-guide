@@ -433,7 +433,7 @@ For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification,
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
-A [Sensor](#sensor) MUST demonstrate that is capable of communicating with the Caliper certification service utilizing the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).
+A [Sensor](#sensor) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service.  Messages MUST be sent utilizing the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).
  
 #### <a name="envelope"></a>5.1 The Envelope
 Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
