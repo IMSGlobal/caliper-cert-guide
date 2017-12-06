@@ -44,12 +44,10 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
   * 4.4 [Expressing Events as JSON-LD](#jsonldEvents)
   * 4.5 [Expressing Entities as JSON-LD](#jsonldEntities)
 * 5.0 [Transport Conformance](#transportConformance)
-  * 5.1 [HTTP Transport Requirements](#http)
-    * 5.1.1 [The Envelope](#envelope)
-    * 5.1.2 [HTTP Message Requests](#httpRequest)
-    * 5.1.3 [HTTP Message Responses](#httpResponse)
-  * 5.2 [MQTT Transport Requirements](#mqtt)
-    * 5.2.1 \[TODO\] . . .
+  * 5.1 [The Envelope](#envelope)
+  * 5.2 [HTTP Message Requests](#httpRequest)
+  * 5.3 [HTTP Message Responses](#httpResponse)
+  * 5.4 [Other Transport Protocols](#otherTransports)
 * 6.0 [Using the Certification Service](#usingCertService)
 * 7.0 [Certification Mark](#certMark)
 * 8.0 [Certification Expiration and Renewal](#certRenewal)
@@ -72,7 +70,7 @@ IMS strongly encourages its members and the community to provide feedback to con
 Public comments and questions can be posted at the Caliper Analytics&reg; [public forum](https://www.imsglobal.org/forums/ims-glc-public-forums-and-resources/caliper-analytics-public-forum).
 
 ### <a name="conventions"></a>1.2 Conventions
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](#rfc2119).  A Sensor implementation that fails to implement a MUST/REQUIRED/SHALL requirement or fails to abide by a MUST NOT/SHALL NOT prohibition is considered nonconformant.  SHOULD/SHOULD NOT/RECOMMENDED statements constitute a best practice.  Ignoring a best practice does not violate conformance but a decision to disregard such guidance should be carefully considered.  MAY/OPTIONAL statements indicate that implementers are entirely free to choose whether or not to implement the option.
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](#rfc2119).  A Sensor implementation that fails to implement a MUST/REQUIRED/SHALL requirement or fails to abide by a MUST NOT/SHALL NOT prohibition is considered nonconformant.  SHOULD/SHOULD NOT/RECOMMENDED statements constitute a best practice.  Ignoring a best practice does not violate conformance but a decision to disregard such guidance should be carefully considered by implementers.  MAY/OPTIONAL statements indicate that implementers are entirely free to choose whether or not to implement the option.
 
 ### <a name="terminology"></a>1.3 Terminology
 <a name="actorDef"></a>__Actor__: An actor is an [Agent](#agent) capable of initiating or performing an [action](#actionDef) on a thing or as part of a process.  A Caliper [Event](#event) includes an `actor` attribute for representing the [Agent](#agent). 
@@ -87,7 +85,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="endpointDef"></a>__Endpoint__: a receiver or consumer of Caliper data that is bound to a specific network protocol.  
 
-<a name="entityDef"></a>__Entity__: an object or a thing that participates in learning-related activity.  Caliper [Entity](#entity) types provide course-grained representations of applications, people, groups and resources that constitute the "stuff" of a Caliper [Event](#event).  Each [Entity](#entity) corresponds to a node in a directed graph.
+<a name="entityDef"></a>__Entity__: an object or a thing that participates in learning-related activity.  Caliper [Entity](#entity) types provide coarse-grained representations of applications, people, groups and resources that constitute the "stuff" of a Caliper [Event](#event).  Each [Entity](#entity) corresponds to a node in a directed graph.
 
 <a name="eventDef"></a>__Event__: describes a relationship established between an [Agent](#agent) (the `actor`) and an [Entity](#entity) (the `object`) formed as a result of a purposeful `action` undertaken by the `actor` in connection to the `object` at a particular moment in time.
 
@@ -435,15 +433,10 @@ For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification,
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
-\[TODO\] Summarize transport options . . . .
+A Caliper [Sensor](#sensor) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service [Endpoint](#endpoint).  Certification is limited to message exchanges using the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).  Messages MUST be sent using the POST request method.  The [Sensor](#sensor) MUST also support message authentication using the `Authorization` request header, setting the value to the provided bearer token.
  
-### <a name="http"></a>5.1 HTTP Transport Requirements
-A Caliper sensor utilizing the Hypertext Transport Protocol (HTTP) request-response messaging protocol MUST demonstrate that is capable of communicating with the Caliper certification service over HTTP with the connection encrypted by Transport Layer Security (TLS).  A Caliper sensor MUST also support message authentication using the HTTP `Authorization` request header as described in [RFC 6750](#rfc6750), [Section 2.1](https://tools.ietf.org/html/rfc6750#section-2).
-
-Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document.
- 
-#### <a name="envelope"></a>5.1.1 The Envelope
-Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) "describe" included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
+#### <a name="envelope"></a>5.1 The Envelope
+Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
 
 The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` properties MUST be specified.  No custom properties are permitted.
 
@@ -456,20 +449,20 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 
 For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
 
-#### <a name="httpRequest"></a>5.1.2  HTTP Message Requests
-Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
+#### <a name="httpRequest"></a>5.2 HTTP Message Requests
+Each HTTP request message sent to the certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
  
 The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
   
 | Request Header | Disposition |
 | :------------- | :----------- |
-| Authorization | Set to the Bearer Token provided by the certification service and associated with the test endpoint. |
+| Authorization | Set to the bearer token provided by the certification service and associated with the test endpoint. |
 | Content-Type | Set to the IANA media type "application/json". |
 | Host | Set to the test endpoint URL provided by the certification service. |
  
-#### <a name="httpResponse"></a>5.1.3  HTTP Message Responses
+#### <a name="httpResponse"></a>5.3 HTTP Message Responses
  
-When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
+Following receipt of a [Sensor](#sensor) request message the certification service will reply with a response message.  The response will include a three-digit status code indicating whether or not the certification service was able to understand and satisfy the request as defined by [RFC 7231](#rfc7231).  
   
 * To signal to a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
 * If a Caliper sensor sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
@@ -478,12 +471,10 @@ When communicating over HTTP the certification service endpoint will exhibit the
 * If a Caliper sensor sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
 * If a Caliper sensor sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
   
-The certification service MAY respond to Caliper sensor messages with other standard HTTP status codes to indicate result dispositions of varying kinds.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+The certification service MAY respond to [Sensor](#sensor) messages with other standard HTTP status codes to indicate result dispositions that vary from the cases described above.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
   
-### <a name="mqtt"></a>5.2 MQTT Transport Requirements
-A Caliper sensor utilizing the Message Queue Telemetry Transport (MQTT) publish-subscribe messaging protocol MUST demonstrate . . . .
-
-\[TODO\] . . . .
+#### <a name="otherTransports"></a>5.4 Other Transport Protocols
+[Caliper Analytics&reg; Specification, version 1.1](#caliperSpec) defines the use of a single transport protocol (HTTP/HTTPS).  However, IMS Global is interested in specifying the use of other transport protocols that can support the exchange of Caliper data.  Organizations wishing to work with IMS Global to add other transport protocols to the Caliper specification should contact the Caliper Working Group directly or indicate interest via the [public forum](https://www.imsglobal.org/forums/ims-glc-public-forums-and-resources/caliper-analytics-public-forum).
 
 ## <a name="usingCertService"></a> 6.0 Using the Certification Service
 Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
@@ -552,6 +543,8 @@ The following Caliper Working Group participants contributed to the writing of t
 <a name="rfc4122"></a>__RFC 4122__.  IETF. P. Leach, M. Mealling and R. Salz.  "A Universally Unique Identifier (UUID) URN Namespace."  July 2005.  URL: https://tools.ietf.org/html/rfc4122
 
 <a name="rfc6750"></a>__RFC 6750__.  IETF.  M. Jones and D. Hardt.  "The OAuth 2.0 Authorization Framework: Bearer Token Usage."  October 2012.  URL: https://tools.ietf.org/html/rfc6750
+
+<a name="rfc7231"></a>__RFC 7231__.  IETF.  R. Fielding and J. Reschke, eds.  Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content.  June 2014.  URL: https://tools.ietf.org/html/rfc7231.
 
 <a name="rfc7807"></a>__RFC 7807__.  IETF.  M. Nottingham, E. Wilde.  "Problem Details for HTTP APIs."  March 2017.  URL: https://tools.ietf.org/html/rfc7807
 
