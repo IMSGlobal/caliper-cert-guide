@@ -450,7 +450,7 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
 
 #### <a name="httpRequest"></a>5.2 HTTP Message Requests
-Each HTTP message sent to the Certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
+Each HTTP request message sent to the certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
  
 The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
   
@@ -462,7 +462,7 @@ The following standard HTTP request headers MUST be set for each message sent to
  
 #### <a name="httpResponse"></a>5.3 HTTP Message Responses
  
-When communicating over HTTP the certification service endpoint will exhibit the following response behavior:
+Following receipt of a [Sensor](#sensor) request message the certification service will reply with a response message.  The response will include a three-digit status code indicating whether or not the certification service was able to understand and satisfy the request as defined by [RFC 7231](#rfc7231).  
   
 * To signal to a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
 * If a Caliper sensor sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
@@ -471,7 +471,7 @@ When communicating over HTTP the certification service endpoint will exhibit the
 * If a Caliper sensor sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
 * If a Caliper sensor sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
   
-The certification service MAY respond to Caliper sensor messages with other standard HTTP status codes to indicate result dispositions that vary from the cases described above.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+The certification service MAY respond to [Sensor](#sensor) messages with other standard HTTP status codes to indicate result dispositions that vary from the cases described above.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
   
 #### <a name="otherTransports"></a>5.4 Other Transport Protocols
 [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec) defines the use of a single transport protocol (HTTP/HTTPS).  However, IMS Global is interested in specifying the use of other transport protocols that can support the exchange of Caliper data.  Organizations wishing to work with IMS Global to add other transport protocols to the Caliper specification should contact the Caliper Working Group directly or indicate interest via the [public forum](https://www.imsglobal.org/forums/ims-glc-public-forums-and-resources/caliper-analytics-public-forum).
@@ -543,6 +543,8 @@ The following Caliper Working Group participants contributed to the writing of t
 <a name="rfc4122"></a>__RFC 4122__.  IETF. P. Leach, M. Mealling and R. Salz.  "A Universally Unique Identifier (UUID) URN Namespace."  July 2005.  URL: https://tools.ietf.org/html/rfc4122
 
 <a name="rfc6750"></a>__RFC 6750__.  IETF.  M. Jones and D. Hardt.  "The OAuth 2.0 Authorization Framework: Bearer Token Usage."  October 2012.  URL: https://tools.ietf.org/html/rfc6750
+
+<a name="rfc7231"></a>__RFC 7231__.  IETF.  R. Fielding and J. Reschke, eds.  Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content.  June 2014.  URL: https://tools.ietf.org/html/rfc7231.
 
 <a name="rfc7807"></a>__RFC 7807__.  IETF.  M. Nottingham, E. Wilde.  "Problem Details for HTTP APIs."  March 2017.  URL: https://tools.ietf.org/html/rfc7807
 
