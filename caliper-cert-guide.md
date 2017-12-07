@@ -87,6 +87,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="entityDef"></a>__Entity__: an object or a thing that participates in learning-related activity.  Caliper [Entity](#entity) types provide coarse-grained representations of applications, people, groups and resources that constitute the "stuff" of a Caliper [Event](#event).  Each [Entity](#entity) corresponds to a node in a directed graph.
 
+<a name="envelopeDef"></a>__Envelope__: a data structure that serves as a transport container of Caliper [Event](#eventDef) and [Entity](#entityDef) data.  The envelope also includes metadata about the emitting [Sensor](#sensor) and the data payload.
+
 <a name="eventDef"></a>__Event__: describes a relationship established between an [Agent](#agent) (the `actor`) and an [Entity](#entity) (the `object`) formed as a result of a purposeful `action` undertaken by the `actor` in connection to the `object` at a particular moment in time.
 
 <a name="jsonldDef"></a>__JSON-LD__: a specification providing a JSON-based data serialization and messaging format, processing algorithms and API for working with [Linked Data](#linkedData).  The messages described in this guide are intended to be used in programming environments that support [JSON-LD](http://json-ld.org/spec/latest/json-ld/).
@@ -433,7 +435,7 @@ For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification,
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
-A Caliper [Sensor](#sensor) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service [Endpoint](#endpoint).  Certification is limited to message exchanges using the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).  Messages MUST be sent using the POST request method.  The [Sensor](#sensor) MUST also support message authentication using the `Authorization` request header, setting the value to the provided bearer token.
+A Caliper [Sensor](#sensor) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service [Endpoint](#endpoint).  Certification is limited to message exchanges using the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).  Messages MUST be sent using the POST request method.  For certification purposes, the [Sensor](#sensor) MUST also support message authentication using the `Authorization` request header, setting the value to the provided bearer token.
  
 #### <a name="envelope"></a>5.1 The Envelope
 Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
@@ -445,7 +447,7 @@ The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` propert
 | sensor | Set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
 | eventTime | Set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
 | dataVersion | Set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
-| data | an ordered collection of one or more Caliper [Entity](#entity) _[describes](#describeDef)_ and/or [Event](#event) types.  The Sensor MAY mix Events and Entity _[describes](#describeDef)_ in the same envelope. |
+| data | An ordered collection of one or more Caliper [Event](#event) and/or [Entity](#entity) *[describe](#describeDef)* objects.  The Sensor MAY mix [Event](#event) and [Entity](#entity) *[describe](#describeDef)* data in the same [Envelope](#envelope). |
 
 For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
 
@@ -456,15 +458,15 @@ The following standard HTTP request headers MUST be set for each message sent to
   
 | Request Header | Disposition |
 | :------------- | :----------- |
-| Authorization | Set to the bearer token provided by the certification service and associated with the test endpoint. |
-| Content-Type | Set to the IANA media type "application/json". |
-| Host | Set to the test endpoint URL provided by the certification service. |
+| Authorization | Set the string value to the bearer token provided by the certification service and associated with the test endpoint (e.g., Authorization: Bearer \<token value\>). |
+| Content-Type | Set the string value to the IANA media type "application/json". |
+| Host | Set the string value to the test endpoint URL provided by the certification service. |
  
 #### <a name="httpResponse"></a>5.3 HTTP Message Responses
  
 Following receipt of a [Sensor](#sensor) request message the certification service will reply with a response message.  The response will include a three-digit status code indicating whether or not the certification service was able to understand and satisfy the request as defined by [RFC 7231](#rfc7231).  
   
-* To signal to a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
+* To signal a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
 * If a Caliper sensor sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
 * If a Caliper sensor sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
 * If a Caliper sensor sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
