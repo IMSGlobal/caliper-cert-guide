@@ -87,6 +87,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="entityDef"></a>__Entity__: an object or a thing that participates in learning-related activity.  Caliper [Entity](#entity) types provide coarse-grained representations of applications, people, groups and resources that constitute the "stuff" of a Caliper [Event](#event).  Each [Entity](#entity) corresponds to a node in a directed graph.
 
+<a name="envelopeDef"></a>__Envelope__: a data structure that serves as a transport container of Caliper [Event](#eventDef) and [Entity](#entityDef) data.  The envelope also includes metadata about the emitting [Sensor](#sensor) and the data payload.
+
 <a name="eventDef"></a>__Event__: describes a relationship established between an [Agent](#agent) (the `actor`) and an [Entity](#entity) (the `object`) formed as a result of a purposeful `action` undertaken by the `actor` in connection to the `object` at a particular moment in time.
 
 <a name="jsonldDef"></a>__JSON-LD__: a specification providing a JSON-based data serialization and messaging format, processing algorithms and API for working with [Linked Data](#linkedData).  The messages described in this guide are intended to be used in programming environments that support [JSON-LD](http://json-ld.org/spec/latest/json-ld/).
@@ -464,7 +466,7 @@ The following standard HTTP request headers MUST be set for each message sent to
  
 Following receipt of a [Sensor](#sensor) request message the certification service will reply with a response message.  The response will include a three-digit status code indicating whether or not the certification service was able to understand and satisfy the request as defined by [RFC 7231](#rfc7231).  
   
-* To signal to a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
+* To signal a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
 * If a Caliper sensor sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
 * If a Caliper sensor sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
 * If a Caliper sensor sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
