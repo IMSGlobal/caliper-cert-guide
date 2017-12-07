@@ -456,7 +456,7 @@ The following standard HTTP request headers MUST be set for each message sent to
   
 | Request Header | Disposition |
 | :------------- | :----------- |
-| Authorization | Set the string value to the bearer token provided by the certification service and associated with the test endpoint (e.g., Authorization: Bearer <token value>). |
+| Authorization | Set the string value to the bearer token provided by the certification service and associated with the test endpoint (e.g., Authorization: Bearer \<token value\>). |
 | Content-Type | Set the string value to the IANA media type "application/json". |
 | Host | Set the string value to the test endpoint URL provided by the certification service. |
  
