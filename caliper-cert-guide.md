@@ -56,6 +56,9 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 * [About this Document](#aboutThisDoc)
 
 ## <a name="introduction"></a>1.0 Introduction
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Session Profile" src="assets/caliper-sensor-v2.png"></div>
+
 The [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
