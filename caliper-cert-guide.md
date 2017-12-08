@@ -260,7 +260,7 @@ Create and send a "Graded" [GradeEvent](#gradeEvent) to the certification servic
 [GradeEvent](#gradeEvent)
 
 #### Required Actor
-[Person](#person) or [SoftwareApplication](#softwareApplication)
+[Agent](#agent) or subtype
 
 #### Required Action  
 [Graded](#graded)
