@@ -56,6 +56,9 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 * [About this Document](#aboutThisDoc)
 
 ## <a name="introduction"></a>1.0 Introduction
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Session Profile" src="assets/caliper-sensor-v2.png"></div>
+
 The [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
@@ -63,9 +66,9 @@ Caliper also defines an application programming interface (the Sensor API&trade;
 This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should also note that behavioral requirements for Caliper Endpoints are provided in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), Section 6.0.
 
 ### <a name="docStatus"></a>1.1 Status of this Document
-This document is the Final Release, meaning the technical solution is now made available as a public document and as such several IMS Members have successfully completed conformance certification at the time of the release of this document.
+This document is considered the _Final Release_.  This means that the Caliper Analytics&reg; Sensor Certification Guide, version 1.1, is now made available as a public document following acceptance by IMS Global member organizations, a number of whom have successfully achieved conformance certification at the time of the release of this document.
     
-IMS strongly encourages its members and the community to provide feedback to continue the evolution and improvement of the Caliper specification. To join the IMS developer and conformance certification community focused on Caliper please visit https://www.imsglobal.org/activity/caliper.
+IMS Global strongly encourages its members and the greater public to provide feedback that focuses on improving the Caliper specification. To join the IMS developer and conformance certification community focused on Caliper please visit https://www.imsglobal.org/activity/caliper.
     
 Public comments and questions can be posted at the Caliper Analytics&reg; [public forum](https://www.imsglobal.org/forums/ims-glc-public-forums-and-resources/caliper-analytics-public-forum).
 
@@ -81,7 +84,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="contextDef"></a>__Context__: a special [JSON-LD](http://json-ld.org/spec/latest/json-ld/) keyword that maps the terms employed in a JSON document to [IRIs](https://www.ietf.org/rfc/rfc3987.txt) that link to one or more published vocabularies.  Inclusion of a [JSON-LD](http://json-ld.org/spec/latest/json-ld/) context provides an economical way of communicating document semantics to services interested in consuming Caliper event data.
 
-<a name="describeDef"></a>__Describe__: a Caliper message containing an Entity that is not directly associated with an Event. Entities can be sent asynchronously from Events using `Describe` messages in order to reduce verbosity (e.g. sending a Person entity as a `Describe` avoids having to repeat the Person object in each Event that includes it).
+<a name="describeDef"></a>__Describe__: a Caliper message containing an [Entity](#entity) that is not directly associated with an [Event](#event). Entities can be sent asynchronously from events using `Describe` messages in order to reduce verbosity (e.g. sending a [Person](#person) entity as a `Describe` avoids having to repeat the [Person](#person) object in each [Event](#event) that includes it).
 
 <a name="endpointDef"></a>__Endpoint__: a receiver or consumer of Caliper data that is bound to a specific network protocol.  
 
@@ -140,6 +143,9 @@ Each Caliper profile is also a unit of certification for Caliper [Sensor](#senso
 * Serialized Events and Entities MUST conform to the syntactical requirements defined in section [4.0](#dataFormat) below.  This includes referencing one or more JSON-LD [contexts](#contextDef) by including the JSON-LD `@context` keyword and value as required.  
 
 ### <a name="annotationProfile"></a>3.1 Annotation Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Annotation Profile" src="assets/caliper-profile_annotation.png"></div>
+
 The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](#digitalResource).  
 
 #### Profile Description
@@ -164,6 +170,9 @@ Create and send a "Bookmarked" [AnnotationEvent](#annotationEvent) to the certif
 [BookmarkAnnotation](#bookmarkAnnotation)
  
 ### <a name="assessmentProfile"></a>3.2 Assessment Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Assessment Profile" src="assets/caliper-profile_assessment.png"></div>
+
 The Caliper Assessment Profile models assessment-related activities including interactions with individual assessment items.
 
 #### Profile Description
@@ -188,6 +197,9 @@ Create and send a "Started" [AssessmentEvent](#assessmentEvent) followed by a "S
 [Attempt](#attempt)
  
 ### <a name="assignableProfile"></a>3.3 Assignable Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Assignable Profile" src="assets/caliper-profile_assignable.png"></div>
+
 The Assignable Profile models activities associated with the assignment of digital content to a learner for completion according to specific criteria.
 
 #### Profile Description
@@ -212,6 +224,9 @@ Create and send a "Started" [AssignableEvent](#assignableEvent) followed by a "S
 [Attempt](#attempt)
  
 ### <a name="forumProfile"></a>3.4 Forum Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Forum Profile" src="assets/caliper-profile_forum.png"></div>
+
 The Caliper Forum Profile models learners and others participating in online forum communities.
 
 #### Profile Description
@@ -233,6 +248,9 @@ Create and send a "Posted" [MessageEvent](#messageEvent) to the certification se
 [Message](#message)
  
 ### <a name="gradingProfile"></a>3.5 Grading Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Grading Profile" src="assets/caliper-profile_grading.png"></div>
+
 The Caliper Grading Profile models grading activities performed by an [Agent](#agent), typically a [Person](#person) or a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
@@ -245,7 +263,7 @@ Create and send a "Graded" [GradeEvent](#gradeEvent) to the certification servic
 [GradeEvent](#gradeEvent)
 
 #### Required Actor
-[Person](#person) or [SoftwareApplication](#softwareApplication)
+[Agent](#agent) or subtype
 
 #### Required Action  
 [Graded](#graded)
@@ -260,6 +278,9 @@ Create and send a "Graded" [GradeEvent](#gradeEvent) to the certification servic
 For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
  
 ### <a name="mediaProfile"></a>3.6 Media Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Media Profile" src="assets/caliper-profile_media.png"></div>
+
 The Caliper Media Profile models interactions between learners and rich content such as audio, images and video.
 
 #### Profile Description
@@ -278,12 +299,15 @@ Create and send a "Started" [MediaEvent](#mediaEvent) followed by an "Ended" [Me
 [Started](#started), [Ended](#ended) 
 
 #### Required Object
-[MediaObject](#mediaObject) or subtype
+[AudioObject](#audioObject), [ImageObject](#imageObject), [MediaObject](#mediaObject), or [VideoObject](#videoObject)
 
 #### Recommended Target Entity
 [MediaLocation](#mediaLocation)
  
 ### <a name="readingProfile"></a>3.7 Reading Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Reading Profile" src="assets/caliper-profile_reading.png"></div>
+
 The Caliper Reading Profile models activities associated with navigating to and viewing digital textual content.
 
 #### Profile Description
@@ -302,9 +326,12 @@ See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3
 [NavigatedTo](#navigatedTo), [Viewed](#viewed)  
 
 #### Required Object
-[DigitalResource](#digitalResource) or subtype
+[AssignableDigitalResource](#assignableDigitalResource), [Chapter](#chapter), [DigitalResource](#digitalResource), [DigitalResourceCollection](#digitalResourceCollection), [Document](#document), [Page](#page), or [WebPage](#webPage)
  
 ### <a name="sessionProfile"></a>3.8 Session Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Session Profile" src="assets/caliper-profile_session.png"></div>
+
 The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](#person) interacting with a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
@@ -326,6 +353,9 @@ Create and send a "LoggedIn" [SessionEvent](#sessionEvent) to the certification 
 [SoftwareApplication](#softwareApplication)
  
 ### <a name="toolUseProfile"></a>3.9 Tool Use Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Tool Use Profile" src="assets/caliper-profile_tool_use.png"></div>
+
 The Caliper Tool Use Profile models an intended interaction between a user and a tool.
 
 #### Profile Description
@@ -348,6 +378,9 @@ Create and send a "Used" [ToolUseEvent](#toolUseEvent) to the certification serv
 
 
 ### <a name="basicProfile"></a>3.10 Basic Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Basic Profile" src="assets/caliper-profile_basic.png"></div>
+
 The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
 
 #### Profile Description
