@@ -296,7 +296,7 @@ Create and send a "Started" [MediaEvent](#mediaEvent) followed by an "Ended" [Me
 [Started](#started), [Ended](#ended) 
 
 #### Required Object
-[MediaObject](#mediaObject) or subtype
+[AudioObject](#audioObject), [ImageObject](#imageObject), [MediaObject](#mediaObject), or [VideoObject](#videoObject)
 
 #### Recommended Target Entity
 [MediaLocation](#mediaLocation)
@@ -323,7 +323,7 @@ See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3
 [NavigatedTo](#navigatedTo), [Viewed](#viewed)  
 
 #### Required Object
-[DigitalResource](#digitalResource) or subtype
+[AssignableDigitalResource](#assignableDigitalResource), [Chapter](#chapter), [DigitalResource](#digitalResource), [DigitalResourceCollection](#digitalResourceCollection), [Document](#document), [Page](#page), or [WebPage](#webPage)
  
 ### <a name="sessionProfile"></a>3.8 Session Profile
 
