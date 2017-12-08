@@ -140,6 +140,9 @@ Each Caliper profile is also a unit of certification for Caliper [Sensor](#senso
 * Serialized Events and Entities MUST conform to the syntactical requirements defined in section [4.0](#dataFormat) below.  This includes referencing one or more JSON-LD [contexts](#contextDef) by including the JSON-LD `@context` keyword and value as required.  
 
 ### <a name="annotationProfile"></a>3.1 Annotation Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Annotation Profile" src="assets/caliper-profile_annotation.png"></div>
+
 The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](#digitalResource).  
 
 #### Profile Description
@@ -164,6 +167,9 @@ Create and send a "Bookmarked" [AnnotationEvent](#annotationEvent) to the certif
 [BookmarkAnnotation](#bookmarkAnnotation)
  
 ### <a name="assessmentProfile"></a>3.2 Assessment Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Assessment Profile" src="assets/caliper-profile_assessment.png"></div>
+
 The Caliper Assessment Profile models assessment-related activities including interactions with individual assessment items.
 
 #### Profile Description
@@ -188,6 +194,9 @@ Create and send a "Started" [AssessmentEvent](#assessmentEvent) followed by a "S
 [Attempt](#attempt)
  
 ### <a name="assignableProfile"></a>3.3 Assignable Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Assignable Profile" src="assets/caliper-profile_assignable.png"></div>
+
 The Assignable Profile models activities associated with the assignment of digital content to a learner for completion according to specific criteria.
 
 #### Profile Description
@@ -212,6 +221,9 @@ Create and send a "Started" [AssignableEvent](#assignableEvent) followed by a "S
 [Attempt](#attempt)
  
 ### <a name="forumProfile"></a>3.4 Forum Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Forum Profile" src="assets/caliper-profile_forum.png"></div>
+
 The Caliper Forum Profile models learners and others participating in online forum communities.
 
 #### Profile Description
@@ -233,6 +245,9 @@ Create and send a "Posted" [MessageEvent](#messageEvent) to the certification se
 [Message](#message)
  
 ### <a name="gradingProfile"></a>3.5 Grading Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Grading Profile" src="assets/caliper-profile_grading.png"></div>
+
 The Caliper Grading Profile models grading activities performed by an [Agent](#agent), typically a [Person](#person) or a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
@@ -260,6 +275,9 @@ Create and send a "Graded" [GradeEvent](#gradeEvent) to the certification servic
 For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
  
 ### <a name="mediaProfile"></a>3.6 Media Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Media Profile" src="assets/caliper-profile_media.png"></div>
+
 The Caliper Media Profile models interactions between learners and rich content such as audio, images and video.
 
 #### Profile Description
@@ -284,6 +302,9 @@ Create and send a "Started" [MediaEvent](#mediaEvent) followed by an "Ended" [Me
 [MediaLocation](#mediaLocation)
  
 ### <a name="readingProfile"></a>3.7 Reading Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Reading Profile" src="assets/caliper-profile_reading.png"></div>
+
 The Caliper Reading Profile models activities associated with navigating to and viewing digital textual content.
 
 #### Profile Description
@@ -305,6 +326,9 @@ See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3
 [DigitalResource](#digitalResource) or subtype
  
 ### <a name="sessionProfile"></a>3.8 Session Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Session Profile" src="assets/caliper-profile_session.png"></div>
+
 The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](#person) interacting with a [SoftwareApplication](#softwareApplication).
 
 #### Profile Description
@@ -326,6 +350,9 @@ Create and send a "LoggedIn" [SessionEvent](#sessionEvent) to the certification 
 [SoftwareApplication](#softwareApplication)
  
 ### <a name="toolUseProfile"></a>3.9 Tool Use Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Tool Use Profile" src="assets/caliper-profile_tool_use.png"></div>
+
 The Caliper Tool Use Profile models an intended interaction between a user and a tool.
 
 #### Profile Description
@@ -348,6 +375,9 @@ Create and send a "Used" [ToolUseEvent](#toolUseEvent) to the certification serv
 
 
 ### <a name="basicProfile"></a>3.10 Basic Profile
+
+<div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Basic Profile" src="assets/caliper-profile_basic.png"></div>
+
 The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
 
 #### Profile Description
