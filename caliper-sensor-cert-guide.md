@@ -10,7 +10,7 @@ Recipients of this document are requested to submit, with their comments, notifi
 
 IMS takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this document or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any effort to identify any such rights. Information on IMS’s procedures with respect to rights in IMS specifications can be found at the IMS Intellectual Property Rights web page: [http://www.imsglobal.org/ipr/imsipr_policyFinal.pdf](http://www.imsglobal.org/ipr/imsipr_policyFinal.pdf).
 
-Copyright &copy; 2017 IMS Global Learning Consortium. All Rights Reserved.
+Copyright &copy; 2018 IMS Global Learning Consortium. All Rights Reserved.
 
 Use of this guide to develop products or services is governed by the license with IMS found on the IMS website: http://www.imsglobal.org/speclicense.html.
 
@@ -561,7 +561,7 @@ The following Caliper Working Group participants contributed to the writing of t
 | Lisa Mattson | IMS Global |
 
 ## <a name="references"></a>References
-<a name="caliperSpec"></a>Anthony Whyte, Viktor Haag, Linda Feng, Markus Gylling, Matt Ashbourne, Wes LaMarche and Etienne Pelaprat.  Caliper Analytics® Specification, version 1.1.  30 November 2017.  URL: http://www.imsglobal.org/caliper-spec-v1p1
+<a name="caliperSpec"></a>Anthony Whyte, Viktor Haag, Linda Feng, Markus Gylling, Matt Ashbourne, Wes LaMarche and Etienne Pelaprat.  Caliper Analytics® Specification, version 1.1.  12 January 2018.  URL: http://www.imsglobal.org/caliper-spec-v1p1
 
 <a name="jsonldSyntax"></a>__JSON-LD Syntax__.  W3C.  M. Sporny, D. Longley, G. Kellog, M. Lanthaler and N. Lindström.  JSON-LD 1.1.  A JSON-based Serialization for Linked Data. 15 February 2017.  URL: http://json-ld.org/spec/latest/json-ld/
 
@@ -600,6 +600,6 @@ Please contact IMS Global through our website at [http://www.imsglobal.org](http
 
 Please refer to Document Name: IMS Caliper Analytics&reg; Certification Guide, version 1.1
 
-Date: 30 November 2017
+Date: 12 January 2018
 
 This document contains trademarks of the IMS Global Learning Consortium including the IMS Logos, Learning Tools Interoperability&reg; (LTI&reg;), Accessible Portable Item Protocol&reg; (APIP&reg;), Question and Test Interoperability&reg; (QTI&reg;), Common Cartridge&reg; (CC&reg;), AccessForAll&trade;, OneRoster&reg;, Caliper Analytics&reg; and SensorAPI&trade;. For more information on the IMS trademark usage policy see trademark policy page - https://www.imsglobal.org/trademarks
