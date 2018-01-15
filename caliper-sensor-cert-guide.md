@@ -139,7 +139,7 @@ Each Caliper profile is also a unit of certification for Caliper [Sensor](#senso
 * Certain [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) properties are required and MUST be specified.  Required properties include: `id`, `type`, `actor`, `action`, `object` and `eventTime`.  
 * All other [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each required and/or optional property specified is mandatory.
 * Each [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) participating in the [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) MUST be expressed either as an object or as a string corresponding to the resource's [IRI](#iriDef).  
-* The actions vocabulary is limited to the supported actions described in the *Caliper Analytics&reg; Specification*, [version 1.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1), Appendix A, and no other.
+* The actions vocabulary is limited to the supported actions described in the *Caliper Analytics&reg; Specification*, version 1.1, [Appendix A](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#actions), and no other.
 * Serialized Events and Entities MUST conform to the syntactical requirements defined in [Section 4.0](#dataFormat) below.  This includes referencing one or more JSON-LD [contexts](#contextDef) by including the JSON-LD `@context` keyword and value as required.  
 
 ### <a name="annotationProfile"></a>3.1 Annotation Profile
