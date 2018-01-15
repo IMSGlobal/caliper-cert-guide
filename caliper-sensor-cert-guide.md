@@ -59,11 +59,11 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 
 <div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Session Profile" src="assets/caliper-sensor-v2.png"></div>
 
-The [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
+The *Caliper Analytics&reg; Specification*, [version 1.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
 
-This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should also note that behavioral requirements for Caliper Endpoints are provided in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), Section 6.0.
+This document is the certification guide for Caliper [Sensors](#sensorDef). In this release of the Caliper specification, certification services are not provided for Caliper [endpoints](#endpointDef). Endpoint implementors should take note that it is the intent of the Caliper Working Group to add endpoint certification in forthcoming releases of the specification. Implementors should also note that behavioral requirements for Caliper Endpoints are provided in the *Caliper Analytics&reg; Specification*, version 1.1, [Section 6.0](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#endpoint).
 
 ### <a name="docStatus"></a>1.1 Status of this Document
 This document is considered the _Final Release_.  This means that the Caliper Analytics&reg; Sensor Certification Guide, version 1.1, is now made available as a public document following acceptance by IMS Global member organizations, a number of whom have successfully achieved conformance certification at the time of the release of this document.
@@ -76,27 +76,27 @@ Public comments and questions can be posted at the Caliper Analytics&reg; [publi
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](#rfc2119).  A Sensor implementation that fails to implement a MUST/REQUIRED/SHALL requirement or fails to abide by a MUST NOT/SHALL NOT prohibition is considered nonconformant.  SHOULD/SHOULD NOT/RECOMMENDED statements constitute a best practice.  Ignoring a best practice does not violate conformance but a decision to disregard such guidance should be carefully considered by implementers.  MAY/OPTIONAL statements indicate that implementers are entirely free to choose whether or not to implement the option.
 
 ### <a name="terminology"></a>1.3 Terminology
-<a name="actorDef"></a>__Actor__: An actor is an [Agent](#agent) capable of initiating or performing an [action](#actionDef) on a thing or as part of a process.  A Caliper [Event](#event) includes an `actor` attribute for representing the [Agent](#agent). 
+<a name="actorDef"></a>__Actor__: An actor is an [Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent) capable of initiating or performing an [action](#actionDef) on a thing or as part of a process.  A Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) includes an `actor` attribute for representing the [Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent). 
 
-<a name="blankNodeDef"></a>__Blank Node Identifier__: a string that begins with "_:" that is used to identify an [Entity](#entity) for which an [IRI](#iriDef) is not provided.  An [Entity](#entity) provisioned with a blank node identifier is neither dereferenceable nor has meaning outside the scope of the [JSON-LD](#jsonldDef) document within which it resides.
+<a name="blankNodeDef"></a>__Blank Node Identifier__: a string that begins with "_:" that is used to identify an [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) for which an [IRI](#iriDef) is not provided.  An [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) provisioned with a blank node identifier is neither dereferenceable nor has meaning outside the scope of the [JSON-LD](#jsonldDef) document within which it resides.
 
-<a name="actionDef"></a>__Action__: something performed or done to accomplish a purpose.  Caliper [Event](#event) subtypes define a controlled vocabulary of one or more [actions](#actions) relevant to the activity domain.  A Caliper [Event](#event) includes an `action` attribute for expressing the associated action.     
+<a name="actionDef"></a>__Action__: something performed or done to accomplish a purpose.  Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) subtypes define a controlled vocabulary of one or more [actions](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#actions) relevant to the activity domain.  A Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) includes an `action` attribute for expressing the associated action.     
 
 <a name="contextDef"></a>__Context__: a special [JSON-LD](http://json-ld.org/spec/latest/json-ld/) keyword that maps the terms employed in a JSON document to [IRIs](https://www.ietf.org/rfc/rfc3987.txt) that link to one or more published vocabularies.  Inclusion of a [JSON-LD](http://json-ld.org/spec/latest/json-ld/) context provides an economical way of communicating document semantics to services interested in consuming Caliper event data.
 
-<a name="describeDef"></a>__Describe__: a Caliper message containing an [Entity](#entity) that is not directly associated with an [Event](#event). Entities can be sent asynchronously from events using `Describe` messages in order to reduce verbosity (e.g. sending a [Person](#person) entity as a `Describe` avoids having to repeat the [Person](#person) object in each [Event](#event) that includes it).
+<a name="describeDef"></a>__Describe__: a Caliper message containing an [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) that is not directly associated with an [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event). Entities can be sent asynchronously from events using `Describe` messages in order to reduce verbosity (e.g. sending a [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) entity as a `Describe` avoids having to repeat the [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) object in each [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) that includes it).
 
 <a name="endpointDef"></a>__Endpoint__: a receiver or consumer of Caliper data that is bound to a specific network protocol.  
 
-<a name="entityDef"></a>__Entity__: an object or a thing that participates in learning-related activity.  Caliper [Entity](#entity) types provide coarse-grained representations of applications, people, groups and resources that constitute the "stuff" of a Caliper [Event](#event).  Each [Entity](#entity) corresponds to a node in a directed graph.
+<a name="entityDef"></a>__Entity__: an object or a thing that participates in learning-related activity.  Caliper [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) types provide coarse-grained representations of applications, people, groups and resources that constitute the "stuff" of a Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event).  Each [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) corresponds to a node in a directed graph.
 
-<a name="envelopeDef"></a>__Envelope__: a data structure that serves as a transport container of Caliper [Event](#eventDef) and [Entity](#entityDef) data.  The envelope also includes metadata about the emitting [Sensor](#sensor) and the data payload.
+<a name="envelopeDef"></a>__Envelope__: a data structure that serves as a transport container of Caliper [Event](#eventDef) and [Entity](#entityDef) data.  The envelope also includes metadata about the emitting [Sensor](#sensorDef) and the data payload.
 
-<a name="eventDef"></a>__Event__: describes a relationship established between an [Agent](#agent) (the `actor`) and an [Entity](#entity) (the `object`) formed as a result of a purposeful `action` undertaken by the `actor` in connection to the `object` at a particular moment in time.
+<a name="eventDef"></a>__Event__: describes a relationship established between an [Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent) (the `actor`) and an [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) (the `object`) formed as a result of a purposeful `action` undertaken by the `actor` in connection to the `object` at a particular moment in time.
 
-<a name="jsonldDef"></a>__JSON-LD__: a specification providing a JSON-based data serialization and messaging format, processing algorithms and API for working with [Linked Data](#linkedData).  The messages described in this guide are intended to be used in programming environments that support [JSON-LD](http://json-ld.org/spec/latest/json-ld/).
+<a name="jsonldDef"></a>__JSON-LD__: a specification providing a JSON-based data serialization and messaging format, processing algorithms and API for working with [Linked Data](#linkedDataDef).  The messages described in this guide are intended to be used in programming environments that support [JSON-LD](http://json-ld.org/spec/latest/json-ld/).
 
-<a name="iriDef"></a>__IRI__: The Internationalized Resource Identifier (IRI) extends the Uniform Resource Identifier ([URI](#uriDef)) scheme by using characters drawn from the Universal character set rather than US-ASCII per [RFC 3987](https://www.ietf.org/rfc/rfc3987.txt).  [Linked Data](#linkedData) rely on IRIs to refer to most nodes and properties.
+<a name="iriDef"></a>__IRI__: The Internationalized Resource Identifier (IRI) extends the Uniform Resource Identifier ([URI](#uriDef)) scheme by using characters drawn from the Universal character set rather than US-ASCII per [RFC 3987](https://www.ietf.org/rfc/rfc3987.txt).  [Linked Data](#linkedDataDef) rely on IRIs to refer to most nodes and properties.
 
 <a name="iso8601Def"></a>__ISO 8601__: Caliper data and time values are formatted per ISO 8601 with the addition of millisecond precision.  The format is yyyy-MM-ddTHH:mm:ss.SSSZ where 'T' separates the date from the time while 'Z' indicates that the time is set to UTC.
 
@@ -104,11 +104,11 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="metricProfileDef"></a>__Metric Profile__: models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms and concepts that application designers and developers can draw upon to describe common user interactions in a consistent manner using a shared vocabulary.
 
-<a name="objectDef"></a>__Object__: an [Entity](#entity) that an [Agent](#agent) interacts with that becomes the focus, target or object of an interaction.  A Caliper [Event](#event) includes an `object` attribute for representing the resource.
+<a name="objectDef"></a>__Object__: an [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) that an [Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent) interacts with that becomes the focus, target or object of an interaction.  A Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) includes an `object` attribute for representing the resource.
 
 <a name="sensorDef"></a>__Sensor__: Software assets deployed within a learning application that implement the [Sensor API&trade;](#sensorAPIDef) for marshalling and transmitting Caliper data to the certification service endpoint.
 
-<a name="sensorAPIDef"></a>__Sensor API&trade;__: The standard set of methods and supported parameters that a [Sensor](#sensorDef) implements according to the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 5.0 in order to transmit Caliper data in an interoperable way.
+<a name="sensorAPIDef"></a>__Sensor API&trade;__: The standard set of methods and supported parameters that a [Sensor](#sensorDef) implements according to the *Caliper Analytics&reg; Specification*, version 1.1, [Section 5.0](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#sensor) in order to transmit Caliper data in an interoperable way.
 
 <a name="termDef"></a>__Term__: a word or short expression that expands to an [IRI](#iriDef) when mapped to a JSON-LD [context](#contextDef) document. Terms are employed by Caliper as `type` property string values in order to distinguish between various JSON representations of entities and events defined by the Caliper information model.
 
@@ -116,11 +116,11 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 <a name="uriDef"></a>__URI__:  the Uniform Resource Identifier ([URI](#uriDef)) utilizes the US-ASCII character set to identify a resource.  Per [RFC 2396](#rfc2396) a [URI](#uriDef) "can be further classified as a locator, a name or both."  Both the Uniform Resource Locator ([URL](#urlDef)) and the Uniform Resource Name ([URN](#urnDef)) are considered subspaces of the more general [URI](#uriDef) space. 
 
-<a name="urlDef"></a>__URL__: A Uniform Resource Locator ([URL](#urlDef)) is a type of [URI](#uriDef) that provides a reference to resource that specifies both its location and a means of retrieving a representation of it.  An HTTP [URI](#uriDef) is a [URL](#urlDef) and using HTTP IRIs/URIs to identify things is fundamental to Linked Data.
+<a name="urlDef"></a>__URL__: A Uniform Resource Locator ([URL](#urlDef)) is a type of [URI](#uriDef) that provides a reference to resource that specifies both its location and a means of retrieving a representation of it.  An HTTP [URI](#uriDef) is a [URL](#urlDef) and using HTTP IRIs/URIs to identify things is fundamental to [Linked Data](#linkedDataDef).
 
 <a name="urnDef"></a>__URN__: A Uniform Resource Name ([URN](#urnDef)) is a type of [URI](#uriDef) that provides a persistent identifier for a resource that is bound to a defined namespace.  Unlike a [URL](#urlDef) a [URN](#urnDef) is location-independent and provides no means of accessing a representation of the named resource.  
 
-<a name="uuidDef"></a>__UUID__: a 128-bit identifier that does not require a registration authority to assure uniqueness.  However, absolute uniqueness is not guaranteed although the collision probability is considered extremely low. Caliper recommends use of randomly or pseudo-randomly generated version 4 UUIDs.  Each Caliper [Event](#event) MUST be assigned a UUID that is expressed as a [URN](#urnDef) using the form `urn:uuid:<UUID>` as described in [RFC 4122](#rfc4122).
+<a name="uuidDef"></a>__UUID__: a 128-bit identifier that does not require a registration authority to assure uniqueness.  However, absolute uniqueness is not guaranteed although the collision probability is considered extremely low. Caliper recommends use of randomly or pseudo-randomly generated version 4 UUIDs.  Each Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) MUST be assigned a UUID that is expressed as a [URN](#urnDef) using the form `urn:uuid:<UUID>` as described in [RFC 4122](#rfc4122).
 
 ## <a name="certPreReqs"></a>2.0 Certification Prerequisites
 Certain prerequisites MUST be met before you can certify your platform, application or service as Caliper compliant. 
@@ -131,43 +131,43 @@ Certain prerequisites MUST be met before you can certify your platform, applicat
 * You MUST submit your report via the Caliper Certification Service.
 
 ## <a name="profileConformance"></a>3.0 Metric Profile Certification
-As described more fully in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
+As described more fully in the *Caliper Analytics&reg; Specification*, [version 1.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1), the Caliper information model defines a number of metric profiles, each of which models a learning activity or a supporting activity that helps facilitate learning.  Each profile provides a domain-specific set of terms for describing common user interactions. 
 
 Each Caliper profile is also a unit of certification for Caliper [Sensor](#sensorDef) implementations. Any given Sensor may apply for certification for one or more of the Caliper Metric Profiles. In the subsections below, the Minimum Conformance and Restrictions sections specified for each Profile defines the corresponding conformance criteria in detail.
 
 #### General Requirements 
-* Certain [Event](#event) properties are required and MUST be specified.  Required properties include: `id`, `type`, `actor`, `action`, `object` and `eventTime`.  
-* All other [Event](#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each required and/or optional property specified is mandatory.
-* Each [Entity](#entity) participating in the [Event](#event) MUST be expressed either as an object or as a string corresponding to the resource's [IRI](#iriDef).  
-* The actions vocabulary is limited to the supported actions described in the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), Appendix A, and no other.
-* Serialized Events and Entities MUST conform to the syntactical requirements defined in section [4.0](#dataFormat) below.  This includes referencing one or more JSON-LD [contexts](#contextDef) by including the JSON-LD `@context` keyword and value as required.  
+* Certain [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) properties are required and MUST be specified.  Required properties include: `id`, `type`, `actor`, `action`, `object` and `eventTime`.  
+* All other [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) properties are considered optional and need not be referenced.  Adherence to the rules associated with each required and/or optional property specified is mandatory.
+* Each [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) participating in the [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) MUST be expressed either as an object or as a string corresponding to the resource's [IRI](#iriDef).  
+* The actions vocabulary is limited to the supported actions described in the *Caliper Analytics&reg; Specification*, version 1.1, [Appendix A](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#actions), and no other.
+* Serialized Events and Entities MUST conform to the syntactical requirements defined in [Section 4.0](#dataFormat) below.  This includes referencing one or more JSON-LD [contexts](#contextDef) by including the JSON-LD `@context` keyword and value as required.  
 
 ### <a name="annotationProfile"></a>3.1 Annotation Profile
 
 <div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Annotation Profile" src="assets/caliper-profile_annotation.png"></div>
 
-The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](#digitalResource).  
+The Caliper Annotation Profile models activities related to the annotation of a [DigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#digitalResource).  
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.1.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationProfile).
 
 #### Minimum Conformance
-Create and send a "Bookmarked" [AnnotationEvent](#annotationEvent) to the certification service endpoint.  All other actions included in the profile are considered optional for certification purposes.
+Create and send a "Bookmarked" [AnnotationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationEvent) to the certification service endpoint.  All other actions included in the profile are considered optional for certification purposes.
 
 #### Required Event
-[AnnotationEvent](#annotationEvent)
+[AnnotationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationEvent)
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
  
 #### Required Action  
-[Bookmarked](#bookmarked)
+[Bookmarked](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#bookmarked)
 
 #### Required Object
-[DigitalResource](#digitalResource) or subtype
+[DigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#digitalResource) or subtype
 
 #### Recommended Generated Entity
-[BookmarkAnnotation](#bookmarkAnnotation)
+[BookmarkAnnotation](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#bookmarkAnnotation)
  
 ### <a name="assessmentProfile"></a>3.2 Assessment Profile
 
@@ -176,25 +176,25 @@ Create and send a "Bookmarked" [AnnotationEvent](#annotationEvent) to the certif
 The Caliper Assessment Profile models assessment-related activities including interactions with individual assessment items.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.2.  
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.2](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentProfile).  
  
 #### Minimum Conformance
-Create and send a "Started" [AssessmentEvent](#assessmentEvent) followed by a "Submitted" [AssessmentEvent](#assessmentEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
+Create and send a "Started" [AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent) followed by a "Submitted" [AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
 #### Required Event
-[AssessmentEvent](#assessmentEvent)
+[AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent)
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
 #### Required Actions
-[Started](#started), [Submitted](#submitted) 
+[Started](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#started), [Submitted](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#submitted) 
 
 #### Required Object
-[Assessment](#assessment)
+[Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment)
 
 #### Recommended Generated Entity
-[Attempt](#attempt)
+[Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)
  
 ### <a name="assignableProfile"></a>3.3 Assignable Profile
 
@@ -203,25 +203,25 @@ Create and send a "Started" [AssessmentEvent](#assessmentEvent) followed by a "S
 The Assignable Profile models activities associated with the assignment of digital content to a learner for completion according to specific criteria.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.3.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.3](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableProfile).
  
 #### Minimum Conformance
-Create and send a "Started" [AssignableEvent](#assignableEvent) followed by a "Submitted" [AssignableEvent](#assignableEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
+Create and send a "Started" [AssignableEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableEvent) followed by a "Submitted" [AssignableEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
 #### Required Event
-[AssignableEvent](#assignableEvent) 
+[AssignableEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableEvent) 
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
 #### Required Actions
-[Started](#started), [Submitted](#submitted)   
+[Started](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#started), [Submitted](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#submitted)   
 
 #### Required Object
-[AssignableDigitalResource](#assignableDigitalResource)
+[AssignableDigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableDigitalResource)
 
 #### Recommended Generated Entity
-[Attempt](#attempt)
+[Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)
  
 ### <a name="forumProfile"></a>3.4 Forum Profile
 
@@ -230,52 +230,52 @@ Create and send a "Started" [AssignableEvent](#assignableEvent) followed by a "S
 The Caliper Forum Profile models learners and others participating in online forum communities.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.4.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.4](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#forumProfile).
  
 #### Minimum Conformance
-Create and send a "Posted" [MessageEvent](#messageEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
+Create and send a "Posted" [MessageEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#messageEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
 #### Required Event
-[MessageEvent](#messageEvent)
+[MessageEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#messageEvent)
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
 #### Required Action  
-[Posted](#posted)
+[Posted](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#posted)
 
 #### Required Object
-[Message](#message)
+[Message](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#message)
  
 ### <a name="gradingProfile"></a>3.5 Grading Profile
 
 <div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Grading Profile" src="assets/caliper-profile_grading.png"></div>
 
-The Caliper Grading Profile models grading activities performed by an [Agent](#agent), typically a [Person](#person) or a [SoftwareApplication](#softwareApplication).
+The Caliper Grading Profile models grading activities performed by an [Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent), typically a [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) or a [SoftwareApplication](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#softwareApplication).
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.5.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.5](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#gradingProfile).
  
 #### Minimum Conformance
-Create and send a "Graded" [GradeEvent](#gradeEvent) to the certification service endpoint.  All other actions included in the profile are considered optional for certification purposes.
+Create and send a "Graded" [GradeEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#gradeEvent) to the certification service endpoint.  All other actions included in the profile are considered optional for certification purposes.
 
 #### Required Event
-[GradeEvent](#gradeEvent)
+[GradeEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#gradeEvent)
 
 #### Required Actor
-[Agent](#agent) or subtype
+[Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent) or subtype
 
 #### Required Action  
-[Graded](#graded)
+[Graded](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#graded)
 
 #### Required Object
-[Attempt](#attempt)
+[Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)
 
 #### Recommended Generated Entity
-[Score](#score)
+[Score](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#score)
 
 #### Other Requirements
-For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](#person) MUST be specified as the `actor` of the interaction.
+For auto-graded scenarios the [SoftwareApplication](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#softwareApplication) MUST be specified as the `actor`.  Otherwise, a [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) MUST be specified as the `actor` of the interaction.
  
 ### <a name="mediaProfile"></a>3.6 Media Profile
 
@@ -284,25 +284,25 @@ For auto-graded scenarios the [SoftwareApplication](#softwareApplication) MUST b
 The Caliper Media Profile models interactions between learners and rich content such as audio, images and video.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.6.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.6](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#mediaProfile).
  
 #### Minimum Conformance
-Create and send a "Started" [MediaEvent](#mediaEvent) followed by an "Ended" [MediaEvent](#mediaEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
+Create and send a "Started" [MediaEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#mediaEvent) followed by an "Ended" [MediaEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#mediaEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
 #### Required Event
-[MediaEvent](#mediaEvent)
+[MediaEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#mediaEvent)
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
 #### Required Actions
-[Started](#started), [Ended](#ended) 
+[Started](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#started), [Ended](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#ended) 
 
 #### Required Object
-[AudioObject](#audioObject), [ImageObject](#imageObject), [MediaObject](#mediaObject), or [VideoObject](#videoObject)
+[AudioObject](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#audioObject), [ImageObject](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#imageObject), [MediaObject](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#mediaObject), or [VideoObject](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#videoObject)
 
 #### Recommended Target Entity
-[MediaLocation](#mediaLocation)
+[MediaLocation](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#mediaLocation)
  
 ### <a name="readingProfile"></a>3.7 Reading Profile
 
@@ -311,46 +311,46 @@ Create and send a "Started" [MediaEvent](#mediaEvent) followed by an "Ended" [Me
 The Caliper Reading Profile models activities associated with navigating to and viewing digital textual content.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.7.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.7](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#readingProfile).
  
 #### Minimum Conformance
- Create and send both a "NavigatedTo" [NavigationEvent](#navigationEvent) and a "Viewed" [ViewEvent](#viewEvent) to the certification service endpoint.
+Create and send both a "NavigatedTo" [NavigationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#navigationEvent) and a "Viewed" [ViewEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#viewEvent) to the certification service endpoint.
 
 #### Required Event
-[NavigationEvent](#navigationEvent), [ViewEvent](#viewEvent)
+[NavigationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#navigationEvent), [ViewEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#viewEvent)
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
 #### Required Actions
-[NavigatedTo](#navigatedTo), [Viewed](#viewed)  
+[NavigatedTo](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#navigatedTo), [Viewed](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#viewed)  
 
 #### Required Object
-[AssignableDigitalResource](#assignableDigitalResource), [Chapter](#chapter), [DigitalResource](#digitalResource), [DigitalResourceCollection](#digitalResourceCollection), [Document](#document), [Page](#page), or [WebPage](#webPage)
+[AssignableDigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableDigitalResource), [Chapter](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#chapter), [DigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#digitalResource), [DigitalResourceCollection](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#digitalResourceCollection), [Document](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#document), [Page](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#page), or [WebPage](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#webPage)
  
 ### <a name="sessionProfile"></a>3.8 Session Profile
 
 <div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Session Profile" src="assets/caliper-profile_session.png"></div>
 
-The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](#person) interacting with a [SoftwareApplication](#softwareApplication).
+The Caliper Session Profile models the creation and subsequent termination of a user session established by a [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) interacting with a [SoftwareApplication](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#softwareApplication).
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.8.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.8](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#sessionProfile).
  
 #### Minimum Conformance
-Create and send a "LoggedIn" [SessionEvent](#sessionEvent) to the certification service endpoint. All other actions included in the profile are considered optional for certification purposes.
+Create and send a "LoggedIn" [SessionEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#sessionEvent) to the certification service endpoint. All other actions included in the profile are considered optional for certification purposes.
 
 #### Required Event
-[SessionEvent](#sessionEvent)
+[SessionEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#sessionEvent)
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
 #### Required Action 
-[LoggedIn](#loggedIn) 
+[LoggedIn](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#loggedIn) 
 
 #### Required Object
-[SoftwareApplication](#softwareApplication)
+[SoftwareApplication](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#softwareApplication)
  
 ### <a name="toolUseProfile"></a>3.9 Tool Use Profile
 
@@ -359,50 +359,50 @@ Create and send a "LoggedIn" [SessionEvent](#sessionEvent) to the certification 
 The Caliper Tool Use Profile models an intended interaction between a user and a tool.
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.9.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.9](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#toolUseProfile).
  
 #### Minimum Conformance
-Create and send a "Used" [ToolUseEvent](#toolUseEvent) to the certification service endpoint.
+Create and send a "Used" [ToolUseEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#toolUseEvent) to the certification service endpoint.
 
 #### Required Event
-[ToolUseEvent](#toolUseEvent)
+[ToolUseEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#toolUseEvent)
 
 #### Required Actor
-[Person](#person)
+[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
 #### Required Action  
-[Used](#used)
+[Used](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#used)
 
 #### Required Object
-[SoftwareApplication](#softwareApplication)
+[SoftwareApplication](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#softwareApplication)
 
 
 ### <a name="basicProfile"></a>3.10 Basic Profile
 
 <div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Basic Profile" src="assets/caliper-profile_basic.png"></div>
 
-The Caliper Basic Profile provides a generic [Event](#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
+The Caliper Basic Profile provides a generic [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) for describing learning or supporting activities that have yet to be modeled by Caliper. 
 
 #### Profile Description
-See [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 3.10.
+See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.10](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#basicProfile).
 
 #### Minimum Conformance
-Create and send a *generic* Caliper [Event](#event) to the certification service endpoint.
+Create and send a *generic* Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) to the certification service endpoint.
 
 #### Required Event
-[Event](#event)
+[Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event)
 
 #### Required Actor
-[Agent](#agent) or subtype
+[Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent) or subtype
 
 #### Required Action
 Any Caliper defined action can be used to describe the interaction.
 
 #### Required Object
-[Entity](#entity) or subtype
+[Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) or subtype
 
 #### Other Requirements
-Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](#event) supertype.
+Use of the Basic Profile is limited to describing interactions not modeled in other profiles.  Any events described MUST be expressed using only the [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) supertype.
 
 ## <a name="dataFormat"></a>4.0 Data Interchange Format
 Caliper events and entities are serialized as [JSON-LD](#jsonldDef), a JSON-based data interchange format that encourages use of shared vocabularies and discoverable key:value identifiers when constructing JSON documents.
@@ -413,81 +413,81 @@ Caliper events and entities are serialized as [JSON-LD](#jsonldDef), a JSON-base
 IMS Global provides a remote Caliper 1.1 [JSON-LD](#jsonldDef) context document (http://purl.imsglobal.org/ctx/caliper/v1p1) for mapping Caliper [Terms](#termDef) to [IRIs](#iriDef).  Implementers are encouraged to familiarize themselves with the term definitions described therein. 
 
 #### Requirements
-* Each Caliper [Event](#event) and [Entity](#entity) *[describe](#describeDef)* document generated by a [Sensor](#sensor) MUST be provisioned with a [JSON-LD](#jsonldDef) `@context` defined as a property of the top-level object.  
+* Each Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) and [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) *[describe](#describeDef)* document generated by a [Sensor](#sensorDef) MUST be provisioned with a [JSON-LD](#jsonldDef) `@context` defined as a property of the top-level object.  
 * The top-level `@context` property type MUST be defined as a string or an array.
 * If the top-level `@context` value is defined as a string it MUST be set to the Caliper remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".
 * If the top-level `@context` value is defined as an array of multiple contexts, the remote Caliper [JSON-LD](#jsonldDef) context MUST be listed last in order to ensure that Caliper terms retain their primacy given that [JSON-LD](#jsonldDef) parsers rely on a "most-recently-defined-wins" approach when evaluating duplicate terms.
 * Referencing the remote Caliper [JSON-LD](#jsonldDef) context document in the top-level `@context` is mandatory.  The terms it defines MUST NOT be defined inline as an object.
 * Additional remote or inline _local_ contexts may be referenced any time a JSON object is defined in order to ascribe meaning to terms not described by the model.  These contexts are additive in nature and can be defined as a string, object or array.  Duplicate context references SHOULD be omitted when serializing the object.  Moreover, nested _local_ contexts that are added to the _active_ context at processing time MUST NOT override Caliper terms defined by the top-level context.
 
-For example [JSON-LD](#jsonldDef) context usage see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.1.
+For example [JSON-LD](#jsonldDef) context usage see *Caliper Analytics&reg; Specification*, version 1.1, [Section 4.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#jsonldContext).
 
 ### <a name="jsonldNodeIdentifiers"></a>4.2 Node Identifiers
 Caliper specifies the use of [IRIs](#iriDef) for identifying nodes (i.e., the things being described) and their attributes.  [IRI](#iriDef) values MUST be absolute containing a scheme, path and optional query and fragment segments.  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY be used as an identifier although care should be taken when employing a location-independent identifier since it precludes the possibility of utilizing it in future to retrieve machine-readable data over HTTP.  If an [IRI](#iriDef) is deemed inappropriate for the resource a [blank node](#blankNodeDef) identifier may be assigned.
 
-For additional information regarding identifiers see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.2.
+For additional information regarding identifiers see *Caliper Analytics&reg; Specification*, version 1.1, [Section 4.2](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#jsonldIdentifiers).
 
 ### <a name="jsonldTypeCoercion"></a>4.3 Type Coercion
-Caliper permits [Entity](#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).  [JSON-LD](#jsonldDef) also supports the _coercion_ of data values to specified types based on value type mappings defined in a [JSON-LD](#jsonldDef) context.  For a given `@type` the keywords `@id` or `@vocab` may be assigned as a value in order to signal to a [JSON-LD](#jsonldDef) parser that if a term's instance value is set to a string it is to be interpreted as an [IRI](#iriDef).  Type coercion of this sort provides representational flexibility that implementers are encouraged to leverage.
+Caliper permits [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).  [JSON-LD](#jsonldDef) also supports the _coercion_ of data values to specified types based on value type mappings defined in a [JSON-LD](#jsonldDef) context.  For a given `@type` the keywords `@id` or `@vocab` may be assigned as a value in order to signal to a [JSON-LD](#jsonldDef) parser that if a term's instance value is set to a string it is to be interpreted as an [IRI](#iriDef).  Type coercion of this sort provides representational flexibility that implementers are encouraged to leverage.
 
-For examples of coerced Caliper values see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 4.3.
+For examples of coerced Caliper values see *Caliper Analytics&reg; Specification*, version 1.1, [Section 4.3](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#jsonldTypes).
 
 ### <a name="jsonldEvents"></a>4.4 Expressing Events as JSON-LD
-A Caliper [Event](#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  Considered as a JSON data structure an [Event](#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
+A Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) is a generic type that describes the relationship established between an `actor` and an `object`, formed as a result of a purposeful [action](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#actions) undertaken by the `actor` at a particular moment in time and within a given learning context.  Caliper defines a number of [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) subtypes, each scoped to a particular activity domain and distinguishable by a `type` attribute.  Considered as a JSON data structure an [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) constitutes an unordered set of key:value pairs that is semi-structured by design.  
 
-The [Event](#event) `@context`, `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](#event).  Adherence to the rules associated with each property specified is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
+The [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) `@context`, `id`, `type`, `actor`, `action`, `object` and `eventTime` properties are required and MUST be specified; all other properties are optional and MAY be omitted when describing an [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event).  Adherence to the rules associated with each property specified is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization.
 
 | Property | Disposition |
 | :------- | :----------- |
-| @context | A top-level [JSON-LD](jsonldDef) context MUST be specified as described above in section [4.1](#jsonldContext). |
+| @context | A top-level [JSON-LD](jsonldDef) context MUST be specified as described above in [Section 4.1](#jsonldContext). |
 | id | Set the value to a 128-bit long universally unique identifier (UUID) formatted as a [URN](#urnDef) per [RFC 4122](#rfc4122), which describes a [URN](#urnDef) namespace for [UUIDs](#uuidDef). | 
 | type | Set the string value to the relevant Caliper term (e.g., "AssessmentEvent"). |
-| actor | Set to [Agent](#agent) or one of its subtypes (e.g., [Person](#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. |
+| actor | Set to [Agent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#agent) or one of its subtypes (e.g., [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)).  The `actor` value MUST be expressed as a JSON object or as a string corresponding to the actor's IRI. |
 | action | Set the string value to the relevant action term (e.g., "Started") specified by the governing Metric Profile. |
-| object | Set the value to the relevant [Entity](#entity) (e.g., [Assessment](#assessment)) specified by the governing Metric Profile. The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI. |
+| object | Set the value to the relevant [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) (e.g., [Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment)) specified by the governing Metric Profile. The `object` value MUST be expressed as a JSON object or as a string corresponding to the object's IRI. |
 | eventTime | Set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified. |
 
-For example [Event](#event) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), appendix B.
+For example [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) JSON-LD see *Caliper Analytics&reg; Specification*, version 1.1, [Appendix B](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#events).
   
 ### <a name="jsonldEntities"></a>4.5 Expressing Entities as JSON-LD
-A Caliper [Entity](#entity) is a generic type that represents objects that participate in learning-related activities.  A variety of [Entity](#entity) subtypes have been defined in order to better describe people, groups, organizations, digital content, courses, software applications, and other objects that constitute the "stuff" of a Caliper [Event](#event).  Like an [Event](#event), an [Entity](#entity) is considered semi-structured data consisting of an unordered set of key:value pairs.  
+A Caliper [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) is a generic type that represents objects that participate in learning-related activities.  A variety of [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) subtypes have been defined in order to better describe people, groups, organizations, digital content, courses, software applications, and other objects that constitute the "stuff" of a Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event).  Like an [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event), an [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) is considered semi-structured data consisting of an unordered set of key:value pairs.  
 
-As noted in section [4.3](#jsonldTypeCoercion) above Caliper permits [Entity](#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).
+As noted in [Section 4.3](#jsonldTypeCoercion) above Caliper permits [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) values to be expressed either as a JSON object or as a string corresponding to its [IRI](#iriDef).
 
-If an [Entity](#entity) is expressed as a JSON object the `id` and `type` properties are required and MUST be specified.  If transmitted as a _[describe](#describeDef)_ a top-level `@context` MUST also be specified.  Otherwise, omit the `@context` when the [Entity](#entity) is specified as a value in an [Event](#event) except in cases where custom terms are specified.  See section [4.1](#jsonldContext) above for more details regarding [JSON-LD](#jsonldDef) context handling.  
+If an [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) is expressed as a JSON object the `id` and `type` properties are required and MUST be specified.  If transmitted as a _[describe](#describeDef)_ a top-level `@context` MUST also be specified.  Otherwise, omit the `@context` when the [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) is specified as a value in an [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) except in cases where custom terms are specified.  See [Section 4.1](#jsonldContext) above for more details regarding [JSON-LD](#jsonldDef) context handling.  
 
-All other properties are optional and MAY be omitted when describing an [Entity](#entity).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization. 
+All other properties are optional and MAY be omitted when describing an [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity).  Adherence to the rules associated with each property referenced is mandatory.  Custom attributes not described by the model MAY be included but MUST be added to the `extensions` property as a map of key:value pairs.  Properties with a value of *null* or empty SHOULD be excluded prior to serialization. 
 
 | Property | Disposition |
 | :------- | :---------- |
-| @context | If the [Entity](#entity) is transmitted as a _[describe](#describeDef)_ a top-level `@context` MUST be specified.  Otherwise, omit the `@context` when the [Entity](#entity) is specified as a value in an [Event](#event) except in cases where custom terms are specified. |
-| id | Set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized. | 
+| @context | If the [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) is transmitted as a _[describe](#describeDef)_ a top-level `@context` MUST be specified.  Otherwise, omit the `@context` when the [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) is specified as a value in an [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) except in cases where custom terms are specified. |
+| id | Set the string value to a valid [IRI](#iriDef) or a blank node identifier. The [IRI](#iriDef) MUST be unique and persistent.  The [IRI](#iriDef) SHOULD be dereferenceable; i.e., capable of returning a representation of the [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity).  A [URI](#uriDef) employing the [URN](#urnDef) scheme MAY also be utilized. | 
 | type | Set the string value to the relevant Caliper term (e.g., "DigitalResource"). |
 
-For example [Entity](#entity) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), appendix C.
+For example [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) JSON-LD see *Caliper Analytics&reg; Specification*, version 1.1, [Appendix C](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entities).
   
 ## <a name="transportConformance"></a>5.0 Transport Conformance
  
-A Caliper [Sensor](#sensor) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service [Endpoint](#endpoint).  Certification is limited to message exchanges using the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).  Messages MUST be sent using the POST request method.  For certification purposes, the [Sensor](#sensor) MUST also support message authentication using the `Authorization` request header, setting the value to the provided bearer token.
+A Caliper [Sensor](#sensorDef) MUST demonstrate that it is capable of transmitting Caliper data successfully to the certification service [Endpoint](#endpointDef).  Certification is limited to message exchanges using the Hypertext Transport Protocol (HTTP) with the connection encrypted with Transport Layer Security (TLS).  Messages MUST be sent using the POST request method.  For certification purposes, the [Sensor](#sensorDef) MUST also support message authentication using the `Authorization` request header, setting the value to the provided bearer token.
  
 #### <a name="envelope"></a>5.1 The Envelope
-Caliper [Event](#event) and [Entity](#entity) data are transmitted inside an [Envelope](#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensor) and the data payload.  Each [Event](#event) and [Entity](#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
+Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) and [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) data are transmitted inside an [Envelope](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#envelope), a JSON data structure that includes metadata about the emitting [Sensor](#sensorDef) and the data payload.  Each [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) and [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) _[describe](#desribeDef)_ included in an envelope's `data` array MUST be expressed as a [JSON-LD](#jsonld) document. 
 
-The [Envelope](#envelope) `sensor`, `sendTime`, `dataVersion` and `data` properties MUST be specified.  No custom properties are permitted.
+The [Envelope](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#envelope) `sensor`, `sendTime`, `dataVersion` and `data` properties MUST be specified.  No custom properties are permitted.
 
 | Required Property | Disposition |
 | :---------------- | :----------- |
-| sensor | Set the string value to a unique identifier assigned either to the [Sensor](#sensor) or to the instrumented platform, application or service utilizing the [Sensor](#sensor).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
-| eventTime | Set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensor) issued the message. |
-| dataVersion | Set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), governs the form of the Caliper entities and events contained in the `data` payload. |
-| data | An ordered collection of one or more Caliper [Event](#event) and/or [Entity](#entity) *[describe](#describeDef)* objects.  The Sensor MAY mix [Event](#event) and [Entity](#entity) *[describe](#describeDef)* data in the same [Envelope](#envelope). |
+| sensor | Set the string value to a unique identifier assigned either to the [Sensor](#sensorDef) or to the instrumented platform, application or service utilizing the [Sensor](#sensorDef).  The identifier SHOULD be in the form of an [IRI](#iriDef). |
+| eventTime | Set the date and time value expressed with millisecond precision using the ISO 8601 format YYYY-MM-DDTHH:mm:ss.SSSZ set to UTC with no offset specified that indicates the time at which the [Sensor](#sensorDef) issued the message. |
+| dataVersion | Set the string value to the Caliper [JSON-LD](#jsonldDef) remote context URL "http://purl.imsglobal.org/ctx/caliper/v1p1".  This indicates that the *Caliper Analytics&reg; Specification*, [version 1.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1), governs the form of the Caliper entities and events contained in the `data` payload. |
+| data | An ordered collection of one or more Caliper [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) and/or [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) *[describe](#describeDef)* objects.  The Sensor MAY mix [Event](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#event) and [Entity](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#entity) *[describe](#describeDef)* data in the same [Envelope](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#envelope). |
 
-For example [Envelope](#envelope) JSON-LD see [Caliper Analytics&reg; Specification, version 1.1](#caliperSpec), section 5.3.
+For example [Envelope](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#envelope) JSON-LD see *Caliper Analytics&reg; Specification*, version 1.1, [Section 5.3](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#jsonldPayload).
 
 #### <a name="httpRequest"></a>5.2 HTTP Message Requests
-Each HTTP request message sent to the certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](#envelope).  Messages MUST be sent using the POST request method.
+Each HTTP request message sent to the certification service MUST consist of a single serialized JSON representation of a Caliper [Envelope](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#envelope).  Messages MUST be sent using the POST request method.
  
-The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](#endpoint):
+The following standard HTTP request headers MUST be set for each message sent to the certification service [Endpoint](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#endpoint):
   
 | Request Header | Disposition |
 | :------------- | :----------- |
@@ -497,19 +497,19 @@ The following standard HTTP request headers MUST be set for each message sent to
  
 #### <a name="httpResponse"></a>5.3 HTTP Message Responses
  
-Following receipt of a [Sensor](#sensor) request message the certification service will reply with a response message.  The response will include a three-digit status code indicating whether or not the certification service was able to understand and satisfy the request as defined by [RFC 7231](#rfc7231).  
+Following receipt of a [Sensor](#sensorDef) request message the certification service will reply with a response message.  The response will include a three-digit status code indicating whether or not the certification service was able to understand and satisfy the request as defined by [RFC 7231](#rfc7231).  
   
 * To signal a Caliper sensor that it has successfully received a message the certification service endpoint will reply with a `2xx` class status code.  The body of a successful response will be empty.
-* If a Caliper sensor sends a message containing events and or entities without an enclosing [Envelope](#envelope), the certification service will reply with a `400 Bad Request` response.
+* If a Caliper sensor sends a message containing events and or entities without an enclosing [Envelope](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#envelope), the certification service will reply with a `400 Bad Request` response.
 * If a Caliper sensor sends a malformed Caliper endpoint (it does not contain `sensor`, `sendTime`, `dataVersion` and `data` properties of the required form), the certification service will reply with a `400 Bad Request` response.
 * If a Caliper sensor sends a message without an `Authorization` request header of the RECOMMENDED form or sends a token credential that the certification service is unable to either validate or determine has sufficient privileges to submit Caliper data, the certification service will reply with a `401 Unauthorized` response.
 * If a Caliper sensor sends a message with a `Content-Type` other than "application/json", the certification service will reply with a `415 Unsupported Media Type` response.
-* If a Caliper sensor sends a message with an [Envelope](#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
+* If a Caliper sensor sends a message with an [Envelope](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#envelope) that contains a `dataVersion` value that the endpoint cannot support the certification service will reply with a `422 Unprocessable Entity` response.
   
-The certification service MAY respond to [Sensor](#sensor) messages with other standard HTTP status codes to indicate result dispositions that vary from the cases described above.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
+The certification service MAY respond to [Sensor](#sensorDef) messages with other standard HTTP status codes to indicate result dispositions that vary from the cases described above.  The certification service MAY also communicate more detailed information about problem states, using the standard method for reporting problem details described in [RFC 7807](#rfc7807).
   
 #### <a name="otherTransports"></a>5.4 Other Transport Protocols
-[Caliper Analytics&reg; Specification, version 1.1](#caliperSpec) defines the use of a single transport protocol (HTTP/HTTPS).  However, IMS Global is interested in specifying the use of other transport protocols that can support the exchange of Caliper data.  Organizations wishing to work with IMS Global to add other transport protocols to the Caliper specification should contact the Caliper Working Group directly or indicate interest via the [public forum](https://www.imsglobal.org/forums/ims-glc-public-forums-and-resources/caliper-analytics-public-forum).
+*Caliper Analytics&reg; Specification*, [version 1.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1) defines the use of a single transport protocol (HTTP/HTTPS).  However, IMS Global is interested in specifying the use of other transport protocols that can support the exchange of Caliper data.  Organizations wishing to work with IMS Global to add other transport protocols to the Caliper specification should contact the Caliper Working Group directly or indicate interest via the [public forum](https://www.imsglobal.org/forums/ims-glc-public-forums-and-resources/caliper-analytics-public-forum).
 
 ## <a name="usingCertService"></a> 6.0 Using the Certification Service
 Visit the Caliper Certification service at [https://www.imsglobal.org/sso/launch.php/caliper](https://www.imsglobal.org/sso/launch.php/caliper).  You MUST be logged in to the IMS Global website to access the Caliper certification service.  If you do not have an account, please register at [https://www.imsglobal.org/user/register](https://www.imsglobal.org/user/register).
