@@ -59,7 +59,7 @@ THIS GUIDE IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
 
 <div style="design: block;margin: 0 auto"><img class="img-responsive" alt="Session Profile" src="assets/caliper-sensor-v2.png"></div>
 
-The *Caliper Analytics&reg; Specification*, [version 1.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
+The *Caliper Analytics&reg; Specification*, [version 1.1](#caliperSpec), provides a structured approach to describing, collecting and exchanging learning activity data at scale.  Establishing a common vocabulary for describing learning interactions is a central objective.  Promoting data interoperability, data sharing and data-informed decision making are also important goals.
 
 Caliper also defines an application programming interface (the Sensor API&trade;) for marshalling and transmitting event data from instrumented applications to target endpoints for storage, analysis and use.  Industry-wide adoption of Caliper offers the tantalizing prospect of a more unified learning data environment in which to build new and innovative services designed to measure, infer, predict, report and visualize.
 
@@ -561,7 +561,7 @@ The following Caliper Working Group participants contributed to the writing of t
 | Lisa Mattson | IMS Global |
 
 ## <a name="references"></a>References
-<a name="caliperSpec"></a>Anthony Whyte, Viktor Haag, Linda Feng, Markus Gylling, Matt Ashbourne, Wes LaMarche and Etienne Pelaprat.  Caliper Analytics® Specification, version 1.1.  12 January 2018.  URL: http://www.imsglobal.org/caliper-spec-v1p1
+<a name="caliperSpec"></a>__Caliper Spec__.  IMS Global.  Anthony Whyte, Viktor Haag, Linda Feng, Markus Gylling, Matt Ashbourne, Wes LaMarche and Etienne Pelaprat.  Caliper Analytics® Specification, version 1.1.  12 January 2018.  URL: http://www.imsglobal.org/caliper-spec-v1p1
 
 <a name="jsonldSyntax"></a>__JSON-LD Syntax__.  W3C.  M. Sporny, D. Longley, G. Kellog, M. Lanthaler and N. Lindström.  JSON-LD 1.1.  A JSON-based Serialization for Linked Data. 15 February 2017.  URL: http://json-ld.org/spec/latest/json-ld/
 
