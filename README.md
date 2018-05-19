@@ -19,18 +19,18 @@ merged to this branch.
 Following the 1.1.0 release *caliper-cert-guide* releases will be tagged as follows:
 
 #### Tags on master 
-`1.2-final`: denotes the release of version 1.2 in Final state
+* `1.2-final`: denotes the release of version 1.2 in Final state
 
-`1.2-errata.01`: denotes the first errata release for version 1.2 
+* `1.2-errata.01`: denotes the first errata release for version 1.2 
 
-`1.2-errata.02`: denotes the second errata release for version 1.2
+* `1.2-errata.02`: denotes the second errata release for version 1.2
 
 #### Tags on develop (pre-release)
-`1.2-base.01`: denotes the first release of version 1.2 in Base Document state
+* `1.2-base.01`: denotes the first release of version 1.2 in Base Document state
 
-`1.2-candidate.01`: denotes the first release of version 1.2 in Candidate Final state
+* `1.2-candidate.01`: denotes the first release of version 1.2 in Candidate Final state
 
-`1.2-candidate.02`: denotes the second release of version 1.2 in Candidate Final state
+* `1.2-candidate.02`: denotes the second release of version 1.2 in Candidate Final state
 
 _Note: the third `.nn` segment is incremented whenever the same type 
   of release may occur multiple times for a given version of a document._
