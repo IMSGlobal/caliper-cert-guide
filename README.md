@@ -1,6 +1,6 @@
 # IMS Global Learning Consortium, Inc.
 
-# Caliper Analytics&reg; Sensor Certification Guide, version 1.1
+# Caliper Analytics&reg; Sensor Certification Guide
 The [Caliper Analytics® Specification](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1) 
 provides a structured approach to describing, collecting and exchanging learning activity data at 
 scale. Caliper also defines an application programming interface (the Sensor API™) for marshalling 
