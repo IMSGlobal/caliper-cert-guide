@@ -43,7 +43,7 @@ information.
 
 ## License
 This project is licensed under the terms of the IMS Global Learning Consortium Specification 
-Document License. See the [LICENSE](./LICENSE(spec).md) file for details.
+Document License. See the [LICENSE](./LICENSE.md) file for details.
 
 ©2018 IMS Global Learning Consortium, Inc. All Rights Reserved.
 Trademark Information - http://www.imsglobal.org/copyright.html
