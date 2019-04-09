@@ -151,18 +151,20 @@ The Caliper Annotation Profile models activities related to the annotation of a 
 #### Profile Description
 See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.1](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationProfile).
 
-#### Minimum Conformance
-Create and send a "Bookmarked" [AnnotationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationEvent) to the certification service endpoint.  All other actions included in the profile are considered optional for certification purposes.
+#### Event Conformance Table
 
-#### Required Event
-[AnnotationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationEvent)
+| Event           | Action      | Required |
+|-----------------|-------------|----------|
+| [AnnotationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationEvent)|
+|                 | Bookmarked  | Required |
+|                 | Highlighted |          |
+|                 | Shared      |          |
+|                 | Tagged      |          |
+
 
 #### Required Actor
 [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
  
-#### Required Action  
-[Bookmarked](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#bookmarked)
-
 #### Required Object
 [DigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#digitalResource) or subtype
 
@@ -177,24 +179,33 @@ The Caliper Assessment Profile models assessment-related activities including in
 
 #### Profile Description
 See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.2](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentProfile).  
+
+#### Event Conformance Table
+
+| Event               | Action      | Required |
+|---------------------|-------------|----------|
+| [AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent)|
+|                     | Paused      |          |
+|                     | Reset       |          |
+|                     | Restarted   |          |
+|                     | Resumed     |          |
+|                     | Started     | Required |
+|                     | Submitted   | Required |
+| AssessmentItemEvent |             |          |
+|                     | Completed   |          |
+|                     | Skipped     |          |
+|                     | Started     |          |
+| NavigationEvent     |             |          |
+|                     | NavigatedTo |          |
+| ViewEvent           |             |          |
+|                     | Viewed      |          |
  
-#### Minimum Conformance
-Create and send a "Started" [AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent) followed by a "Submitted" [AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
 
-#### Required Event
-[AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent)
-
-#### Required Actor
-[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
-
-#### Required Actions
-[Started](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#started), [Submitted](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#submitted) 
-
-#### Required Object
-[Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment)
-
-#### Recommended Generated Entity
-[Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)
+| Other Requirements           |                                                                                   |
+|------------------------------|-----------------------------------------------------------------------------------|
+| Required Actor               | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)         |
+| Required Object              | [Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment) |
+| Recommended Generated Entity | [Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)       |
  
 ### <a name="assignableProfile"></a>3.3 Assignable Profile
 
@@ -205,23 +216,30 @@ The Assignable Profile models activities associated with the assignment of digit
 #### Profile Description
 See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.3](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableProfile).
  
-#### Minimum Conformance
-Create and send a "Started" [AssignableEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableEvent) followed by a "Submitted" [AssignableEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableEvent) to the certification service endpoint.  All other event types and actions included in the profile are considered optional for certification purposes.
+#### Event Conformance Table
 
-#### Required Event
-[AssignableEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableEvent) 
+| Event           | Action      | Required    |
+|-----------------|-------------|-------------|
+| [AssignableEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableEvent) |
+|                 | Activated   |             |
+|                 | Completed   | Recommended |
+|                 | Deactivated |             |
+|                 | Reviewed    |             |
+|                 | Started     | Required    |
+|                 | Submitted   | Required    |
+| NavigationEvent |             |             |
+|                 | NavigatedTo |             |
+| ViewEvent       |             |             |
+|                 | Viewed      |             |
 
-#### Required Actor
-[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
 
-#### Required Actions
-[Started](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#started), [Submitted](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#submitted)   
-
-#### Required Object
-[AssignableDigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableDigitalResource)
-
-#### Recommended Generated Entity
-[Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)
+| Other Requirements           |                                                                                                                 |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Required Actor               | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)                                       |
+| Required Object              | [AssignableDigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assignableDigitalResource) |
+| Recommended Generated Entity | [Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)                                     |
+ 
+ 
  
 ### <a name="forumProfile"></a>3.4 Forum Profile
 
