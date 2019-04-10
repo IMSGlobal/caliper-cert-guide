@@ -153,23 +153,13 @@ See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.1](https://w
 
 #### Event Conformance Table
 
-| Event           | Action      | Required |
-|-----------------|-------------|----------|
-| [AnnotationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationEvent)|
-|                 | Bookmarked  | Required |
-|                 | Highlighted |          |
-|                 | Shared      |          |
-|                 | Tagged      |          |
-
-
-#### Required Actor
-[Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)
- 
-#### Required Object
-[DigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#digitalResource) or subtype
-
-#### Recommended Generated Entity
-[BookmarkAnnotation](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#bookmarkAnnotation)
+| Event                                                                                       | Action      | Required | Actor                                                                     | Object                                                                                                 | Recommended Generated Entity                                                                      |
+|---------------------------------------------------------------------------------------------|-------------|----------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| [AnnotationEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#annotationEvent) |             |          | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) | [DigitalResource](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#digitalResource) or subtype | [BookmarkAnnotation](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#bookmarkAnnotation) |
+|                                                                                             | Bookmarked  | Required |                                                                           |                                                                                                        |                                                                                                   |
+|                                                                                             | Highlighted |          |                                                                           |                                                                                                        |                                                                                                   |
+|                                                                                             | Shared      |          |                                                                           |                                                                                                        |                                                                                                   |
+|                                                                                             | Tagged      |          |                                                                           |                                                                                                        |                                                                                                   |
  
 ### <a name="assessmentProfile"></a>3.2 Assessment Profile
 
@@ -182,30 +172,23 @@ See *Caliper Analytics&reg; Specification*, version 1.1, [Section 3.2](https://w
 
 #### Event Conformance Table
 
-| Event               | Action      | Required |
-|---------------------|-------------|----------|
-| [AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent)|
-|                     | Paused      |          |
-|                     | Reset       |          |
-|                     | Restarted   |          |
-|                     | Resumed     |          |
-|                     | Started     | Required |
-|                     | Submitted   | Required |
-| AssessmentItemEvent |             |          |
-|                     | Completed   |          |
-|                     | Skipped     |          |
-|                     | Started     |          |
-| NavigationEvent     |             |          |
-|                     | NavigatedTo |          |
-| ViewEvent           |             |          |
-|                     | Viewed      |          |
- 
-
-| Other Requirements           |                                                                                   |
-|------------------------------|-----------------------------------------------------------------------------------|
-| Required Actor               | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person)         |
-| Required Object              | [Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment) |
-| Recommended Generated Entity | [Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt)       |
+| Event                                                                                       | Action      | Required | Actor                                                                     | Object                                                                            | Recommended Generated Entity                                                |
+|---------------------------------------------------------------------------------------------|-------------|----------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| [AssessmentEvent](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessmentEvent) |             |          | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) | [Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment) | [Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt) |
+|                                                                                             | Paused      |          |                                                                           |                                                                                   |                                                                             |
+|                                                                                             | Reset       |          |                                                                           |                                                                                   |                                                                             |
+|                                                                                             | Restarted   |          |                                                                           |                                                                                   |                                                                             |
+|                                                                                             | Resumed     |          |                                                                           |                                                                                   |                                                                             |
+|                                                                                             | Started     | Required |                                                                           |                                                                                   |                                                                             |
+|                                                                                             | Submitted   | Required |                                                                           |                                                                                   |                                                                             |
+| AssessmentItemEvent                                                                         |             |          | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) | [Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment) | [Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt) |
+|                                                                                             | Completed   |          |                                                                           |                                                                                   |                                                                             |
+|                                                                                             | Skipped     |          |                                                                           |                                                                                   |                                                                             |
+|                                                                                             | Started     |          |                                                                           |                                                                                   |                                                                             |
+| NavigationEvent                                                                             |             |          | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) | [Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment) | [Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt) |
+|                                                                                             | NavigatedTo |          |                                                                           |                                                                                   |                                                                             |
+| ViewEvent                                                                                   |             |          | [Person](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#person) | [Assessment](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#assessment) | [Attempt](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1#attempt) |
+|                                                                                             | Viewed      |          |                                                                           |                                                                                   |                                                                             |
  
 ### <a name="assignableProfile"></a>3.3 Assignable Profile
 
