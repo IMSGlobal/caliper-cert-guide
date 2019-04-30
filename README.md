@@ -1,5 +1,13 @@
 # IMS Global Learning Consortium, Inc.
 
+
+# This is an archived repository
+
+This `master` branch represents the Caliper 1.0/1.1 certification guide.
+
+The 1.2 certification guide now lives in the main [Caliper repo's develop branch](https://github.com/IMSGlobal/caliper-spec/tree/develop)
+
+
 # Caliper Analytics&reg; Sensor Certification Guide
 The [Caliper Analytics® Specification](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1) 
 provides a structured approach to describing, collecting and exchanging learning activity data at 
